@@ -278,7 +278,7 @@ var servicePoint = new function () {
 				+ '/workProfiles/'
 				+ sessvars.workProfileId + '/queues') || [];
 
-
+			sessvars.myQueues = myQueues;
 			window.myQueueIds = _.map(myQueues, 'id');
 
 			if (allQueuesBtnEnabled === true) {
@@ -2370,31 +2370,44 @@ var servicePoint = new function () {
 		if(util.getNotificationAvailablity() && util.getNotificationStatus()) {
 			if(Notification.permission === 'granted') {
 				var queueId = parseInt(event.E.prm.queueId/100000000000);
-                var queueIndex = window.myQueueIds.indexOf(queueId);
-                if (queueIndex >= 0) {
-					var message = "";
-					var img = './images/application.png';
-                    if (event.E.evnt == servicePoint.publicEvents.APPOINTMENT_QUEUE_POPULATED) {
-                        message = jQuery.i18n.prop('info.notification.appoinmentMessage');
-                    } else {
-                        message = jQuery.i18n.prop('info.notification.message');
-					}
-
-					var isMacPlatform = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);i
-				
-					var notification;
-					if (isMacPlatform){
-						notification = new Notification(message);
+				var queueName = event.E.prm.queueName;
+				if(event.E.evnt === servicePoint.publicEvents.USER_POOL_POPULATED) {
+					if(queueId !== sessvars.currentUser.id) {
+						return;
 					} else {
-						notification = new Notification(message, {icon : img});
+						queueName = jQuery.i18n.prop('info.user.pool')
 					}
-					
-					notification.onclick(function(){
-						servicePoint.updateWorkstationStatus(false);
-					});
-                }
+				} else if(event.E.evnt === servicePoint.publicEvents.SP_POOL_POPULATED) {
+					if(queueId !== sessvars.servicePointId) {
+						return;
+					} else {
+						queueName = jQuery.i18n.prop('info.servicepoint.pool');
+					}
+				} else {
+					var queueIndex = window.myQueueIds.indexOf(queueId);
+                	if (queueIndex === -1) {
+						return;
+					}
+				}
+
+				var message = "";
+				var img = './images/application.png';
+
+                if (event.E.evnt == servicePoint.publicEvents.APPOINTMENT_QUEUE_POPULATED) {
+                    message = jQuery.i18n.prop('info.notification.appoinmentMessage');
+                } else {
+                    message = jQuery.i18n.prop('info.notification.message');
+				}
+
+				var isMacPlatform = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);i
 				
-			}
+				var notification;
+				if (isMacPlatform){
+					notification = new Notification(message, {body:  queueName});
+				} else {
+					notification = new Notification(message, {icon : img, body:  queueName});
+				}
+            }
 		}
 	}
 
@@ -2665,7 +2678,12 @@ var servicePoint = new function () {
 				servicePoint.updateWorkstationStatus();
 				break;
 			case servicePoint.publicEvents.QUEUE_POPULATED:
+			case servicePoint.publicEvents.APPOINTMENT_QUEUE_POPULATED:
+			case servicePoint.publicEvents.USER_POOL_POPULATED:
+			case servicePoint.publicEvents.SP_POOL_POPULATED:
+				servicePoint.updateWorkstationStatus();
 				queuePopulated(processedEvent);
+				break;
 			default:
 				break;
 		}

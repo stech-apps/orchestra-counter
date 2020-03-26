@@ -440,7 +440,7 @@
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
-          label="Enable notification"
+          label="Allow notification"
           description="If enabled, the user is notified when a queue goes from 0 to 1 visit. This setting can only be used when https is enabled."
           privilege="install:adminAdmin"/>
 

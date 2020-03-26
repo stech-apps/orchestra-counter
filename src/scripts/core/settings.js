@@ -53,7 +53,7 @@ function showModules() {
 		$('.js-add-customer').hide();
 	}
 
-	if (enableNotificationUtt == true && location.protocol === 'https:') {
+	if (enableNotificationUtt == true && util.getNotificationAvailablity() && location.protocol === 'https:') {
 		$('#qmNotificaitonContainer').attr("style", "display:block !important");
 	} else {
 		$('#qmNotificaitonContainer').hide();
