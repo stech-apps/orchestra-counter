@@ -194,9 +194,12 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("reinsertBtn", 'action.reinsert');
         i18nQmBtn("transferBtn", 'action.transfer');
         i18nQmBtn("parkBtn", 'button.park');
+        i18nQmBtn("smsBtn", 'button.sms');
         i18nQmBtn("noShowBtn", 'action.noshow');
         i18nQmBtn("endVisitBtn", 'action.finish.visit');
         i18nQmBtn("wrapUpBtn", 'action.wrapup.visit');
+        i18nSafeSelectorBtnAppend('.js-sms-error', 'error.validate.phone.number');
+        i18nSafeSelectorBtnAppend('.js-send-sms-text', 'button.sms');
 
         // Wrap up
         i18nQmBtn("wrapUpEndVisitBtn", 'action.finish.visit');
@@ -444,6 +447,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe('popoverPoolActionbarService', 'info.userandcounterpool.service');
         i18nSafe('popoverPoolActionbarCustomer', 'info.userandcounterpool.customer.name');
         i18nSafeSelectorBtnAppend('.js-popover-transfer > span', 'action.pool.transfer');
+        i18nSafeSelectorBtnAppend('.js-popover-sms > span', 'action.pool.sms');
+        i18nSafeSelectorBtnAppend('.js-popover-send', 'action.pool.send');
+        i18nSafeSelectorBtnAppend('.qm-popover-action-bar-send-sms-error', 'error.validate.phone.number');
         i18nSafeSelectorBtnAppend('.js-popover-delete > span', 'action.pool.delete');
         i18nSafeSelectorBtnAppend('.js-popover-close > span', 'application.sr.close');
         i18nSafeSelectorBtnAppend('.js-popover-back > span', 'application.sr.back');

@@ -27,6 +27,7 @@ buttonWalkDirectEnabled = true;						// Walk Direct Button
 buttonWalkDirectService = '';						// Default Walk Direct
 buttonRemoveFromQueueEnabled = true;				// Remove from Queue Button
 buttonTransferFromQueueEnabled = true;				// Transfer from Queue Button
+buttonSmsTicketEnabled = true;						// send sms from Queue Button
 buttonCallFromQueueEnabled = false;					// Call from Queue Button
 buttonTransferFirstEnabled = true;				// Transfer to first in Queue Button
 buttonTransferLastEnabled = true; 				// Transfer to last in Queue Button
@@ -336,6 +337,9 @@ function setUnitTypeModules(val) {
 	}
 	if (params.btnQueueTransfer != undefined) {
 		buttonTransferFromQueueEnabled = params.btnQueueTransfer;	// Transfer from Queue Button
+	}
+	if (params.btnSendSms != undefined) {
+		buttonSmsTicketEnabled = params.btnSendSms;	// Transfer from Queue Button
 	}
 	if (params.btnQueueCall != undefined) {
 		buttonCallFromQueueEnabled = params.btnQueueCall;			// Call from Queue Button

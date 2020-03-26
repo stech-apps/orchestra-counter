@@ -320,6 +320,11 @@ var queues = new function() {
                             } else {
                                 options.showTransferBtn = false;
                             }
+                            if ( buttonSmsTicketEnabled  == true ) {
+                                options.showSmsBtn = true;
+                            } else {
+                                options.showSmsBtn = false;
+                            }
                             if ( buttonRemoveFromQueueEnabled == true ) {
                                 options.showDeleteBtn = true;
                             } else {
@@ -481,6 +486,11 @@ var queues = new function() {
                     options.showTransferBtn = true;
                 } else {
                     options.showTransferBtn = false;
+                }
+                if ( buttonSmsTicketEnabled  == true ) {
+                    options.showSmsBtn = true;
+                } else {
+                    options.showSmsBtn = false;
                 }
                 if ( buttonRemoveFromQueueEnabled == true ) {
                     options.showDeleteBtn = true;

@@ -22,5 +22,61 @@
         &__header-section{
             margin-bottom: rem(10px);
         }
+        &__footer-section {
+            .button-tooltip{
+                align-self:flex-end;
+            }
+            &-sms-container{
+                width: 218px;
+                height: 88px;
+                display: none;
+                flex-direction: column;
+                border: 1px solid $primary-action-button-color;
+                border-radius: 4px;
+            }
+            &-sms-top-container{
+                // width: 216px;
+                height: 45px;
+                display: flex;
+                border-bottom: 1px solid $primary-action-button-color;
+                align-items: center;
+            }
+            &-phone-icon{
+                margin: 0;
+                margin-left: 12px;
+                font-size: 32px;
+                color: $primary-action-button-color;
+            }
+            &-text{
+                font-size: 14px;
+                margin-left: 16px;
+                color: $primary-action-button-color;
+            }
+            &-sms-bottom-container{
+                // width: 218px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+            }
+            &-sms-input{
+                width: 142px;
+                outline: none;
+                border: none;
+                margin-left: 20px;
+                margin-right: 10px;
+                color: $primary-action-button-color;
+            }
+            &-send-button{
+                &-icon{
+                    font-size: 24px;
+                }
+
+            }
+            .qm-label-error{
+                display: none;
+                color: $primary-action-button-color;
+                font-size: 13px;
+            }
+        }
     }
 }

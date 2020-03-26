@@ -1127,4 +1127,46 @@ var util = new function () {
     this.showGotoCardLink = function () {
         $('#cardContentLink').show();
     }
+
+    this.hideSmsView = function () {
+        $('#visitSmsInput').val('');
+        $('#smsContainer').hide();
+        $('#smsBtn').show();
+    }
+    this.showSmsView = function () {
+        $('.js-sms-error').css("display", "none");
+        $('.js-send-btn').prop('disabled', true);
+        $('#smsContainer').show();
+        $('#visitSmsInput').focus();
+        $('#visitSmsInput').on('blur', function () {
+           // util.hideSmsView();
+        });
+        $('#visitSmsInput').on('keydown', function () {
+            util.validatePhoneNo($('#visitSmsInput'), $('.js-send-btn'), $('.js-sms-error'));
+        });
+        $('#smsBtn').hide();
+    }
+    this.validatePhoneNo = function ($phoneField, $sendBtn, $errorLabel) {
+        var phonePattern = /^[0-9\+\s]+$/;
+        var passedTest = phonePattern.test($phoneField.val());
+        if (passedTest && $phoneField.val().length > 0) {
+            $errorLabel.css("display", "none");
+            $sendBtn.prop('disabled', false);
+            return false;
+        } else {
+            $errorLabel.css("display", "inline");
+            $sendBtn.prop('disabled', true);
+            return true;
+        };
+    }
+    this.sendSms = function () {
+        var obj = {
+            "visit": JSON.stringify(sessvars.state.visit),
+            "phoneNumber": $('#visitSmsInput').val(),
+        };
+        obj.json = JSON.stringify(obj);
+        spService.postParams("branches/" + sessvars.state.branchId + "/visits/" + sessvars.state.visit.id + "/events/SEND_VISIT_SMS", obj);
+        util.showMessage(jQuery.i18n
+            .prop('info.sms.success'));
+    }
 };

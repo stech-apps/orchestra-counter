@@ -9,6 +9,18 @@
             <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
             <span class="qm-action-btn__text"></span>
         </button>
+        <button class="qm-action-btn qm-action-btn--laying js-popover-sms">
+            <i class="qm-action-btn__icon icon-add" aria-hidden="true"></i>
+            <span class="qm-action-btn__text"></span>
+        </button>
+        <div class="qm-popover-action-bar-send-sms-parent">
+        <div class="qm-popover-action-bar-send-sms-container">
+            <i class="qm-action-btn__icon qm-popover-action-bar-phone-icon icon-add" aria-hidden="true"></i>
+            <input id="queueSmsInput" class="qm-popover-action-bar-sms-box"/>
+            <button class="qm-action-btn qm-popover-action-bar-send-btn js-popover-send" onclick="util.sendSms();"></button>
+        </div>
+        <span class="qm-popover-action-bar-send-sms-error"></span>
+        </div>
         <button class="qm-action-btn qm-action-btn--laying js-popover-delete">
             <i class="qm-action-btn__icon icon-delete" aria-hidden="true"></i>
             <span class="qm-action-btn__text"></span>

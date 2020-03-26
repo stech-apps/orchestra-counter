@@ -40,6 +40,75 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  .icon-next:before {
+    content: "\e97d";
+  }
+  .icon-pin:before {
+    content: "\e95e";
+    color: #fff;
+  }
+  .icon-ic-outline-pin:before {
+    content: "\e97b";
+    color: #fff;
+  }
+  .icon-button-down .path1:before {
+    content: "\e974";
+    color: rgb(0, 0, 0);
+  }
+  .icon-button-down .path2:before {
+    content: "\e975";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  .icon-button-down .path3:before {
+    content: "\e976";
+    margin-left: -1em;
+    color: rgb(229, 0, 70);
+  }
+  .icon-button-up .path1:before {
+    content: "\e977";
+    color: rgb(0, 0, 0);
+  }
+  .icon-button-up .path2:before {
+    content: "\e978";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+  }
+  .icon-button-up .path3:before {
+    content: "\e979";
+    margin-left: -1em;
+    color: rgb(229, 0, 70);
+  }
+  .icon-info-solid:before {
+    content: "\e972";
+  }
+  .icon-emailsms:before {
+    content: "\e96e";
+  }
+  .icon-smartphone:before {
+    content: "\e96f";
+  }
+  .icon-ticket-small:before {
+    content: "\e970";
+  }
+  .icon-info:before {
+    content: "\e96d";
+  }
+  .icon-arriveappointment:before {
+    content: "\e96c";
+  }
+  .icon-createappointment:before {
+    content: "\e968";
+  }
+  .icon-editappointment:before {
+    content: "\e969";
+  }
+  .icon-editvisit:before {
+    content: "\e96a";
+  }
+  .icon-addvisit:before {
+    content: "\e96b";
+  }
   .icon-add:before {
     content: "\e900";
   }
@@ -97,6 +166,18 @@
   .icon-subtract-smaller:before {
     content: "\e912";
   }
+  .icon-mobile-ticket:before {
+    content: "\e97e";
+  }
+  .icon-location-light:before {
+    content: "\e97a";
+  }
+  .icon-cake:before {
+    content: "\e973";
+  }
+  .icon-calendar-light:before {
+    content: "\e971";
+  }
   .icon-radiobutton-checked:before {
     content: "\e966";
   }
@@ -110,7 +191,7 @@
     content: "\e963";
   }
   .icon-checkbox-checked:before {
-    content: "\e95e";
+    content: "\e97c";
   }
   .icon-checkbox-checked-rtl:before {
     content: "\e960";
@@ -184,7 +265,7 @@
   .icon-hourglass:before {
     content: "\e922";
   }
-  .icon-info:before {
+  .icon-warn:before {
     content: "\e923";
   }
   .icon-location:before {
@@ -353,40 +434,3 @@
     content: "\e95a";
   }
   
-
-  // Overrides for RTL
-[dir='rtl'] {
-    .icon-done-solid:before {
-        content: "\e945";
-    }
-    .icon-check:before {
-        content: "\e93f";
-    }
-    .icon-announce:before {
-        content: "\e940";
-    }
-    .icon-exit:before {
-        content: "\e941";
-    }
-    .icon-mark:before {
-        content: "\e942";
-    }
-    .icon-call-next-solid:before {
-        content: "\e943";
-    }
-    .icon-complete:before {
-        content: "\e944";
-    }
-    .icon-transfer:before {
-        content: "\e947";
-    }
-    .icon-walk-in:before {
-        content: "\e948";
-    }
-    .icon-caret-left:before {
-        content: "\e904";
-    }
-    .icon-caret-right:before {
-        content: "\e903";
-    }
-}
