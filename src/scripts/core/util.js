@@ -1144,7 +1144,7 @@ var util = new function () {
                 util.hideSmsView();
             },100);
         });
-        $('#visitSmsInput').on('keydown', function () {
+        $('#visitSmsInput').on('input', function () {
             util.validatePhoneNo($('#visitSmsInput'), $('.js-send-btn'), $('.js-sms-error'));
         });
         $('#smsBtn').hide();
@@ -1153,7 +1153,7 @@ var util = new function () {
         var phonePattern = /^\(?\+?\d?[-\s()0-9]{0,}$/;
         var passedTest = phonePattern.test($phoneField.val().trim());
 console.log($phoneField.val().trim().length);
-        if($phoneField.val().trim().length > 1){
+        if($phoneField.val().trim().length > 0){
             if (!passedTest) {
                 $errorLabel.css("display", "inline");
                 $sendBtn.prop('disabled', true);

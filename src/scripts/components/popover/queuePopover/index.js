@@ -366,7 +366,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
                 $(sendBtn).prop('disabled', true);
                 $(smsBtn).hide();
                 $(smsError).hide();
-                $(smsInput).on('keydown', function () {
+                $(smsInput).on('input', function () {
                     if(util.validatePhoneNo($(smsInput), $(sendBtn), $(smsError))){
                         smsView.style.marginTop  = '0px';
                     }else{
