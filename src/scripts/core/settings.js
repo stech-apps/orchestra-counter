@@ -157,6 +157,13 @@ function showModules() {
 	} else {
 		$('#parkBtn').hide();
 	}
+
+	if (buttonSmsTicketEnabled == true) {
+		$('#smsBtn').show();
+	} else {
+		$('#smsBtn').hide();
+	}
+
 	if (buttonNotesEnabled == true) {
 		$('.js-notes').css("display", "");
 	} else {

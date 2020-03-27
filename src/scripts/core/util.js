@@ -1150,33 +1150,42 @@ var util = new function () {
         $('#smsBtn').hide();
     }
     this.validatePhoneNo = function ($phoneField, $sendBtn, $errorLabel) {
-        var phonePattern = /^[0-9\+\s]+$/;
-        var passedTest = phonePattern.test($phoneField.val());
-        if (passedTest && $phoneField.val().length > 0) {
+        var phonePattern = /^\(?\+?\d?[-\s()0-9]{0,}$/;
+        var passedTest = phonePattern.test($phoneField.val().trim());
+console.log($phoneField.val().trim().length);
+        if($phoneField.val().trim().length > 1){
+            if (!passedTest) {
+                $errorLabel.css("display", "inline");
+                $sendBtn.prop('disabled', true);
+                return false;
+            } else {
+                $errorLabel.css("display", "none");
+                $sendBtn.prop('disabled', false);
+                return true;
+            };
+        }else{
             $errorLabel.css("display", "none");
-            $sendBtn.prop('disabled', false);
-            return false;
-        } else {
-            $errorLabel.css("display", "inline");
             $sendBtn.prop('disabled', true);
             return true;
-        };
+        }
+     
     }
-    this.sendSms = function (visitId) {
+    this.sendSms = function (visitId, phoneNumberVal) {
         var selectedVisit;
-        if (visitId) {
+        var phoneNumber;
+        if (visitId && phoneNumberVal) {
             selectedVisit = spService.get("branches/" + sessvars.state.branchId + "/visits/" + visitId);
+            phoneNumber = phoneNumberVal;
+        }else{
+            selectedVisit = sessvars.state.visit;
+            phoneNumber = $('#visitSmsInput').val();
         }
         var obj = {
-            "visit": JSON.stringify(visitId ? selectedVisit : sessvars.state.visit),
-            "phoneNumber": $('#visitSmsInput').val(),
+            "visit": JSON.stringify(selectedVisit),
+            "phoneNumber": phoneNumber.trim(),
         };
         obj.json = JSON.stringify(obj);
-        if (visitId) {
             spService.postParams("branches/" + sessvars.state.branchId + "/visits/" + selectedVisit.id + "/events/SEND_VISIT_SMS", obj);
-        } else {
-            spService.postParams("branches/" + sessvars.state.branchId + "/visits/" + sessvars.state.visit.id + "/events/SEND_VISIT_SMS", obj);
-        }
         util.showMessage(jQuery.i18n
             .prop('info.sms.success'));
     }

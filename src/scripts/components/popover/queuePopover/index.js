@@ -363,13 +363,14 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
             if (value) {
                 smsView.style.display = 'flex';
                 smsInput.focus();
+                $(sendBtn).prop('disabled', true);
                 $(smsBtn).hide();
                 $(smsError).hide();
                 $(smsInput).on('keydown', function () {
                     if(util.validatePhoneNo($(smsInput), $(sendBtn), $(smsError))){
-                        smsView.style.marginTop  = '25px';
-                    }else{
                         smsView.style.marginTop  = '0px';
+                    }else{
+                        smsView.style.marginTop  = '25px';
                     }
                 });
             } else {
@@ -378,7 +379,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
             }
         },
         _sendSms : function (){
-            util.sendSms(this.visitId);
+            util.sendSms(this.visitId, $(smsInput).val());
             this.disposeInstance();
         },
     disposeInstance: function () {

@@ -452,6 +452,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-popover-sms > span', 'action.pool.sms');
         i18nSafeSelectorBtnAppend('.js-popover-send', 'action.pool.send');
         i18nSafeSelectorBtnAppend('.qm-popover-action-bar-send-sms-error', 'error.validate.phone.number');
+        i18nSafe("queueSmsLabel", 'button.sms');
         i18nSafeSelectorBtnAppend('.js-popover-delete > span', 'action.pool.delete');
         i18nSafeSelectorBtnAppend('.js-popover-close > span', 'application.sr.close');
         i18nSafeSelectorBtnAppend('.js-popover-back > span', 'application.sr.back');

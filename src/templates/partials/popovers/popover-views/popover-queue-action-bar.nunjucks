@@ -15,11 +15,12 @@
         </button>
         <div class="qm-popover-action-bar-send-sms-parent">
         <div class="qm-popover-action-bar-send-sms-container">
+            <label id="queueSmsLabel"  class="sr-only" for="queueSmsInput"></label>
             <i class="qm-action-btn__icon qm-popover-action-bar-phone-icon icon-mobile-ticket" aria-hidden="true"></i>
-            <input id="queueSmsInput" class="qm-popover-action-bar-sms-box"/>
+            <input id="queueSmsInput" class="qm-popover-action-bar-sms-box" type="tel" aria-labelledby="queueSmsLabel"/>
             <button class="qm-action-btn qm-popover-action-bar-send-btn js-popover-send"></button>
         </div>
-        <span class="qm-popover-action-bar-send-sms-error"></span>
+        <span class="qm-popover-action-bar-send-sms-error" role="alert"></span>
         </div>
         <button class="qm-action-btn qm-action-btn--laying js-popover-delete">
             <i class="qm-action-btn__icon icon-delete" aria-hidden="true"></i>
