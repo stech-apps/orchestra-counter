@@ -195,11 +195,13 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("transferBtn", 'action.transfer');
         i18nQmBtn("parkBtn", 'button.park');
         i18nQmBtn("smsBtn", 'button.sms');
-        i18nQmBtn("noShowBtn", 'action.noshow');
+        i18nQmBtn("noShowBtn", 'action.noshow');                
         i18nQmBtn("endVisitBtn", 'action.finish.visit');
         i18nQmBtn("wrapUpBtn", 'action.wrapup.visit');
         i18nSafeSelectorBtnAppend('.js-sms-error', 'error.validate.phone.number');
         i18nSafeSelectorBtnAppend('.js-send-sms-text', 'button.sms');
+        i18nSafe("visitSmsLabel", 'button.sms');
+        i18nQmBtn("visitSmsSendBtn", 'button.sms');
 
         // Wrap up
         i18nQmBtn("wrapUpEndVisitBtn", 'action.finish.visit');

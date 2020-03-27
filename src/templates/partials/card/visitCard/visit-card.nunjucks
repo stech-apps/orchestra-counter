@@ -184,23 +184,25 @@
             </div>
             <div class="button-tooltip">
                 <button class="qm-action-btn" id="smsBtn" onclick="util.showSmsView();this.blur();">
-                    <i class="qm-action-btn__icon icon-message" aria-hidden="true"></i>
+                    <i class="qm-action-btn__icon icon-mobile-ticket" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
                 </button>
             </div>
             <div class="qm-card__footer-section-sms-container" id="smsContainer">
                 <div class="qm-card__footer-section-sms-top-container">
-                <i class="qm-action-btn__icon qm-card__footer-section-phone-icon icon-message"></i>
+                <i class="qm-action-btn__icon qm-card__footer-section-phone-icon icon-mobile-ticket"></i>
                 <span class="qm-action-btn__icon qm-card__footer-section-text js-send-sms-text"></span>
                 </div>
 
                 <div class="qm-card__footer-section-sms-bottom-container">
+                <label id="visitSmsLabel"  class="sr-only" for="visitSmsInput"></label>
                 <input id="visitSmsInput" class="qm-card__footer-section-sms-input" type="tel"/>
-                <button class="qm-action-btn qm-card__footer-section-send-button js-send-btn" onclick="util.sendSms(); util.hideSmsView();">
-                       <i class="qm-action-btn__icon qm-card__footer-section-send-button-icon icon-message " aria-hidden="true"></i>
+                <button id="visitSmsSendBtn"  class="qm-action-btn qm-card__footer-section-send-button js-send-btn" onclick="util.sendSms(); util.hideSmsView();">
+                       <i class="qm-action-btn__icon qm-card__footer-section-send-button-icon icon-next " aria-hidden="true"></i>
+                       <span class="sr-only"  title=""></span>
                 </button>
                 </div>
-                 <span class="qm-label-error js-sms-error"></span>
+                 <span id="visitSmsError" class="qm-label-error js-sms-error" role="alert"></span>
             </div>
         </div>
         <div class="qm-card-action-layout qm-card-action-layout-right">

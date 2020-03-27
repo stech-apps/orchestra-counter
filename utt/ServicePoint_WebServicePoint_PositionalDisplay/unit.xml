@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.12     2020-03-27   Added parameter to enable/diable          chamut
+                            sms notification
     7.0.12     2020-03-18   Added parameter to enable/diable          kasran
                             notification 
 
@@ -435,6 +437,14 @@
           writeLevel="profile"
           label="Allow notification"
           description="If enabled, the user is notified when a queue goes from 0 to 1 visit. This setting can only be used when https is enabled."
+          privilege="install:adminAdmin"/>
+        <parameter name="sndSMS"
+          sortOrder="5039"
+          type="Boolean"
+          defaultValue="true"
+          writeLevel="profile"
+          label="Send SMS"
+          description="Enable/disable sms option"
           privilege="install:adminAdmin"/>
 
 

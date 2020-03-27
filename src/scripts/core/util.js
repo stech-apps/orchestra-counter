@@ -1140,7 +1140,9 @@ var util = new function () {
         $('#smsContainer').show();
         $('#visitSmsInput').focus();
         $('#visitSmsInput').on('blur', function () {
-           // util.hideSmsView();
+            setTimeout(function () {
+                util.hideSmsView();
+            },100);
         });
         $('#visitSmsInput').on('keydown', function () {
             util.validatePhoneNo($('#visitSmsInput'), $('.js-send-btn'), $('.js-sms-error'));
@@ -1160,13 +1162,21 @@ var util = new function () {
             return true;
         };
     }
-    this.sendSms = function () {
+    this.sendSms = function (visitId) {
+        var selectedVisit;
+        if (visitId) {
+            selectedVisit = spService.get("branches/" + sessvars.state.branchId + "/visits/" + visitId);
+        }
         var obj = {
-            "visit": JSON.stringify(sessvars.state.visit),
+            "visit": JSON.stringify(visitId ? selectedVisit : sessvars.state.visit),
             "phoneNumber": $('#visitSmsInput').val(),
         };
         obj.json = JSON.stringify(obj);
-        spService.postParams("branches/" + sessvars.state.branchId + "/visits/" + sessvars.state.visit.id + "/events/SEND_VISIT_SMS", obj);
+        if (visitId) {
+            spService.postParams("branches/" + sessvars.state.branchId + "/visits/" + selectedVisit.id + "/events/SEND_VISIT_SMS", obj);
+        } else {
+            spService.postParams("branches/" + sessvars.state.branchId + "/visits/" + sessvars.state.visit.id + "/events/SEND_VISIT_SMS", obj);
+        }
         util.showMessage(jQuery.i18n
             .prop('info.sms.success'));
     }

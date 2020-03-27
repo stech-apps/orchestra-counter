@@ -33,6 +33,9 @@
                 flex-direction: column;
                 border: 1px solid $primary-action-button-color;
                 border-radius: 4px;
+                @at-root [dir='rtl'] & {
+                    margin-right: 10px;
+                }
             }
             &-sms-top-container{
                 // width: 216px;
@@ -44,12 +47,18 @@
             &-phone-icon{
                 margin: 0;
                 margin-left: 12px;
+                @at-root [dir='rtl'] & {
+                    margin-right: 12px;
+                }
                 font-size: 32px;
                 color: $primary-action-button-color;
             }
             &-text{
                 font-size: 14px;
                 margin-left: 16px;
+                @at-root [dir='rtl'] & {
+                    margin-right: 16px;
+                }
                 color: $primary-action-button-color;
             }
             &-sms-bottom-container{
@@ -64,10 +73,18 @@
                 border: none;
                 margin-left: 20px;
                 margin-right: 10px;
+                @at-root [dir='rtl'] & {
+                    margin-left: 10px;
+                    margin-right: 20px;
+                }
                 color: $primary-action-button-color;
             }
             &-send-button{
                 &-icon{
+                    transform: rotate(180deg);
+                    @at-root [dir='rtl'] & {
+                        transform: rotate(180deg);
+                    }
                     font-size: 24px;
                 }
 

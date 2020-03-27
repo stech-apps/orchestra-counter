@@ -133,7 +133,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
             smsBtn.disabled = true;
         } else {
             smsBtn.addEventListener('click', this._toggleSmsView.bind(this, true));
-            sendBtn.addEventListener('click', this._toggleSmsView.bind(this, false));
+            sendBtn.addEventListener('click', this._sendSms.bind(this));
         }
         if(this.disableDelete) {
             deleteBtn.disabled = true;
@@ -376,6 +376,10 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
                 smsView.style.display = 'none';
                 $(smsBtn).show();
             }
+        },
+        _sendSms : function (){
+            util.sendSms(this.visitId);
+            this.disposeInstance();
         },
     disposeInstance: function () {
         this.navigationStack    = [];

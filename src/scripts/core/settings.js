@@ -317,6 +317,9 @@ function setUnitTypeModules(val) {
 	if (params.btnPark != undefined) {
 		buttonParkEnabled = params.btnPark;							// Park Button
 	}
+	if (params.sndSMS != undefined) {
+		buttonSmsTicketEnabled = params.sndSMS;							// Park Button
+	}
 	if (params.btnNotes != undefined) {
 		buttonNotesEnabled = params.btnNotes;						// Notes Button
 	}
