@@ -312,6 +312,7 @@ var servicePoint = new function () {
 			clearTimeout(sessvars.queueTimer);
 			sessvars.queueTimerOn = false;
 			sessvars.currentUser = spService.get("user");
+			util.updateUINofiticationStatus(util.getNotificationStatus());
 			$("#userName").html(sessvars.currentUser.userName);
 			servicePoint.showSettingsWindow();
 		}
@@ -471,7 +472,15 @@ var servicePoint = new function () {
 
 		selectWorkstationModal.trigger("chosen:updated");
 		selectPrioModal.trigger("chosen:updated");
+
+		if (sessvars.branchId && sessvars.branchId !== branchId) {
+			this.hideNotificationModel();
+		}
 	};
+
+	this.hideNotificationModel = function() {
+		$('#qmNotificaitonContainer').hide();
+	}
 
 	// show workstations in settings window
 	var showWorkstations = function (branchId, workstationSelect, prioSelect) {
@@ -518,6 +527,10 @@ var servicePoint = new function () {
 		}
 
 		setTempUnitTypeModules();
+
+		if (sessvars.servicePointId && sessvars.servicePointId !== unitId) {
+			this.hideNotificationModel();
+		}
 	};
 
 	// show profiles in settings window and in status row

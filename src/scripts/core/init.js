@@ -23,6 +23,7 @@ var init = new function () {
         }
 
         sessvars.currentUser = spService.get('user');
+        util.updateUINofiticationStatus(util.getNotificationStatus());
 
         if (typeof sessvars.systemInformation == "undefined" || sessvars.systemInformation == "" || null == sessvars.systemInformation) {
             sessvars.systemInformation = spService.get('systemInformation');

@@ -718,10 +718,11 @@ var util = new function () {
     this.setNotificationStatus = function(value) {
         if(value) {
             if(Notification.permission === 'default') {
+                var tmpObj = this;
                 Notification.requestPermission().then(function (permission) {
                     // If the user accepts, let's create a notification
                     if (permission === "granted") {
-                        this.setNotificationInStorage(value);
+                        tmpObj.setNotificationInStorage(value);
                     } else {
                         util.updateUINofiticationStatus(false);
                     }
@@ -754,7 +755,7 @@ var util = new function () {
     this.setNotificationInStorage = function(isNotificationEnable) {
         this.getNotificationInStorage();
         var notificationStatusObj = {
-            userId : sessvars.userId,
+            userId : sessvars.currentUser.id,
             notificationStatus : isNotificationEnable
         }
         localStorage.setItem("notificationStatus", JSON.stringify(notificationStatusObj))
@@ -762,7 +763,7 @@ var util = new function () {
 
     this.getNotificationInStorage = function() {
         var notificationStatusObj = JSON.parse(localStorage.getItem("notificationStatus"));
-        if (notificationStatusObj && notificationStatusObj.userId === sessvars.userId) {
+        if (notificationStatusObj && notificationStatusObj.userId === sessvars.currentUser.id) {
             return notificationStatusObj;
         } else {
             return null;

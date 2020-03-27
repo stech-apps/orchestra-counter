@@ -10,8 +10,6 @@ window.$Qmatic.components.modal.ProfileSettingsModal = function (selector) {
 
         var notificationPanel = document.getElementById("qmNotificaitonContainer");
         notificationPanel.style.display = util.getNotificationAvailablity() ? "block" : "none";
-
-        util.updateUINofiticationStatus(util.getNotificationStatus());
     }
 
     this.cleanUp = function () {
