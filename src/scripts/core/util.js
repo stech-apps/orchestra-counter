@@ -1130,11 +1130,13 @@ var util = new function () {
     }
 
     this.hideSmsView = function () {
+        $('.qm-card-action-layout-left').css('align-items', 'flex-start');
         $('#visitSmsInput').val('');
         $('#smsContainer').hide();
         $('#smsBtn').show();
     }
     this.showSmsView = function () {
+        $('.qm-card-action-layout-left').css('align-items', 'flex-end');
         $('.js-sms-error').css("display", "none");
         $('.js-send-btn').prop('disabled', true);
         $('#smsContainer').show();
@@ -1146,6 +1148,12 @@ var util = new function () {
         });
         $('#visitSmsInput').on('input', function () {
             util.validatePhoneNo($('#visitSmsInput'), $('.js-send-btn'), $('.js-sms-error'));
+        });
+        $('#visitSmsInput').on('keypress', function (e) {
+            if(e.which === 13){
+                util.sendSms();
+                util.hideSmsView();  
+             }
         });
         $('#smsBtn').hide();
     }

@@ -24,10 +24,13 @@
         }
         &__footer-section {
             .button-tooltip{
-                align-self:flex-end;
+                //align-self:flex-end;
             }
             &-sms-container{
-                width: 218px;
+                 width: 218px;
+                @media screen and (max-width: #{map-get($grid-breakpoints, 'xl')}) {
+                  width: 100px;
+                }
                 height: 88px;
                 display: none;
                 flex-direction: column;
@@ -68,16 +71,19 @@
                 align-items: center;
             }
             &-sms-input{
-                width: 142px;
+                 width: 142px;
+                 @media screen and (max-width: #{map-get($grid-breakpoints, 'xl')}) {
+                    width: 50px;
+                  }
                 outline: none;
                 border: none;
                 margin-left: 20px;
                 margin-right: 10px;
+                color: rgba(0, 0, 0, 0.6);
                 @at-root [dir='rtl'] & {
                     margin-left: 10px;
                     margin-right: 20px;
                 }
-                color: $primary-action-button-color;
             }
             &-send-button{
                 &-icon{

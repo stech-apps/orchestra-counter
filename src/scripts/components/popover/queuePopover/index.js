@@ -373,6 +373,11 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
                         smsView.style.marginTop  = '25px';
                     }
                 });
+                $(smsInput).on('keypress', function (e) {
+                    if(e.which === 13){
+                       sendBtn.click();
+                     }
+                });
             } else {
                 smsView.style.display = 'none';
                 $(smsBtn).show();
