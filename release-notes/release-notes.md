@@ -8,6 +8,20 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+<h2>Version 4.0.0.034</h2>
+
+**Date: 15/04/2020**
+
+**Build number: 034**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **COUNTER-210** | **Queue list in Counter shows icons if notes exists on visit** |
+
+----------
+
 <h2>Version 4.0.0.033</h2>
 
 **Date: 27/03/2020**

@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.13     2020-04-15   updated description in btnNotes param     chamut
     7.0.12     2020-03-27   Added parameter to enable/diable          chamut
                             sms notification
     7.0.12     2020-03-18   Added parameter to enable/diable          kasran
@@ -88,7 +89,7 @@
 
 <unit name="WebServicePoint_PositionalDisplay"
       frameworkVersion="2"
-      unitVersion="7.0.12"
+      unitVersion="7.0.13"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -298,7 +299,7 @@
           type="Boolean"
           defaultValue="false"
           label="Notes Button"
-          description="Edit/Add Notes Button"
+          description="Edit/Add/Show Notes Button"
           sortOrder="5024"
           writeLevel="branch"
           privilege="install:adminAdmin"/>
