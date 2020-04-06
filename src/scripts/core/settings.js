@@ -166,8 +166,10 @@ function showModules() {
 
 	if (buttonNotesEnabled == true) {
 		$('.js-notes').css("display", "");
+		sessvars.isNotesEnabled = true;
 	} else {
 		$('.js-notes').hide();
+		sessvars.isNotesEnabled = false;
 	}
 
 	if (buttonWrapUpEnabled == true) {

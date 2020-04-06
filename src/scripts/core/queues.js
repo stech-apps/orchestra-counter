@@ -7,6 +7,7 @@ var queues = new function() {
     var SORTING = [[3, 'desc'], [2, 'desc'], [0, 'asc']];
     var queuePopovers = [];
     var notePopovers = [];
+    var isNoteEnabled = false;
 
     /*
      * keepCalling should be set to true to have this function call itself every 30 secs.
@@ -200,13 +201,21 @@ var queues = new function() {
       setNumberOfWaitingCustomers('#workProfileVisitsTab .qm-tab-information__text', waitingCustomers);
       //update the myqueues tab as well
       setNumberOfWaitingCustomers('#myQueuesTab .qm-tab-information__text', waitingCustomers);
+      var table = $('#workProfileVisitsTable').DataTable();
+      table.on( 'preDraw', function () {
+        queues.runClearQueuePopovers();
+        });
     }
 
-    var queueDetailInitFn = function (queues) {
-      if (queues !== null && queues !== undefined) {
-        var waitingCustomers = queues.length;
+    var queueDetailInitFn = function (queuesObj) {
+      if (queuesObj !== null && queuesObj !== undefined) {
+        var waitingCustomers = queuesObj.length;
         setNumberOfWaitingCustomers('#queueDetailView .qm-tab-information__text', waitingCustomers);
       }
+      var table = $('#tickets').DataTable();
+      table.on( 'preDraw', function () {
+        queues.runClearQueuePopovers();
+        });
     };
 
     var getNumberOfWaitingCustomers = function (queues) {
@@ -232,7 +241,7 @@ var queues = new function() {
             sessvars.clickedQueueId = queueTableContainingRow.fnGetData(rowClicked).id; //ql queue id
 
             queueViewController.navigateToDetail();
-
+            isNoteEnabled = sessvars && sessvars.isNotesEnabled;
             if(typeof ticketsTable !== 'undefined') {
                 //empty the tickets table and populate with new data from server if table is not created
                 ticketsTable.fnClearTable();
@@ -264,21 +273,26 @@ var queues = new function() {
                     },
                     /* notes */
                     {
-                        "sClass": "qm-table__middle-column",
+                        "sClass": "qm-table__middle-column qm-table--hide-note-column",
                         "sType": "string",
                         "aDataSort": [1,2],
                         "sWidth": "",
                         "sDefaultContent": "",
                         "mData": "parameterMap.custom1",
-                        "mRender":  function ( data, type, full ) {
-                            if(type == 'sort'){
+                        "mRender": function (data, type, full) {
+                            if (type == 'sort') {
                                 queues.runClearQueuePopovers();
                             }
-                            if(data){
-                                return "<i tabindex='0' class='icon-message'></i>"
-                                
+                            if (data) {
+                                if (decodeURIComponent(data).trim().length) {
+                                    return "<i tabindex='0' class='icon-message'></i>"
+                                } else {
+                                    return null;
+                                }
+                            } else {
+                                return null;
                             }
-                          }
+                        }
                     },
                     /* Customer name */
                     {
@@ -317,10 +331,19 @@ var queues = new function() {
                     nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
                     nHead.getElementsByTagName('th')[5].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
                     $(nHead).find('th').attr('scope', 'col');
+                    if(isNoteEnabled){
+                        $('th:eq(1)', nHead).removeClass('qm-table--hide-note-column');
+                    }else{
+                        $('th:eq(1)', nHead).addClass('qm-table--hide-note-column');
+                    }
                 };
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues/" + sessvars.clickedQueueId + "/visits/full";
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
-
+                    var noteTxt = '';
+                    if(aData.parameterMap['custom1']){
+                        var noteTxt = decodeURIComponent(aData.parameterMap['custom1']).trim();
+                    }
+                    
                     if($('td:eq(0)', nRow).find('a').length == 0) {
                         if(iDisplayIndex === 0) {
                             clearQueuePopovers();
@@ -381,7 +404,13 @@ var queues = new function() {
 
                         var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
                     }
-                    if (aData.parameterMap && aData.parameterMap['custom1'] !== undefined) {
+
+                    if(isNoteEnabled){
+                        $('td:eq(1)', nRow).removeClass('qm-table--hide-note-column');
+                    }else{
+                        $('td:eq(1)', nRow).addClass('qm-table--hide-note-column');
+                    }
+                    if (isNoteEnabled && noteTxt) {
                         $('td:eq(1)', nRow).addClass('qm-table__notes-column');
                         var popoverTemplate = document.querySelector('.qm-popover--notes').outerHTML.trim();
                     
@@ -440,6 +469,7 @@ var queues = new function() {
       var _self = this;
       if(servicePoint.hasValidSettings() && sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
         /*!(servicePoint.isOutcomeOrDeliveredServiceNeeded() && sessvars.forceMark && !hasMark()*/) {
+            isNoteEnabled = sessvars && sessvars.isNotesEnabled;
 
         // queueViewController.navigateToWorkProfileVisits();
 
@@ -472,18 +502,24 @@ var queues = new function() {
                 },
                 /* notes */
                 {
-                    "sClass": "qm-table__middle-column",
+                    "sClass": "qm-table__middle-column qm-table--hide-note-column",
                     "sType": "string",
                     "aDataSort": [1, 2],
                     "sWidth": "",
                     "sDefaultContent": "",
                     "mData": "parameterMap.custom1",
                     "mRender": function (data, type, full) {
-                        if(type == 'sort'){
+                        if (type == 'sort') {
                             queues.runClearQueuePopovers();
                         }
                         if (data) {
-                            return "<i tabindex='0' class='icon-message'></i>"
+                            if (decodeURIComponent(data).trim().length) {
+                                return "<i tabindex='0' class='icon-message'></i>"
+                            } else {
+                                return null;
+                            }
+                        } else {
+                            return null;
                         }
                     }
                 },
@@ -523,10 +559,20 @@ var queues = new function() {
             nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.service.name');
             nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
             nHead.getElementsByTagName('th')[5].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+            $(nHead).find('th').attr('scope', 'col');
+            if(isNoteEnabled){
+                $('th:eq(1)', nHead).removeClass('qm-table--hide-note-column');
+            }else{
+                $('th:eq(1)', nHead).addClass('qm-table--hide-note-column');
+            }
           };
 
           var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/workProfiles/" + sessvars.workProfileId + "/visits/full";
           var rowCallback = function(nRow, aData, iDisplayIndex) {
+            var noteTxt = '';
+            if(aData.parameterMap['custom1']){
+                var noteTxt = decodeURIComponent(aData.parameterMap['custom1']).trim();
+            }
 
             if($('td:eq(0)', nRow).find('a').length == 0) {
               if(iDisplayIndex === 0) {
@@ -590,7 +636,12 @@ var queues = new function() {
               var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
             }
 
-            if (aData.parameterMap && aData.parameterMap['custom1'] !== undefined) {
+            if(isNoteEnabled){
+                $('td:eq(1)', nRow).removeClass('qm-table--hide-note-column');
+            }else{
+                $('td:eq(1)', nRow).addClass('qm-table--hide-note-column');
+            }
+            if (isNoteEnabled && noteTxt) {
                 $('td:eq(1)', nRow).addClass('qm-table__notes-column');
                 var popoverTemplate = document.querySelector('.qm-popover--notes').outerHTML.trim();
             
