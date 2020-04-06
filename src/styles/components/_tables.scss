@@ -72,6 +72,13 @@
         }
     }
 
+    &__notes-column {
+            font-size: 24px!important;
+            i{
+                padding: 5px;
+            }
+    }
+
     &__last-column {
         text-align: right;
         padding-right: rem(30px);

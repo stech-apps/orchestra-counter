@@ -3,6 +3,7 @@
     <tr>
       <th id="ticketVisitId"></th>
       <th id="ticketTicketId"></th>
+      <th id="ticketNotes"></th>
       <th id="ticketCustomerName"></th>
       <th id="ticketActions"></th>
       <th id="ticketAppointmentTime"></th>

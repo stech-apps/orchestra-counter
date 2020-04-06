@@ -6,6 +6,7 @@ var queues = new function() {
     var workProfileTable;
     var SORTING = [[3, 'desc'], [2, 'desc'], [0, 'asc']];
     var queuePopovers = [];
+    var notePopovers = [];
 
     /*
      * keepCalling should be set to true to have this function call itself every 30 secs.
@@ -248,43 +249,73 @@ var queues = new function() {
                 queueDetailInitFn(tickets);
             } else {
                 var columns = [
-                    /* Id */                {"bSearchable": false,
+                    /* Id */                {
+                        "bSearchable": false,
                         "bVisible": false,
                         "sType": "qm-sort",
-                        "mDataProp": "id"},
+                        "mDataProp": "id"
+                    },
 
-                    /* Ticket id */         {"sClass": "qm-table__first-column",
-                    "sType": "qm-sort",
-                    "sWidth": "",
-                        "mDataProp": "ticketId"},
+                    /* Ticket id */         {
+                        "sClass": "qm-table__first-column",
+                        "sType": "qm-sort",
+                        "sWidth": "",
+                        "mDataProp": "ticketId"
+                    },
+                    /* notes */
+                    {
+                        "sClass": "qm-table__middle-column",
+                        "sType": "string",
+                        "aDataSort": [1,2],
+                        "sWidth": "",
+                        "sDefaultContent": "",
+                        "mData": "parameterMap.custom1",
+                        "mRender":  function ( data, type, full ) {
+                            if(type == 'sort'){
+                                queues.runClearQueuePopovers();
+                            }
+                            if(data){
+                                return "<i tabindex='0' class='icon-message'></i>"
+                                
+                            }
+                          }
+                    },
                     /* Customer name */
-                        {"sClass": "qm-table__middle-column",
+                    {
+                        "sClass": "qm-table__middle-column",
                         "sType": "qm-sort",
                         "mData": null,
                         "sWidth": "",
                         "mDataProp": "parameterMap.customers",
-                        "sDefaultContent": ""},
-                    /* Actions */      {"sClass": "qm-table__middle-column",
+                        "sDefaultContent": ""
+                    },
+                    /* Actions */      {
+                        "sClass": "qm-table__middle-column",
                         "mDataProp": "currentVisitService.serviceExternalName",
                         "sWidth": ""
                     },
-                        /* Appointment time */      {"sClass": "qm-table__app-column",
+                        /* Appointment time */      {
+                        "sClass": "qm-table__app-column",
                         // "bVisible": false,
-                    "sType": "qm-sort",
-                    "sWidth": "",
-                        "mDataProp": "appointmentTime"},
-                    /* Waiting time */      {"sClass": "qm-table__last-column",
-                    "sType": "qm-sort",
-                    "sWidth": "",
-                        "mDataProp": "waitingTime"}
+                        "sType": "qm-sort",
+                        "sWidth": "",
+                        "mDataProp": "appointmentTime"
+                    },
+                    /* Waiting time */      {
+                        "sClass": "qm-table__last-column",
+                        "sType": "qm-sort",
+                        "sWidth": "",
+                        "mDataProp": "waitingTime"
+                    }
 
                 ];
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.ticket');
-                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
-                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.service.name');
-                    nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
-                    nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.notes');
+                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
+                    nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.service.name');
+                    nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
+                    nHead.getElementsByTagName('th')[5].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
                     $(nHead).find('th').attr('scope', 'col');
                 };
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues/" + sessvars.clickedQueueId + "/visits/full";
@@ -350,15 +381,38 @@ var queues = new function() {
 
                         var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
                     }
+                    if (aData.parameterMap && aData.parameterMap['custom1'] !== undefined) {
+                        $('td:eq(1)', nRow).addClass('qm-table__notes-column');
+                        var popoverTemplate = document.querySelector('.qm-popover--notes').outerHTML.trim();
+                    
+                        var popover = new Tooltip($('td:eq(1) > i', nRow), {
+                            container: document.getElementById('renderedPopovers'),
+                            boundariesElement: document.querySelector('.qm-main'),
+                            trigger: 'hover focus',
+                            delay: 400,
+                            title: ' ',
+                            placement: this.isRTL ? 'bottom-end' : 'bottom-start',
+                            template: popoverTemplate,
+                            offset: '0, 10',
+                            popperOptions: {
+                                onCreate: function (data) {
+                                    var popover = data.instance.popper;
+                                    var note = popover.querySelector('.qm-popover-notes-text');
+                                    $(note).text(decodeURIComponent(aData.parameterMap['custom1']));
 
+                                }
+                            }
+                        });
+                        notePopovers.push(popover);
+                    }
                     if(aData.parameterMap && aData.parameterMap['customers'] !== undefined) {
-                        $('td:eq(1)', nRow).html(aData.parameterMap['customers']);
+                        $('td:eq(2)', nRow).html(aData.parameterMap['customers']);
                     }
                     if(aData.appointmentTime) {
-                        $('td:eq(3)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
+                        $('td:eq(4)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
                     }
 
-                    $('td:eq(4)', nRow).html(formattedTime);
+                    $('td:eq(5)', nRow).html(formattedTime);
                     return nRow;
                 };
 
@@ -416,6 +470,23 @@ var queues = new function() {
                     "sWidth": "",
                     "mDataProp": "ticketId"
                 },
+                /* notes */
+                {
+                    "sClass": "qm-table__middle-column",
+                    "sType": "string",
+                    "aDataSort": [1, 2],
+                    "sWidth": "",
+                    "sDefaultContent": "",
+                    "mData": "parameterMap.custom1",
+                    "mRender": function (data, type, full) {
+                        if(type == 'sort'){
+                            queues.runClearQueuePopovers();
+                        }
+                        if (data) {
+                            return "<i tabindex='0' class='icon-message'></i>"
+                        }
+                    }
+                },
                 /* Customer name */
                 {
                     "sClass": "qm-table__middle-column",
@@ -447,10 +518,11 @@ var queues = new function() {
             ];
           var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
             nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.ticket');
-            nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
-            nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.service.name');
-            nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
-            nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+            nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.notes');
+            nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
+            nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.service.name');
+            nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
+            nHead.getElementsByTagName('th')[5].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
           };
 
           var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/workProfiles/" + sessvars.workProfileId + "/visits/full";
@@ -518,14 +590,39 @@ var queues = new function() {
               var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
             }
 
-            if(aData.parameterMap && aData.parameterMap['customers'] !== undefined) {
-                $('td:eq(1)', nRow).html(aData.parameterMap['customers']);
-            }
-            if(aData.appointmentTime) {
-                $('td:eq(3)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
+            if (aData.parameterMap && aData.parameterMap['custom1'] !== undefined) {
+                $('td:eq(1)', nRow).addClass('qm-table__notes-column');
+                var popoverTemplate = document.querySelector('.qm-popover--notes').outerHTML.trim();
+            
+                var popover = new Tooltip($('td:eq(1) > i', nRow), {
+                    container: document.getElementById('renderedPopovers'),
+                    boundariesElement: document.querySelector('.qm-main'),
+                    trigger: 'hover focus',
+                    delay: 400,
+                    title: ' ',
+                    placement: this.isRTL ? 'bottom-end' : 'bottom-start',
+                    template: popoverTemplate,
+                    offset: '0, 10',
+                    popperOptions: {
+                        onCreate: function (data) {
+                            var popover = data.instance.popper;
+                            var note = popover.querySelector('.qm-popover-notes-text');
+                            $(note).text(decodeURIComponent(aData.parameterMap['custom1']));
+
+                        }
+                    }
+                });
+                notePopovers.push(popover);
             }
 
-            $('td:eq(4)', nRow).html(formattedTime);
+            if(aData.parameterMap && aData.parameterMap['customers'] !== undefined) {
+                $('td:eq(2)', nRow).html(aData.parameterMap['customers']);
+            }
+            if(aData.appointmentTime) {
+                $('td:eq(4)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
+            }
+
+            $('td:eq(5)', nRow).html(formattedTime);
             return nRow;
           };
 
@@ -567,8 +664,18 @@ var queues = new function() {
         queuePopovers = [];
     };
 
+    var clearNotePopovers = function () {
+        if(notePopovers && notePopovers.length > 0) {
+            for(var i = 0; i < notePopovers.length; i++) {
+                notePopovers[i].dispose();
+            }
+        }
+        notePopovers = [];
+    };
+
     this.runClearQueuePopovers = function () {
         clearQueuePopovers();
+        clearNotePopovers();
     };
 
     this.emptyQueues = function() {

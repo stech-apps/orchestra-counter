@@ -1160,7 +1160,6 @@ var util = new function () {
     this.validatePhoneNo = function ($phoneField, $sendBtn, $errorLabel) {
         var phonePattern = /^\(?\+?\d?[-\s()0-9]{0,}$/;
         var passedTest = phonePattern.test($phoneField.val().trim());
-console.log($phoneField.val().trim().length);
         if($phoneField.val().trim().length > 0){
             if (!passedTest) {
                 $errorLabel.css("display", "inline");

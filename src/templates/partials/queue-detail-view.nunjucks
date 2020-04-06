@@ -18,6 +18,7 @@
                 <tr>
                     <th class="ticketVisitId"></th>
                     <th class="ticketTicketId"></th>
+                    <th class="ticketNotes"></th>
                     <th class="ticketCustomerName"></th>
                     <th class="ticketActions"></th>
                     <th class="ticketAppointmentTime"></th>
