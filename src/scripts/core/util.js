@@ -1141,6 +1141,8 @@ var util = new function () {
         $('.js-send-btn').prop('disabled', true);
         $('#smsContainer').show();
         $('#visitSmsInput').focus();
+        $('#visitSmsInput').val(sessvars.state.visit.parameterMap.primaryCustomerPhoneNumber ? sessvars.state.visit.parameterMap.primaryCustomerPhoneNumber : (sessvars.state.visit.parameterMap.phoneNumber ? sessvars.state.visit.parameterMap.phoneNumber : ''));
+        util.validatePhoneNo($('#visitSmsInput'), $('.js-send-btn'), $('.js-sms-error'));
         $('#visitSmsInput').on('blur', function () {
             setTimeout(function () {
                 util.hideSmsView();
@@ -1149,13 +1151,15 @@ var util = new function () {
         $('#visitSmsInput').on('input', function () {
             util.validatePhoneNo($('#visitSmsInput'), $('.js-send-btn'), $('.js-sms-error'));
         });
-        $('#visitSmsInput').on('keypress', function (e) {
-            if(e.which === 13){
-                util.sendSms();
-                util.hideSmsView();  
-             }
-        });
+        $('#visitSmsInput').off('keypress', this.visitSMSINputKeyPress);
+        $('#visitSmsInput').on('keypress', this.visitSMSINputKeyPress);
         $('#smsBtn').hide();
+    }
+    this.visitSMSINputKeyPress = function (e) {
+        if(e.which === 13){
+            util.sendSms();
+            util.hideSmsView();  
+         }
     }
     this.validatePhoneNo = function ($phoneField, $sendBtn, $errorLabel) {
         var phonePattern = /^\(?\+?\d?[-\s()0-9]{0,}$/;
@@ -1186,6 +1190,9 @@ var util = new function () {
         }else{
             selectedVisit = sessvars.state.visit;
             phoneNumber = $('#visitSmsInput').val();
+            if(phoneNumber.length === 0 || util.validatePhoneNo($('#visitSmsInput'), $('.js-send-btn'), $('.js-sms-error')) === false){
+                return;
+            }
         }
         var obj = {
             "visit": JSON.stringify(selectedVisit),
@@ -1193,6 +1200,16 @@ var util = new function () {
         };
         obj.json = JSON.stringify(obj);
             spService.postParams("branches/" + sessvars.state.branchId + "/visits/" + selectedVisit.id + "/events/SEND_VISIT_SMS", obj);
+
+        var objParms = {
+                "phoneNumber": phoneNumber.trim(),
+                "primaryCustomerPhoneNumber": phoneNumber.trim(),
+        };
+        objParms.json = JSON.stringify(objParms);
+        var tmpVisit = spService.putParams("branches/" + sessvars.state.branchId + "/visits/" + selectedVisit.id + "/parameters/", objParms);
+        if (sessvars.state.visit && sessvars.state.visit.id === tmpVisit.id) {
+            sessvars.state.visit = tmpVisit;
+        }
         util.showMessage(jQuery.i18n
             .prop('info.sms.success'));
     }

@@ -365,7 +365,8 @@ var queues = new function() {
                                 template: popoverTemplate,
                                 popTarget: ticketNumSpan.get(0),
                                 ticketId: aData.ticketId,
-                                visitId: aData.id
+                                visitId: aData.id,
+                                phoneNumber: aData.parameterMap['primaryCustomerPhoneNumber'] ? aData.parameterMap['primaryCustomerPhoneNumber'] : (aData.parameterMap['phoneNumber'] ? aData.parameterMap['phoneNumber'] : ''),
                             };
 
                             // Popover options and initialization
@@ -589,13 +590,13 @@ var queues = new function() {
               } else {
                 // Templates
                 var popoverTemplate = document.querySelector('.qm-popover--queue').outerHTML.trim();
-
                 // Popover options
                 var options = {
                     template: popoverTemplate,
                     popTarget: ticketNumSpan.get(0),
                     ticketId: aData.ticketId,
                     visitId: aData.id,
+                    phoneNumber: aData.parameterMap['primaryCustomerPhoneNumber'] ? aData.parameterMap['primaryCustomerPhoneNumber'] : (aData.parameterMap['phoneNumber'] ? aData.parameterMap['phoneNumber'] : ''),
                     isWorkProfileQueue: true
                 };
 

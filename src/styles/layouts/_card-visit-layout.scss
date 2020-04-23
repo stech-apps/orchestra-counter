@@ -86,9 +86,13 @@
                 }
             }
             &-send-button{
+                height: 100%;
+                width: 100%;
+                margin-left: -10px;
                 &-icon{
                     transform: rotate(180deg);
                     @at-root [dir='rtl'] & {
+                        margin-right: -10px;
                         transform: rotate(180deg);
                     }
                     font-size: 24px;

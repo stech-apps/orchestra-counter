@@ -7,6 +7,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent = function(options) {
     this.showCallBtn        = _.isBoolean(options.showCallBtn) ? options.showCallBtn : true;
     this.showTransferBtn    = _.isBoolean(options.showTransferBtn) ? options.showTransferBtn : true;
     this.showSmsBtn         = _.isBoolean(options.showSmsBtn) ? options.showSmsBtn : true;
+    this.smsCustomPhoneNumber = options.phoneNumber;
     this.showDeleteBtn      = _.isBoolean(options.showDeleteBtn) ? options.showDeleteBtn : true;
     this.disableCall        = _.isBoolean(options.disableCall) ? options.disableCall : false;
     this.disableTransfer    = _.isBoolean(options.disableTransfer) ? options.disableTransfer : false;
@@ -359,11 +360,15 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
             sendBtn = this.instance._tooltipNode.querySelector('.js-popover-send');
             smsInput = smsView.querySelector('.qm-popover-action-bar-sms-box');
             smsError = smsView.querySelector('.qm-popover-action-bar-send-sms-error');
-            smsInput.value = '';
             if (value) {
                 smsView.style.display = 'flex';
                 smsInput.focus();
-                $(sendBtn).prop('disabled', true);
+                $(smsInput).val(this.smsCustomPhoneNumber);
+                if (smsInput.value.length === 0) {
+                    $(sendBtn).prop('disabled', true);
+                } else {
+                    $(sendBtn).prop('disabled', false);
+                }
                 $(smsBtn).hide();
                 $(smsError).hide();
                 $(smsInput).on('input', function () {
@@ -385,6 +390,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         },
         _sendSms : function (){
             util.sendSms(this.visitId, $(smsInput).val());
+            this.smsCustomPhoneNumber = $(smsInput).val();
             this.disposeInstance();
         },
     disposeInstance: function () {
