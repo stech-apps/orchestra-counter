@@ -14,11 +14,11 @@
         <div class="qm-customer">
             <div class="qm-customer__detail-container">
                 <!-- Customer details -->
-                <form id="editAttachedCustomerForm" class="js-edit-customer-form" novalidate>
-                    <fieldset class="qm-fieldset">
-                        <legend class="qm-legend sr-only">
+                <div id="editAttachedCustomerForm" class="js-edit-customer-form" novalidate>
+                    <div class="qm-fieldset">
+                        <div class="qm-legend sr-only">
                             <h2 class="qm-legend__text js-legend-customer-details"></h2>
-                        </legend>
+                        </div>
                         <div class="qm-form-row">
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
@@ -126,8 +126,8 @@
                                 </button>
                             </div>
                         </div>
-                    </fieldset>
-                </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

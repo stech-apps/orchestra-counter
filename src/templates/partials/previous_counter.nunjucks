@@ -610,7 +610,7 @@
                 <div class="modalContainer">
                     <div class="customerForm roundedCorner5">
                         <h2 id="createCustomerHeader"><a href="#" class="closeButton" onclick="customer.cancelSaveCustomer();this.blur();"></a></h2>
-                        <form id="createCustomerForm">
+                        <div id="createCustomerForm">
                             <table id="createCustomerTable" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -776,7 +776,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div><!-- end create customer window -->
@@ -787,7 +787,7 @@
                 <div class="modalContainer">
                     <div class="customerForm roundedCorner5">
                         {#<h2 id="editCustomerHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('editCustomerWindow');"></a></h2>#}
-                        <form id="editCustomerForm">
+                        <div id="editCustomerForm">
                             <table id="editCustomerTable" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -948,7 +948,7 @@
                                     </td>
                                 </tr>
                             </table>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div><!-- end edit customer window -->
