@@ -8,6 +8,34 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+<h2>Version 4.0.0.037</h2>
+
+**Date: 01/07/2020**
+
+**Build number: 037**
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-7918** | **Cannot click to send SMS on a called visit** |
+
+----------
+
+<h2>Version 4.0.0.036</h2>
+
+**Date: 25/06/2020**
+
+**Build number: 036**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-7744** | **Address CSRF issues raised by OBM in a security audit report** |
+
+----------
+
 <h2>Version 4.0.0.035</h2>
 
 **Date: 24/04/2020**
