@@ -1143,6 +1143,9 @@ var util = new function () {
         $('#visitSmsInput').focus();
         $('#visitSmsInput').val(sessvars.state.visit.parameterMap.primaryCustomerPhoneNumber ? sessvars.state.visit.parameterMap.primaryCustomerPhoneNumber : (sessvars.state.visit.parameterMap.phoneNumber ? sessvars.state.visit.parameterMap.phoneNumber : ''));
         util.validatePhoneNo($('#visitSmsInput'), $('.js-send-btn'), $('.js-sms-error'));
+        $('#visitSmsSendBtn').on('mousedown', function (e) {
+            e.preventDefault();
+        });
         $('#visitSmsInput').on('blur', function () {
             setTimeout(function () {
                 util.hideSmsView();
