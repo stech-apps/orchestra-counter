@@ -2675,9 +2675,7 @@ var servicePoint = new function () {
 							sessvars.statusUpdated = new Date();
 							sessvars.workProfileId = workProfileId;
 							updateWorkstationSettings();
-							var profileSel = $('#prioList');
-							sessvars.profileName = $("option:selected", profileSel)
-								.text();
+							sessvars.profileName = processedEvent.E.prm.workProfileName;
 							util.showMessage(jQuery.i18n
 								.prop('info.changed.settings.success.admin')
 								+ ': ' + sessvars.profileName);
