@@ -195,6 +195,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("transferBtn", 'action.transfer');
         i18nQmBtn("parkBtn", 'button.park');
         i18nQmBtn("smsBtn", 'button.sms');
+        i18nQmBtn("meetingBtn", 'button.meeting');
         i18nQmBtn("noShowBtn", 'action.noshow');                
         i18nQmBtn("endVisitBtn", 'action.finish.visit');
         i18nQmBtn("wrapUpBtn", 'action.wrapup.visit');

@@ -408,3 +408,11 @@ function setUnitTypeModules(val) {
 
 	showModules();
 }
+
+function loadSettingsFromProperties(){
+	autoSet =  jQuery.i18n.prop('setting.auto.select');
+	if ( jQuery.i18n.prop('show.only.branches.with.sw') === "false" ) {
+		showOnlySwBranches = false;
+	}	
+	$('#meetingBtn').hide();
+}

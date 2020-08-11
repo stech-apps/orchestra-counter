@@ -1607,6 +1607,9 @@ var servicePoint = new function () {
 						document.getElementById("notesEdit").value = decodeURIComponent(sessvars.state.visit.parameterMap.custom1);
 					}
 				}
+				if (sessvars.state.visit.parameterMap.meetingUrl != undefined) {
+									$('#meetingBtn').show();
+				}
 			}
 			// DS or outcome needed - Update pools
 			spPoolUpdateNeeded = true;
@@ -1723,6 +1726,9 @@ var servicePoint = new function () {
 						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? decodeURIComponent(sessvars.state.visit.parameterMap.custom1) : jQuery.i18n.prop('button.add.note');
 						document.getElementById("notesEdit").value = decodeURIComponent(sessvars.state.visit.parameterMap.custom1);
 					}
+				}
+				if (sessvars.state.visit.parameterMap.meetingUrl != undefined) {
+					$('#meetingBtn').show();
 				}
 			}
 
@@ -2216,6 +2222,8 @@ var servicePoint = new function () {
 
 		$("#deliveredServicesModule").hide();
 		$("#addCustomMarkLink").prop('disabled', true);
+		$('#meetingBtn').hide();
+
 
 		if (outcomeUpdateNeeded) {
 			outcome.clearOutcome();

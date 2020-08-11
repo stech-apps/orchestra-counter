@@ -1216,4 +1216,12 @@ var util = new function () {
         util.showMessage(jQuery.i18n
             .prop('info.sms.success'));
     }
+    this.openMeetingPressed = function () {
+        if (sessvars.state.visit.parameterMap != undefined) {
+                    if (sessvars.state.visit.parameterMap.meetingUrl != undefined) {
+                        window.open(sessvars.state.visit.parameterMap.meetingUrl);
+                    }
+                }
+                
+        }
 };

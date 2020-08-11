@@ -204,6 +204,12 @@
                 </div>
                  <span id="visitSmsError" class="qm-label-error js-sms-error" role="alert"></span>
             </div>
+            <div class="button-tooltip">
+                <button class="qm-action-btn" id="meetingBtn" onclick="util.openMeetingPressed();">
+                    <i class="qm-action-btn__icon icon-video" aria-hidden="true"></i>
+                    <span class="qm-action-btn__text" title=""></span>
+                </button>
+            </div>
         </div>
         <div class="qm-card-action-layout qm-card-action-layout-right">
             <div class="button-tooltip">
