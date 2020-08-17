@@ -33,6 +33,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
             parentContext.selectedId = $(this).val()
             parentContext.selectedText = $(this).find(":selected").text()
             if (multiMarks) {
+                $('#markTypeFilter').prop('disabled', true).trigger("chosen:updated");
                 parentContext.setSelectedText(parentContext.selectedText)
             } else {
                 customMarks.customMarkClicked(parentContext.selectedId, 1, parentContext.selectedText);
@@ -82,6 +83,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
         $markCountInputField.removeClass("invalid")
         $markCountInputField.val(1)
         $mainOverlayContainer.hide();
+        $('#markTypeFilter').prop('disabled', false).trigger("chosen:updated");
     }
 
     this.onInit.apply(this, arguments);

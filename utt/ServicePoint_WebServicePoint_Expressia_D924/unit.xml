@@ -254,6 +254,20 @@
           sortOrder="5019"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
+        <parameter name = "markMandatoryLevel"
+          description = "Define whether marks are mandatory. If visit is selected marks are mandatory per every visit. If transfer is selected marks are mandatory to transfer the visit"
+          sortOrder = "5019"
+              label = "Mark Mandatory Level"
+               type = "Options"
+          mandatory = "false"
+          writeLevel = "profile"
+          privilege = "install:adminAdmin"
+          multiSelection = "false">
+          <options>
+             <option label = "visit">Visit level</option>
+              <option label = "transfer">Transaction level</option>
+          </options>
+        </parameter>
         <parameter name="trQueue"
           type="Boolean"
           defaultValue="true"

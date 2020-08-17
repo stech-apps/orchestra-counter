@@ -43,6 +43,9 @@ enableNotificationUtt = false;
 
 queueRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
 
+mandatoryLevel = 'none';
+markMandatoryValidOptions = ['none', 'visit', 'transfer'];
+markMandatoryTrue = ['visit', 'transfer'];
 
 function showModules() {
 	var $main = $('.qm-main');
@@ -301,6 +304,40 @@ function setUnitTypeModules(val) {
 	}
 	if (params.marksType != undefined) {
 		customMarkTypeName = params.marksType;					// name of the custom mark set in the admin
+		/* Get mandatory marks level 
+		Parameter 'mandatoryLevel'
+	    Possible values:
+		* none - marks are not mandatory
+		* visit - at least one mark for visit
+		* transfer - at least one mark for transfer
+		*/
+
+		// var wantedMarkTypes = customMarkTypeName;		
+		// var wantedMarkTypesWithoutMandatoryField = '';		
+
+		// if(wantedMarkTypes.indexOf(';')){
+		// 	var wantedMarkTypesArray = wantedMarkTypes.split(';');
+		// 	for (var i=0; i<wantedMarkTypesArray.length; i++){
+		// 		if((wantedMarkTypesArray[i].indexOf('mandatoryLevel') > -1) && (wantedMarkTypesArray[i].indexOf(':') > -1) ){
+		// 			var mandatoryLevelValueArray = wantedMarkTypesArray[i].split(':');
+		// 			if (mandatoryLevelValueArray.length > 1){
+		// 				var mandatoryLevelValue = mandatoryLevelValueArray[1].trim();
+		// 				if(markMandatoryValidOptions.indexOf(mandatoryLevelValue) > -1){
+		// 					mandatoryLevel = mandatoryLevelValue;
+		// 				}						
+		// 			}					
+		// 		}else{
+		// 			if(wantedMarkTypesWithoutMandatoryField != ''){
+		// 				wantedMarkTypesWithoutMandatoryField += ';'
+		// 			}
+		// 			wantedMarkTypesWithoutMandatoryField += wantedMarkTypesArray[i];
+		// 		}
+		// 	}
+		// }
+		// customMarkTypeName = wantedMarkTypesWithoutMandatoryField;
+	}
+	if (params.markMandatoryLevel != undefined) {
+		mandatoryLevel = params.markMandatoryLevel								// feature to add a quantity for marks
 	}
 	if (params.multiMarks != undefined) {
 		multiMarks = params.multiMarks								// feature to add a quantity for marks

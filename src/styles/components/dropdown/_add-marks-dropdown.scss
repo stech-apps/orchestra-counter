@@ -5,6 +5,14 @@
       .chosen-single {
         font-weight: $font-weight-light;
       }
+      &.optionSelected {
+        .chosen-single {
+            span {
+                color: $dark-transparent80 !important;
+                font-weight: 300 !important;
+            }
+        }
+      }
     }
 
     &__add-marks {

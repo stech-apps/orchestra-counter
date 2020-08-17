@@ -59,6 +59,10 @@ var transfer = new function() {
             }
             transferParams.json = JSON.stringify(transferParams.$entity);
             spService.putParams('branches/' +  transferParams.branchId + '/queues/' +  transferParams.queueId + '/visits/',transferParams);
+             //Reset parameter 'marksInThisTransfer' in current visit
+             var updateParams = servicePoint.createParams();  
+             updateParams.json = '{"marksInThisTransfer":""}';
+             spService.putParams("branches/" + transferParams.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
             if (delay) {
               util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.state.visit.ticketId, rowData.name, (delay / 60)]), false);
             } else {
@@ -102,6 +106,12 @@ var transfer = new function() {
             userPoolUpdateNeeded = false;
             //transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + sessvars.state.visit.id + '}';
             spService.putParams('branches/' +  transferParams.branchId + '/servicePoints/' +  transferParams.servicePointId + '/visits/',transferParams);
+            
+            //Reset parameter 'marksInThisTransfer' in current visit
+            var updateParams = servicePoint.createParams();  
+            updateParams.json = '{"marksInThisTransfer":""}';
+            spService.putParams("branches/" + transferParams.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
+
             if (delay) {
               util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.state.visit.ticketId, rowData.name, (delay / 60)]), false);
             } else {
@@ -141,7 +151,12 @@ var transfer = new function() {
             transferParams.json = JSON.stringify(transferParams.$entity);
             spPoolUpdateNeeded = false;
     
-			var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
+            var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
+            //Reset parameter 'marksInThisTransfer' in current visit
+            var updateParams = servicePoint.createParams();  
+            updateParams.json = '{"marksInThisTransfer":""}';
+            spService.putParams("branches/" + transferParams.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
+
             requestStatus.done(function() {
                 if (delay) {
                     util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.state.visit.ticketId, rowData.fullName, (delay / 60)]), false);
@@ -501,6 +516,10 @@ var transfer = new function() {
         }
         transferParams.json = JSON.stringify(transferParams.$entity);
         var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/queues/' +  transferParams.queueId + '/visits/',transferParams);
+         //Reset parameter 'marksInThisTransfer' in current visit
+        /* var updateParams = servicePoint.createParams();  
+        updateParams.json = '{"marksInThisTransfer":""}';
+        spService.putParams("branches/" + transferParams.branchId + "/visits/" + visitId + "/parameters", updateParams); */
         queues.updateQueues(true);
         queueViewController.navigateToOverview();
 
@@ -535,9 +554,15 @@ var transfer = new function() {
         if (delay) {
           transferParams.$entity.delay = delay;
         }
+        
         transferParams.json = JSON.stringify(transferParams.$entity);
         spPoolUpdateNeeded = false;
         var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
+          //Reset parameter 'marksInThisTransfer' in current visit
+        /* var updateParams = servicePoint.createParams();  
+        updateParams.json = '{"marksInThisTransfer":""}';
+        spService.putParams("branches/" + transferParams.branchId + "/visits/" + visitId + "/parameters", updateParams); */
+
         queues.updateQueues(true);
         queueViewController.navigateToOverview();
 
@@ -575,6 +600,10 @@ var transfer = new function() {
         transferParams.json = JSON.stringify(transferParams.$entity);
         userPoolUpdateNeeded = false;
         spService.putParams('branches/' +  transferParams.branchId + '/servicePoints/' +  transferParams.servicePointId + '/visits/',transferParams);
+         //Reset parameter 'marksInThisTransfer' in current visit
+        /* var updateParams = servicePoint.createParams();  
+        updateParams.json = '{"marksInThisTransfer":""}';
+        spService.putParams("branches/" + transferParams.branchId + "/visits/" + visitId + "/parameters", updateParams); */
         queues.updateQueues(true);
         queueViewController.navigateToOverview();
         if (delay) {

@@ -374,8 +374,16 @@ var servicePoint = new function () {
 		} else {
 			if (servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 				if (appInitialized) {
-				util.showError(jQuery.i18n
-					.prop('error.no.outcome.or.delivered.service'));
+					if (servicePoint.isMarkListEmptyInVisit()){
+						util.showError(jQuery.i18n
+							.prop('error.no.mark.visit'));
+					} else if (servicePoint.isMarkListEmptyInTransfer()){
+						util.showError(jQuery.i18n
+							.prop('error.no.mark.transfer'));
+					} else{
+						util.showError(jQuery.i18n
+							.prop('error.no.outcome.or.delivered.service'));
+					}	
 				}
 			} else {
 				var branchSel = $("#branchListModal");
@@ -1597,11 +1605,19 @@ var servicePoint = new function () {
 					util.showError(jQuery.i18n
 						.prop('error.no.outcome.or.delivered.service'));
 				}
-			} else if (cfuForceSelection || !sessvars.cfuSelectionSet) {
+			} else if (cfuForceSelection || (!sessvars.cfuSelectionSet && (typeof sessvars.cfuForceSelection != 'undefined'))) {
 				if (!blockMesssagePopup) {
 					util.showError(jQuery.i18n.prop('error.no.cfu.selection'));
 				}
-			}
+			} else if (servicePoint.isMarkListEmptyInVisit()) {
+				if (!blockMesssagePopup) {
+					util.showError(jQuery.i18n.prop('error.no.mark.visit'));
+				}
+			} else if (servicePoint.isMarkListEmptyInTransfer()) {
+				if (!blockMesssagePopup) {
+					util.showError(jQuery.i18n.prop('error.no.mark.transfer'));
+				}
+			} 
 			if (sessvars.state.visit) {
 				$("#ticketNumber").html(sessvars.state.visit.ticketId);
 			}
@@ -1663,6 +1679,14 @@ var servicePoint = new function () {
 			var $transferBtn = $("#transferBtn");
 			$transferBtn.prop('disabled', false);
 
+
+			// is transfer allowed
+			if ((servicePoint.isMarkListEmptyInVisit()) || (servicePoint.isMarkListEmptyInTransfer())) {
+				$("#transferBtn").prop('disabled', true);
+			} else {
+				$("#transferBtn").prop('disabled', false);
+			}
+
 			var $parkBtn = $("#parkBtn");
 			$parkBtn.prop('disabled', false);
 
@@ -1694,6 +1718,11 @@ var servicePoint = new function () {
 			} else {
 				$("#reinsertBtn").prop('disabled', true);
 			}
+			if (sessvars.state.visit.recallAllowed || sessvars.state.visit.recycleAllowed) {
+				$('#meetingBtn').show();
+			} else {
+				$('#meetingBtn').hide();
+			}
 
 			// TODO: Remove this. Investigate if we need to disable something,
 			// Old styles is just to make it look disabled
@@ -1722,6 +1751,12 @@ var servicePoint = new function () {
 				// display spinner with text stating that the visit is about to
 				// be called
 				modalNavigationController.push($Qmatic.components.modal.visitInDisplayQueue);
+			}
+
+			// check if marks are mandatory
+			if(markMandatoryTrue.indexOf(mandatoryLevel) > -1){	
+				spPoolUpdateNeeded = true;
+				userPoolUpdateNeeded = true;
 			}
 
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
@@ -1784,6 +1819,11 @@ var servicePoint = new function () {
 				$("#reinsertBtn, #reinsertOption").prop('disabled', false);
 			} else {
 				$("#reinsertBtn, #reinsertOption").prop('disabled', true);
+			}
+			if (sessvars.state.visit.recallAllowed || sessvars.state.visit.recycleAllowed) {
+				$('#meetingBtn').show();
+			} else {
+				$('#meetingBtn').hide();
 			}
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
 				$("#deliveredServicesModule").css("display", "");
@@ -2926,12 +2966,31 @@ var servicePoint = new function () {
 		return params;
 	};
 
+	this.isTransferWithNoMarks = function(){
+		if((typeof sessvars.state.visit.parameterMap == 'undefined') || (typeof sessvars.state.visit.parameterMap.marksInThisTransfer == 'undefined') || (sessvars.state.visit.parameterMap.marksInThisTransfer == "")){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	this.isMarkListEmptyInVisit = function () {
+		return ((sessvars.state.visit != null) && (mandatoryLevel == 'visit') && (sessvars.state.visit.visitMarks.length == 0));
+	};
+
+	this.isMarkListEmptyInTransfer = function () {
+		return ((sessvars.state.visit != null) && (mandatoryLevel == 'transfer') && 
+			((sessvars.state.visit.visitMarks.length == 0) || (servicePoint.isTransferWithNoMarks())));		
+	};
+
 	this.isOutcomeOrDeliveredServiceNeeded = function () {
 		return sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED
 			|| sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED
 			|| sessvars.state.visitState == servicePoint.visitState.OUTCOME_OR_DELIVERED_SERVICE_NEEDED
 			|| sessvars.state.visitState == servicePoint.visitState.OUTCOME_FOR_DELIVERED_SERVICE_NEEDED
-			|| (cfuForceSelection && !sessvars.cfuSelectionSet);
+			|| (cfuForceSelection && !sessvars.cfuSelectionSet)
+			|| servicePoint.isMarkListEmptyInVisit()
+			|| servicePoint.isMarkListEmptyInTransfer();
 	};
 
 	this.isOutcomeOrDeliveredServiceAdded = function () {
