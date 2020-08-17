@@ -93,6 +93,8 @@
         <script src="scripts/components/modal/nextServices/nextServices.js"></script>
         <script src="scripts/components/modal/logoutWindow/logoutWindow.js"></script>
         <script src="scripts/components/modal/wrapUp/wrapUp.js"></script>
+        <script src="scripts/components/modal/autoCloseExtendModalComponent.js"></script>
+        <script src="scripts/components/modal/autoCloseExtend/autoCloseExtend.js"></script>
 
         <script src="scripts/components/queue/index.js"></script>
         <script src="scripts/components/notes/index.js"></script>

@@ -74,6 +74,7 @@ var servicePoint = new function () {
 	var confirmNeeded = false;
 	var autoClose = 0;
 	var logoffTimer = null;
+	var autoCloseExtendtimer = null;
 	var prevBranchId = null;
 	var prevCounterId = null;
 	var prevProfileId = null;
@@ -318,6 +319,10 @@ var servicePoint = new function () {
 		}
 
 		applicationInitialized = true;
+		// if(autoCloseExtendtimer){
+		// 	window.clearTimeout(autoCloseExtendtimer);
+		// }
+		// autoCloseExtendtimer = null;
 	};
 
 	// display modal popup with settings
@@ -2132,9 +2137,11 @@ var servicePoint = new function () {
 
 	this.setupAutoCloseListener = function () {
 		$(window).on("focusin click", function () {
-			if (sessvars != undefined) {
-				sessvars.statusUpdated = new Date();
-				resetLogoffCounter();
+			if(!modalNavigationController.isTopComponent($Qmatic.components.modal.autoCloseExtend)){
+				if (sessvars != undefined) {
+					sessvars.statusUpdated = new Date();
+					resetLogoffCounter();
+				}
 			}
 		});
 	}
@@ -2145,32 +2152,54 @@ var servicePoint = new function () {
 
 	// Resets the logout counter
 	var resetLogoffCounter = function () {
-		if (logoffTimer != null) {
-			window.clearTimeout(logoffTimer);
-		}
-		if (typeof autoClose === 'undefined' || autoClose == null
-			|| autoClose == 0) {
-			return;
-		}
-		var lastUpdate = new Date();
-		var now = new Date();
-		if (typeof sessvars.statusUpdated !== 'undefined'
-			&& sessvars.statusUpdated != null) {
-			lastUpdate = sessvars.statusUpdated;
-		}
-		var timeSinceLastUpdate = now.getTime() - lastUpdate.getTime();
-		if (timeSinceLastUpdate > 0) {
-			timeSinceLastUpdate = 0;
-		} else {
-			timeSinceLastUpdate = timeSinceLastUpdate / 1000;
-		}
-		var timeUntilLogoff = (autoClose - timeSinceLastUpdate) * 1000;
-		logoffTimer = window.setTimeout(function () {
-			servicePoint.handleLogoutQES(true, true);
-			window.location.href = "/logout.jsp";
-		}, timeUntilLogoff);
+			if (logoffTimer != null) {
+				window.clearTimeout(logoffTimer);
+				console.log("logoffTimer cleared: "+ logoffTimer);
+			}
+			if(autoCloseExtendtimer != null){
+				window.clearTimeout(autoCloseExtendtimer);
+				console.log("autoCloseExtendtimer cleared: "+ autoCloseExtendtimer);
+			}
+			if (typeof autoClose === 'undefined' || autoClose == null
+				|| autoClose == 0) {
+				return;
+			}
+			var lastUpdate = new Date();
+			var now = new Date();
+			if (typeof sessvars.statusUpdated !== 'undefined'
+				&& sessvars.statusUpdated != null) {
+				lastUpdate = sessvars.statusUpdated;
+			}
+			var timeSinceLastUpdate = now.getTime() - lastUpdate.getTime();
+			if (timeSinceLastUpdate > 0) {
+				timeSinceLastUpdate = 0;
+			} else {
+				timeSinceLastUpdate = timeSinceLastUpdate / 1000;
+			}
+			var timeUntilLogoff = (autoClose - timeSinceLastUpdate) * 1000;
+			if (timeUntilLogoff) {
+				autoCloseExtendtimer = window.setTimeout(function () {
+					modalNavigationController.push($Qmatic.components.modal.autoCloseExtend);
+				}, timeUntilLogoff - 30000);
+				console.log("autoCloseExtendtimer set: "+ autoCloseExtendtimer);
+				logoffTimer = window.setTimeout(function () {
+					servicePoint.handleLogoutQES(true, true);
+					window.location.href = "/logout.jsp";
+				}, timeUntilLogoff);
+				console.log("logoffTimer set: "+ logoffTimer);
+			}
 
 	};
+
+	this.extendAutoClose = function(){
+		servicePoint.teardownAutoCloseListener();
+		servicePoint.setupAutoCloseListener();
+		modalNavigationController.popModal($Qmatic.components.modal.autoCloseExtend);
+
+	}
+
+
+
 
 	// clean the GUI on refresh or when a button is pressed
 	var clearOngoingVisit = function () {

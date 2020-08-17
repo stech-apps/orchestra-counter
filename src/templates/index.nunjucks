@@ -103,6 +103,7 @@
         {% include "partials/modals/logoutWindow/logout-window.nunjucks" %}
         {% include "partials/modals/genericConfirm/generic-confirm.nunjucks" %}
         {% include "partials/modals/wrapUp/wrap-up.nunjucks" %}
+        {% include "partials/modals/autoCloseExtend/auto-close-extend.nunjucks" %}
     </div>
 
 

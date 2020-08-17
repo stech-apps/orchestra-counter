@@ -1,0 +1,42 @@
+<!-- Imported partials -->
+{% import "./../../button.nunjucks" as button  %}
+
+<div class="qm-modal qm-hide" id="auto-close-extend-modal" >
+    <div class="qm-modal__overlay"></div>
+    <div class="qm-modal__layout">
+        <div class="qm-card" aria-modal="true"
+        aria-labelledby="autoCloseExtendDesc" id="autoCloseWhiteBox">
+            <div class="qm-card__header-section"></div>
+            <div class="qm-card__content-section qm-modal-focus-init" tabindex="0">
+            <span >    
+                <p class="dialogueMessage" >
+                    <span id="autoCloseExtendDesc" >
+                    </span>
+                </p>
+                        <div id="autoCloseTimerSrOnly" class="sr-only autoCloseTimerBox__time" aria-live="assertive">
+                            20 seconds
+                    </div>
+            </span>
+                <p class="autoCloseTimerBox" id="autoCloseTimerBoxContent"  aria-hidden="true">
+                    <span class="autoCloseTimerBox__text">
+                        <span id="autoCloseTimerText" class="autoCloseTimerBox__text-content"></span>
+                        <span class="autoCloseTimerBox__text-colon">:</span>
+                    </span>
+                    <span id="autoCloseTimerTime" class="autoCloseTimerBox__time" aria-hidden="true">
+                    20
+                    </span>
+                    <span id="autoCloseTimerSecondsTxt" class="autoCloseTimerBox__seconds" aria-hidden="true">
+                    </span>
+                  
+                </p>
+            </div>
+            <div class="qm-card__footer-section qm-card__footer-section--space-between">
+                <div class="qm-card-action-layout">
+                </div>
+                <div class="qm-card-action-layout">
+                {{button.render(id="autoCloseExtendBtn", type="qm-btn--primary", handler="servicePoint.extendAutoClose();")}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -555,6 +555,12 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         // Queue detail view
         i18nSafeSelectorBtnAppend('.qm-queue-detail__back-btn > span', 'application.sr.back');
 
+        // auto close extend
+        i18nQmBtn("autoCloseExtendBtn", 'info.auto.close.extend.button.text');
+        i18nSafe("autoCloseExtendDesc", 'info.auto.close.extend.desc');
+        i18nSafe("autoCloseTimerText", 'info.auto.close.extend.timerText');
+        i18nSafe("autoCloseTimerSecondsTxt", 'info.auto.close.extend.timerText.seconds');
+
         //footer
         sessvars.footer = translate.msg("label.poweredBy",
         		["Qmatic " + sessvars.systemInformation.productName + " " + sessvars.systemInformation.releaseName + " [" + sessvars.systemInformation.productVersion + "]"]);
