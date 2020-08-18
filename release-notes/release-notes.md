@@ -15,14 +15,20 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Build number: 038**
 
-<h3>Bug fixes</h3>
+<h3>Stories</h3>
 
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-8334** | **Add option to make Marks Mandatory** |
 | **QP-8313** | **Add new button for opening meeting when present on the visit** |
 | **QP-8128** | **Counter: extending session for WCAG compliance** |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
 | **QP-7747** | **Admin changed workprofile isn't shown in counter** |
+
 
 ----------
 
