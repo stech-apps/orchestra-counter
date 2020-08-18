@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.14     2020-08-17   Added parameter to make marks mandatory   udaban
     7.0.13     2020-04-15   updated description in btnNotes param     chamut
     7.0.12     2020-03-27   Added parameter to enable/diable          chamut
                             sms notification 
@@ -82,7 +83,7 @@
 
 <unit name="WebServicePoint"
       frameworkVersion="2"
-      unitVersion="7.0.13"
+      unitVersion="7.0.14"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -250,8 +251,8 @@
           privilege = "install:adminAdmin"
           multiSelection = "false">
           <options>
-             <option label = "visit">Visit level</option>
-              <option label = "transfer">Transaction level</option>
+             <option label = "Visit level">visit</option>
+              <option label = "Transaction level">transfer</option>
           </options>
         </parameter>
         <parameter name="trQueue"

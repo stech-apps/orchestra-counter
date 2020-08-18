@@ -8,6 +8,25 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+
+<h2>Version 4.0.0.038</h2>
+
+**Date: 17/08/2020**
+
+**Build number: 038**
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-8334** | **Add option to make Marks Mandatory** |
+| **QP-8313** | **Add new button for opening meeting when present on the visit** |
+| **QP-8128** | **Counter: extending session for WCAG compliance** |
+| **QP-7747** | **Admin changed workprofile isn't shown in counter** |
+
+----------
+
+
 <h2>Version 4.0.0.037</h2>
 
 **Date: 01/07/2020**
