@@ -93,7 +93,7 @@
 
 <unit name="WebServicePoint_D948"
       frameworkVersion="2"
-      unitVersion="7.0.15"
+      unitVersion="7.0.16"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"

@@ -83,7 +83,7 @@
 
 <unit name="WebCounterMultiStaff"
       frameworkVersion="2"
-      unitVersion="7.0.13"
+      unitVersion="7.0.14"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="1"
