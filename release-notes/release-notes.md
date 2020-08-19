@@ -19,7 +19,6 @@ This document describes the new features, bug corrections, known issues and reco
 
 | **Id** | **Release notes** |
 | --- | --- |
-| **QP-8334** | **Add option to make Marks Mandatory** |
 | **QP-8313** | **Add new button for opening meeting when present on the visit** |
 | **QP-8128** | **Counter: extending session for WCAG compliance** |
 
