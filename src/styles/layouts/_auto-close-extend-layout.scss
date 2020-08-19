@@ -48,7 +48,10 @@
         }
         &__seconds {
             font-weight: normal;
-            margin-inline-start: 5px;
+            margin-left: 5px;
+            @at-root [dir='rtl'] & {
+                margin-right: 5px;
+            }
         }
     }
     .autoCloseTimerText {
