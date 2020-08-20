@@ -571,6 +571,6 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         	sessvars.footer += " " + translate.msg("label.licensedTo", [sessvars.systemInformation.licenseCompanyName]);
         }
         $("#footerText").html(sessvars.footer);
-        $("#footerText").html(sessvars.footer + jQuery.i18n.prop('footer.custom'));
+
     };
 };
