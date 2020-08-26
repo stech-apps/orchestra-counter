@@ -1132,7 +1132,7 @@ var customer = new function() {
     //util functions
 
     var parameterizeCustomer = function(formName) {
-        var customerArray = $("#" + formName).serializeArray();
+        var customerArray = $("#" + formName + ' :input').serializeArray();
         var customerParameterized = {};
         var properties = {};
         customerParameterized.properties = properties;
