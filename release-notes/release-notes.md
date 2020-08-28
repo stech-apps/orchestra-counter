@@ -8,6 +8,27 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+<h2>Version 4.0.0.039</h2>
+
+**Date: 28/08/2020**
+
+**Build number: 039**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-8364** | **'Session about to expire' message should be less technical** |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-8399** | **Cannot update the customer information** |
+
+
+----------
+
 
 <h2>Version 4.0.0.038</h2>
 
