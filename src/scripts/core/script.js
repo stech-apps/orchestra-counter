@@ -299,10 +299,11 @@ var servicePoint = new function () {
 				}
 			}
 
-      queues.updateQueues(true);
-      if (workprofileVisitsBtnEnabled === true) {
-        queues.loadWorkProfileVisits();
-      }
+			queues.updateQueues(true);
+			if (workprofileVisitsBtnEnabled === true) {
+				queues.loadWorkProfileVisits();
+			}
+			
 			if (typeof projectedVisits != "undefined") {
 				projectedVisits.updateProjectedVisits(true);
 			}
@@ -311,6 +312,8 @@ var servicePoint = new function () {
 			}
 		} else {
 			clearTimeout(sessvars.queueTimer);
+			util.stopPollingServPool();
+			util.stopPollingUserPool();
 			sessvars.queueTimerOn = false;
 			sessvars.currentUser = spService.get("user");
 			util.updateUINofiticationStatus(util.getNotificationStatus());
@@ -2194,11 +2197,9 @@ var servicePoint = new function () {
 	var resetLogoffCounter = function () {
 			if (logoffTimer != null) {
 				window.clearTimeout(logoffTimer);
-				console.log("logoffTimer cleared: "+ logoffTimer);
 			}
 			if(autoCloseExtendtimer != null){
 				window.clearTimeout(autoCloseExtendtimer);
-				console.log("autoCloseExtendtimer cleared: "+ autoCloseExtendtimer);
 			}
 			if (typeof autoClose === 'undefined' || autoClose == null
 				|| autoClose == 0) {
@@ -2221,12 +2222,10 @@ var servicePoint = new function () {
 				autoCloseExtendtimer = window.setTimeout(function () {
 					modalNavigationController.push($Qmatic.components.modal.autoCloseExtend);
 				}, timeUntilLogoff - 30000);
-				console.log("autoCloseExtendtimer set: "+ autoCloseExtendtimer);
 				logoffTimer = window.setTimeout(function () {
 					servicePoint.handleLogoutQES(true, true);
 					window.location.href = "/logout.jsp";
 				}, timeUntilLogoff);
-				console.log("logoffTimer set: "+ logoffTimer);
 			}
 
 	};

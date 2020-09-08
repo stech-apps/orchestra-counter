@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.17     2020-09-11   added new parameters for user and         chamut
+                            servicepoint pool auto update      
     7.0.16     2020-08-17   Added parameter to make marks mandatory   udaban
     7.0.15     2020-04-15   updated description in btnNotes param     chamut
     7.0.14     2020-03-27   Added parameter to enable/diable          chamut
@@ -88,7 +90,7 @@
 
 <unit name="WebServicePoint_Expressia"
       frameworkVersion="2"
-      unitVersion="7.0.16"
+      unitVersion="7.0.17"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -428,8 +430,24 @@
           label="Allow Counter Pool transfer"
           description="Defines if it is possible to transfer to counter pools on this service point"
           privilege="install:adminAdmin"/>
-        <parameter name="expectedTransactionTimeEnabled"
+        <parameter name="enableUserPoolAutoUpdate"
           sortOrder="5036"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Staff Pool auto update"
+          description="If enabled, staff pool waiting time will be automatically updated."
+          privilege="install:adminAdmin"/>
+        <parameter name="enableServicePointPoolAutoUpdate"
+          sortOrder="5037"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Counter Pool auto update"
+          description="If enabled, counter pool waiting time will be automatically updated."
+          privilege="install:adminAdmin"/>
+        <parameter name="expectedTransactionTimeEnabled"
+          sortOrder="5038"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -437,7 +455,7 @@
           description="Show expected transaction time for current service"
           privilege="install:adminAdmin"/>
         <parameter name="forceLogoutEnabled"
-          sortOrder="5037"
+          sortOrder="5039"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -445,7 +463,7 @@
           description="If enabled the user can forcefully logout another user that has an ongoing visit"
           privilege="install:adminAdmin"/>
         <parameter name="notificationOpt"
-          sortOrder="5038"
+          sortOrder="5040"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -453,7 +471,7 @@
           description="If enabled, the user is notified when a queue goes from 0 to 1 visit. This setting can only be used when https is enabled."
           privilege="install:adminAdmin"/>
         <parameter name="sndSMS"
-          sortOrder="5039"
+          sortOrder="5041"
           type="Boolean"
           defaultValue="true"
           writeLevel="profile"

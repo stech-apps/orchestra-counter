@@ -95,6 +95,32 @@ var util = new function () {
         }
       };
 
+      this.startPollingServPool = function () {
+        if (sessvars.spPoolTimer === undefined) {
+            servicePointPool.updateCounterPool(true);
+        }
+      };
+  
+      this.stopPollingServPool = function () {
+        if (sessvars.spPoolTimer !== undefined ) {
+          clearTimeout(sessvars.spPoolTimer);
+          sessvars.spPoolTimer = undefined;
+        }
+      };
+
+      this.startPollingUserPool = function () {
+        if (sessvars.userPoolTimer === undefined) {
+            userPool.updateUserPool(true);
+        }
+      };
+  
+      this.stopPollingUserPool = function () {
+        if (sessvars.userPoolTimer !== undefined ) {
+          clearTimeout(sessvars.userPoolTimer);
+          sessvars.userPoolTimer = undefined;
+        }
+      };
+
     this.clearServiceExpectedTransactionTime = function () {
         var $expectedTransactionTime = $("#expectedTransactionTime");
         $expectedTransactionTime.empty();

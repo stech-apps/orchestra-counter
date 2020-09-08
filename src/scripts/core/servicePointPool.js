@@ -56,7 +56,12 @@ var servicePointPool = new function () {
                     var popover = new window.$Qmatic.components.popover.CounterPoolPopoverComponent(options);
                     popover.init();
                 });
+                if(pollServicePointPoolEnabled){
+                    util.stopPollingServPool();
+                    util.startPollingServPool();
+                }
             } else {
+                util.stopPollingServPool();
                 counterPoolList.append(noResultTemplate);
             }
 
@@ -66,6 +71,37 @@ var servicePointPool = new function () {
 
     }
 
+    this.updateCounterPool = function (keepCalling) {
+            // Get DOM elements
+            var counterPool = $('#servicePointPoolModule'),
+                counterPoolList = counterPool.find('.qm-pool__list'),
+                counterPoolListItems = counterPoolList.find('.qm-pool__list-item');
+            if (counterPoolListItems.length > 0) {
+                var tickets = spService.get("branches/" + sessvars.branchId + "/servicePoints/" + sessvars.servicePointId + "/pool/visits");
+                if (typeof tickets !== 'undefined' && tickets != null && tickets.length === counterPoolListItems.length) {
+                    tickets.forEach(function (data, i) {
+
+                        counterPoolListItems.each(
+                            function(index, element){
+                                if($(this).find('.qm-pool-item__content--ticket').text() === data.ticketId){
+                                    $(this).find('.qm-pool-item__content--wait').text(util.formatIntoMM(data.waitingTime));
+                                    return false;
+                                }
+                        })
+                    });
+                }
+
+            }
+            if(keepCalling) {
+                if(sessvars.spPoolTimer !== undefined) {
+                    clearTimeout(sessvars.spPoolTimer);
+                    sessvars.spPoolTimer = undefined;
+                }
+                sessvars.spPoolTimer = setTimeout(function() {
+                    servicePointPool.updateCounterPool(true);
+                }, servicePointPoolRefreshTime*1000);
+            }
+    }
     this.callFromPool = function (visitId) {
         if (servicePoint.hasValidSettings()) {
             var params = servicePoint.createParams();

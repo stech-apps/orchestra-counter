@@ -54,7 +54,12 @@ var userPool = new function () {
                     var popover = new window.$Qmatic.components.popover.UserPoolPopoverComponent(options);
                     popover.init();
                 });
+                if(pollUserPoolEnabled){
+                    util.stopPollingUserPool();
+                    util.startPollingUserPool();
+                }
             } else {
+                util.stopPollingUserPool();
                 userPoolList.append(noResultTemplate);
             }
 
@@ -62,6 +67,38 @@ var userPool = new function () {
         }
 
     };
+
+    this.updateUserPool = function (keepCalling) {
+            // Get DOM elements
+            var userPoolMod = $('#userPoolModule'),
+                userPoolList = userPoolMod.find('.qm-pool__list'),
+                userPoolListItems = userPoolList.find('.qm-pool__list-item');
+            if (userPoolListItems.length > 0) {
+                var tickets = spService.get("branches/" + sessvars.branchId + "/users/" + sessvars.currentUser.id + "/pool/visits");
+                if (typeof tickets !== 'undefined' && tickets != null && tickets.length === userPoolListItems.length) {
+                    tickets.forEach(function (data, i) {
+
+                        userPoolListItems.each(
+                            function(index, element){
+                                if($(this).find('.qm-pool-item__content--ticket').text() === data.ticketId){
+                                    $(this).find('.qm-pool-item__content--wait').text(util.formatIntoMM(data.waitingTime));
+                                    return false;
+                                }
+                        })
+                    });
+                }
+
+            }
+            if(keepCalling) {
+                if(sessvars.userPoolTimer !== undefined) {
+                    clearTimeout(sessvars.userPoolTimer);
+                    sessvars.userPoolTimer = undefined;
+                }
+                sessvars.userPoolTimer = setTimeout(function() {
+                    userPool.updateUserPool(true);
+                }, userPoolRefreshTime*1000);
+            }
+    }
 
     this.callFromPool = function (visitId) {
         if (servicePoint.hasValidSettings()) {

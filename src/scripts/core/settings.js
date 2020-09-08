@@ -40,8 +40,12 @@ singleSession = false;
 expectedTransactionTimeEnabled = false;
 ServiceTransactionTimeEnabled = true;
 enableNotificationUtt = false;
+pollUserPoolEnabled = false;
+pollServicePointPoolEnabled = false;
 
-queueRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
+queueRefreshTime = 30;
+servicePointPoolRefreshTime = 30;
+userPoolRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
 
 mandatoryLevel = 'none';
 markMandatoryValidOptions = ['none', 'visit', 'transfer'];
@@ -441,6 +445,12 @@ function setUnitTypeModules(val) {
 
 	if (params.notificationOpt != undefined) {
 		enableNotificationUtt = params.notificationOpt;					
+	}
+	if (params.enableUserPoolAutoUpdate != undefined) {
+		pollUserPoolEnabled = params.enableUserPoolAutoUpdate;			
+	}
+	if (params.enableServicePointPoolAutoUpdate != undefined) {
+		pollServicePointPoolEnabled = params.enableServicePointPoolAutoUpdate;		
 	}
 
 	showModules();
