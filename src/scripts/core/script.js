@@ -1721,7 +1721,7 @@ var servicePoint = new function () {
 			} else {
 				$("#reinsertBtn").prop('disabled', true);
 			}
-			if (sessvars.state.visit.recallAllowed || sessvars.state.visit.recycleAllowed) {
+			if ((sessvars.state.visit.recallAllowed || sessvars.state.visit.recycleAllowed) && sessvars.state.visit.parameterMap.meetingUrl != undefined) {
 				$('#meetingBtn').show();
 			} else {
 				$('#meetingBtn').hide();
@@ -1823,7 +1823,7 @@ var servicePoint = new function () {
 			} else {
 				$("#reinsertBtn, #reinsertOption").prop('disabled', true);
 			}
-			if (sessvars.state.visit.recallAllowed || sessvars.state.visit.recycleAllowed) {
+			if ((sessvars.state.visit.recallAllowed || sessvars.state.visit.recycleAllowed) && sessvars.state.visit.parameterMap.meetingUrl != undefined) {
 				$('#meetingBtn').show();
 			} else {
 				$('#meetingBtn').hide();
