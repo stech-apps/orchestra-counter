@@ -19,6 +19,9 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-8335** | **Edited customer details (from MT) doesn't retain from Counter** |
+| **QP-6761** | **Workstation terminal Time in pool is not updated automatically** |
+| **QP-8411** | **Cannot add a new customer when user use form auto-filling option** |
+| **QP-8408** | **"Start Meeting" button doesn't hide when the MS TEAMS utt disabled/removed from the branch** |
 
 
 ----------
