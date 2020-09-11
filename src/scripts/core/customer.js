@@ -968,8 +968,8 @@ var customer = new function() {
             var tempCustomer = {    firstName : firstName,
                                     lastName : lastName,
                                     properties : {
-                                        email : sessvars.state.visit.parameterMap.email !== undefined ? sessvars.state.visit.parameterMap.email : sessvars.state.visit.parameterMap.primaryCustomerEmail,
-                                        phoneNumber : sessvars.state.visit.parameterMap.phoneNumber !== undefined ? sessvars.state.visit.parameterMap.phoneNumber : sessvars.state.visit.parameterMap.primaryCustomerPhoneNumber,
+                                        email : sessvars.state.visit.parameterMap.primaryCustomerEmail !== undefined ? sessvars.state.visit.parameterMap.primaryCustomerEmail : sessvars.state.visit.parameterMap.email,
+                                        phoneNumber : sessvars.state.visit.parameterMap.primaryCustomerPhoneNumber !== undefined ? sessvars.state.visit.parameterMap.primaryCustomerPhoneNumber : sessvars.state.visit.parameterMap.phoneNumber,
                                         dateOfBirth : sessvars.state.visit.parameterMap.primaryCustomerDateOfBirth
                                     }
                                 }
@@ -1071,6 +1071,7 @@ var customer = new function() {
             if (sessvars.currentCustomer.id !== undefined) {
                 var params = servicePoint.createParams();
                 params.json =jsonString(customerParameterized);
+                console.log(params);
                 spService.putParams("customers/"+customerParameterized.customerId, params);
 
                 //update current customer i.e. the selected customer, NOT the linked customer
