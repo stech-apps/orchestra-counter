@@ -8,17 +8,17 @@ var customMarks = new function () {
 	var customMarksParams;
 	var multiMarkCounter;
 	var multiMarkCounterIntial;
-  var dropdownFilter = null;
-  var markTypeDropdownFilter = null;
+	var dropdownFilter = null;
+	var markTypeDropdownFilter = null;
 	var markName = "";
 	var previousMarks = "";
 	var marksInThisTransfer = "";
 
-  function initMarkTypeDropdownFilter() {
-    if (markTypeDropdownFilter === null) {
-      markTypeDropdownFilter = $Qmatic.components.dropdown.markTypeSelection.get$Elem();
-    }
-  }
+	function initMarkTypeDropdownFilter() {
+		if (markTypeDropdownFilter === null) {
+			markTypeDropdownFilter = $Qmatic.components.dropdown.markTypeSelection.get$Elem();
+		}
+	}
 
 	function initFilter() {
 		if (!dropdownFilter)
@@ -35,12 +35,12 @@ var customMarks = new function () {
 	}
 
 	this.addCustomMarkPressed = function () {
-    initFilter();
-    initMarkTypeDropdownFilter();
-    clearFilter(dropdownFilter);
-	clearFilter(markTypeDropdownFilter);
-	$Qmatic.components.dropdown.markTypeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMarkType') });
-	markTypeDropdownFilter.trigger("chosen:updated");
+		initFilter();
+		initMarkTypeDropdownFilter();
+		clearFilter(dropdownFilter);
+		clearFilter(markTypeDropdownFilter);
+		$Qmatic.components.dropdown.markTypeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMarkType') });
+		markTypeDropdownFilter.trigger("chosen:updated");
 		customMarksTable.fnAdjustColumnSizing();
 
 		if (servicePoint.hasValidSettings()
@@ -68,9 +68,9 @@ var customMarks = new function () {
 					markTypeDropdownFilter.trigger("chosen:updated");
 				}
 
-        // Make Mark dropdown disabled
-        dropdownFilter.prop('disabled', true);
-        dropdownFilter.trigger('chosen:updated');
+				// Make Mark dropdown disabled
+				dropdownFilter.prop('disabled', true);
+				dropdownFilter.trigger('chosen:updated');
 				// for (i = 0; i < markTypesArray.length; i++) {
 				// 	if (markTypesArray[i].name == customMarkTypeName) {
 				// 		markTypeId = markTypesArray[i].id;
@@ -89,57 +89,57 @@ var customMarks = new function () {
 				// dropdownFilter.trigger("chosen:updated");
 			}
 		}
-  };
+	};
 
-  this.updateSelectMarkDropdown = function (markTypeId) {
-    clearFilter(dropdownFilter);
-    dropdownFilter.prop('disabled', true);
-    dropdownFilter.trigger('chosen:updated');
-    var url = "branches/" + sessvars.branchId
-      + "/markTypes/" + markTypeId + "/marks";
-    var marksResponse = spService.get(url, true)
+	this.updateSelectMarkDropdown = function (markTypeId) {
+		clearFilter(dropdownFilter);
+		dropdownFilter.prop('disabled', true);
+		dropdownFilter.trigger('chosen:updated');
+		var url = "branches/" + sessvars.branchId
+			+ "/markTypes/" + markTypeId + "/marks";
+		var marksResponse = spService.get(url, true)
 
-    util.sortArrayCaseInsensitive(marksResponse, "name");
+		util.sortArrayCaseInsensitive(marksResponse, "name");
 
-    util.populateSelect(marksResponse, dropdownFilter);
-    dropdownFilter.prop('disabled', false);
-    dropdownFilter.trigger("chosen:updated");
-  }
+		util.populateSelect(marksResponse, dropdownFilter);
+		dropdownFilter.prop('disabled', false);
+		dropdownFilter.trigger("chosen:updated");
+	}
 
-  this.evaluateCustomMarkTypes = function (allMarks, wantedMarkTypes) {
-    var excludeMode = false;
-    var allMode = false;
+	this.evaluateCustomMarkTypes = function (allMarks, wantedMarkTypes) {
+		var excludeMode = false;
+		var allMode = false;
 
-    wantedMarkTypes = wantedMarkTypes.split(/[,:]+/).map(function(value) {
-      return value.toLowerCase().trim();
-    });
+		wantedMarkTypes = wantedMarkTypes.split(/[,:]+/).map(function (value) {
+			return value.toLowerCase().trim();
+		});
 
-    var excludeIndex = wantedMarkTypes.indexOf('exclude');
+		var excludeIndex = wantedMarkTypes.indexOf('exclude');
 
-    if (excludeIndex > 0) {
-      wantedMarkTypes = wantedMarkTypes.slice(0, excludeIndex);
-    } else if (excludeIndex === 0) {
-      excludeMode = true;
-    } else if (wantedMarkTypes.indexOf('*') > -1) {
-      allMode = true;
-    }
+		if (excludeIndex > 0) {
+			wantedMarkTypes = wantedMarkTypes.slice(0, excludeIndex);
+		} else if (excludeIndex === 0) {
+			excludeMode = true;
+		} else if (wantedMarkTypes.indexOf('*') > -1) {
+			allMode = true;
+		}
 
-    var filterInMark = _.curry(this.filterIn, 2)(wantedMarkTypes);
-    var filterOutMark = _.negate(filterInMark);
+		var filterInMark = _.curry(this.filterIn, 2)(wantedMarkTypes);
+		var filterOutMark = _.negate(filterInMark);
 
-    if (excludeMode) {
-      wantedMarkTypes = _.pull(wantedMarkTypes, "exclude");
-      return _.filter(allMarks, filterOutMark);
-    } else if (allMode) {
-      return allMarks;
-    } else {
-      return _.filter(allMarks, filterInMark);
-    }
-  }
+		if (excludeMode) {
+			wantedMarkTypes = _.pull(wantedMarkTypes, "exclude");
+			return _.filter(allMarks, filterOutMark);
+		} else if (allMode) {
+			return allMarks;
+		} else {
+			return _.filter(allMarks, filterInMark);
+		}
+	}
 
-  this.filterIn = function (wantedMarkTypes, mark) {
-    return _.includes(wantedMarkTypes, mark.name.toLowerCase());
-  }
+	this.filterIn = function (wantedMarkTypes, mark) {
+		return _.includes(wantedMarkTypes, mark.name.toLowerCase());
+	}
 
 	this.showAddedMarksTable = function () {
 		customMarksTable && customMarksTable.show();
@@ -151,7 +151,7 @@ var customMarks = new function () {
 
 	this.updateVisitParamaters = function (branchId, visitId) {
 		//Update parameter 'marksInThisTransfer' in current visit 	
-		var newMarks = sessvars.state.visit.visitMarks;	
+		var newMarks = sessvars.state.visit.visitMarks;
 		var previousMarksMap = previousMarks.map(function (e) { return e.id })
 
 		for (i = 0; i < newMarks.length; i++) {
@@ -169,19 +169,19 @@ var customMarks = new function () {
 				marksInThisTransfer = marksInThisTransfer + newMarks[i].id
 			}*/
 
-			
-		
-			if(previousMarksMap.indexOf(newMarks[i].id) == -1){
-				if(marksInThisTransfer != ""){
-					marksInThisTransfer = marksInThisTransfer + ","		
+
+
+			if (previousMarksMap.indexOf(newMarks[i].id) == -1) {
+				if (marksInThisTransfer != "") {
+					marksInThisTransfer = marksInThisTransfer + ","
 				}
 				marksInThisTransfer = marksInThisTransfer + newMarks[i].id
 			}
 		}
 
-		var updateParams = servicePoint.createParams();  
-			updateParams.json = '{"marksInThisTransfer":"'+marksInThisTransfer+'"}';
-			spService.putParams("branches/" + branchId + "/visits/" + visitId + "/parameters", updateParams);	
+		var updateParams = servicePoint.createParams();
+		updateParams.json = '{"marksInThisTransfer":"' + marksInThisTransfer + '"}';
+		spService.putParams("branches/" + branchId + "/visits/" + visitId + "/parameters", updateParams);
 
 	};
 
@@ -198,20 +198,26 @@ var customMarks = new function () {
 			if (multiMarks == true && multiMarkCounter > 1) {
 				customMarks.addMultiMarks(null, markName);
 			} else {
+				//Update parameter in visit 'marksInThisTransfer'
+				previousMarks = sessvars.state.visit.visitMarks;
+				if ((typeof sessvars.state.visit.parameterMap != 'undefined') && (typeof sessvars.state.visit.parameterMap.marksInThisTransfer != 'undefined')) {
+					marksInThisTransfer = sessvars.state.visit.parameterMap.marksInThisTransfer;
+				}
+
 				var postResponse = spService
 					.post("branches/" + customMarksParams.branchId
-					+ "/servicePoints/"
-					+ customMarksParams.servicePointId + "/visits/"
-					+ customMarksParams.visitId + "/marks/"
-					+ customMarksParams.markId);
+						+ "/servicePoints/"
+						+ customMarksParams.servicePointId + "/visits/"
+						+ customMarksParams.visitId + "/marks/"
+						+ customMarksParams.markId);
 				sessvars.state = servicePoint.getState(postResponse);
-
+				customMarks.updateVisitParamaters(customMarksParams.branchId, sessvars.state.visit.id);
 				if (postResponse) {
-				customMarks.getUserStateWorkaround(true);
-				util.showMessage(jQuery.i18n
-					.prop('success.added.mark') + " " + markName);
+					customMarks.getUserStateWorkaround(true);
+					util.showMessage(jQuery.i18n
+						.prop('success.added.mark') + " " + markName);
 				} else {
-				customMarks.getUserStateWorkaround();
+					customMarks.getUserStateWorkaround();
 				}
 			}
 		}
@@ -226,8 +232,8 @@ var customMarks = new function () {
 				+ customMarksParams.markId, "customMarks.addMultiMarks");
 		} else {
 			//Update parameter in visit 'marksInThisTransfer'
-			previousMarks = sessvars.state.visit.visitMarks;			
-			if((typeof sessvars.state.visit.parameterMap != 'undefined') && (typeof sessvars.state.visit.parameterMap.marksInThisTransfer != 'undefined')){
+			previousMarks = sessvars.state.visit.visitMarks;
+			if ((typeof sessvars.state.visit.parameterMap != 'undefined') && (typeof sessvars.state.visit.parameterMap.marksInThisTransfer != 'undefined')) {
 				marksInThisTransfer = sessvars.state.visit.parameterMap.marksInThisTransfer;
 			}
 			sessvars.state = servicePoint.getState(spService.post("branches/"
@@ -239,7 +245,7 @@ var customMarks = new function () {
 			customMarks.updateVisitParamaters(customMarksParams.branchId, sessvars.state.visit.id);
 			customMarks.getUserStateWorkaround(true);
 			util.showMessage(jQuery.i18n
-					.prop('success.added.mark') + " " + markName + " X " + multiMarkCounterIntial);
+				.prop('success.added.mark') + " " + markName + " X " + multiMarkCounterIntial);
 		}
 
 		delServUpdateNeeded = true;
@@ -250,11 +256,11 @@ var customMarks = new function () {
 		if (servicePoint.hasValidSettings()) {
 			var removeParams = servicePoint.createParams();
 			//Update parameter in visit 'marksInThisTransfer'
-			previousMarks = sessvars.state.visit.visitMarks;			
-			if((typeof sessvars.state.visit.parameterMap != 'undefined') && (typeof sessvars.state.visit.parameterMap.marksInThisTransfer != 'undefined')){
+			previousMarks = sessvars.state.visit.visitMarks;
+			if ((typeof sessvars.state.visit.parameterMap != 'undefined') && (typeof sessvars.state.visit.parameterMap.marksInThisTransfer != 'undefined')) {
 				marksInThisTransfer = sessvars.state.visit.parameterMap.marksInThisTransfer;
 			}
-			
+
 			removeParams.visitId = sessvars.state.visit.id;
 			removeParams.servicePointId = sessvars.state.servicePointId;
 			removeParams.visitMarkId = customMarksTable.fnGetData(rowClicked).id;
@@ -265,32 +271,32 @@ var customMarks = new function () {
 				+ removeParams.visitMarkId);
 			sessvars.state = servicePoint.getState(delResponse);
 			if (delResponse) {
-			//Update parameter in visit 'marksInThisTransfer'						
-			if(marksInThisTransfer != ""){
-				var newMarksInThisTransfer = "";
-				var marksInThisTransferArray = marksInThisTransfer.split(',');	
-				if(marksInThisTransferArray.indexOf((removeParams.visitMarkId).toString()) > -1){								
-					for (k = 0; k < marksInThisTransferArray.length; k++) {								
-						if(marksInThisTransferArray[k] != removeParams.visitMarkId){
-							if(newMarksInThisTransfer != ""){
-								newMarksInThisTransfer = newMarksInThisTransfer + ",";
+				//Update parameter in visit 'marksInThisTransfer'						
+				if (marksInThisTransfer != "") {
+					var newMarksInThisTransfer = "";
+					var marksInThisTransferArray = marksInThisTransfer.split(',');
+					if (marksInThisTransferArray.indexOf((removeParams.visitMarkId).toString()) > -1) {
+						for (k = 0; k < marksInThisTransferArray.length; k++) {
+							if (marksInThisTransferArray[k] != removeParams.visitMarkId) {
+								if (newMarksInThisTransfer != "") {
+									newMarksInThisTransfer = newMarksInThisTransfer + ",";
+								}
+								newMarksInThisTransfer = newMarksInThisTransfer + marksInThisTransferArray[k];
 							}
-							newMarksInThisTransfer = newMarksInThisTransfer + marksInThisTransferArray[k];
 						}
+						var updateParams = servicePoint.createParams();
+						updateParams.json = '{"marksInThisTransfer":"' + newMarksInThisTransfer + '"}';
+						spService.putParams("branches/" + removeParams.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
 					}
-					var updateParams = servicePoint.createParams();  
-					updateParams.json = '{"marksInThisTransfer":"'+newMarksInThisTransfer+'"}';
-					spService.putParams("branches/" + removeParams.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
-				}									
-			}
-			customMarks.getUserStateWorkaround(true);
-			util.showMessage(jQuery.i18n
+				}
+				customMarks.getUserStateWorkaround(true);
+				util.showMessage(jQuery.i18n
 					.prop('success.removed.mark') + " " + markName);
-					if (servicePoint.isMarkListEmptyInVisit()) {					
-						util.showError(jQuery.i18n.prop('error.no.mark.visit'));					
-					} else if (servicePoint.isMarkListEmptyInTransfer()) {					
-						util.showError(jQuery.i18n.prop('error.no.mark.transfer'));					
-					}
+				if (servicePoint.isMarkListEmptyInVisit()) {
+					util.showError(jQuery.i18n.prop('error.no.mark.visit'));
+				} else if (servicePoint.isMarkListEmptyInTransfer()) {
+					util.showError(jQuery.i18n.prop('error.no.mark.transfer'));
+				}
 			} else {
 				customMarks.getUserStateWorkaround();
 			}
@@ -348,27 +354,27 @@ var customMarks = new function () {
 					"sClass": "middleColumn",
 					"mDataProp": "eventTime",
 					"mData": function (source, type, val) {
-                        return source['eventTime'] ? util.formatHHMMToTimeConvention(source['eventTime']) : source['eventTime'];
-                    },
+						return source['eventTime'] ? util.formatHHMMToTimeConvention(source['eventTime']) : source['eventTime'];
+					},
 					"sType": "qm-sort",
 					"sDefaultContent": null,
 					"sWidth": "auto",
 					"bSortable": false,
 					"createdCell": function (td, cellData, rowData, row, col) {
-					if (customMarks.checkIfMarkInThisTransferToRemove(rowData.id)){
-						$(td).append(
-							"<span class=\"removeMarkBtn\" " + "title=\""
-							+ jQuery.i18n.prop("action.remove.mark.click")
-							+ "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
-							+ '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
-							+ '<span class="sr-only">Remove this mark from the current visit</span>'
-							+ '</button>' + "</span>");
+						if (customMarks.checkIfMarkInThisTransferToRemove(rowData.id)) {
+							$(td).append(
+								"<span class=\"removeMarkBtn\" " + "title=\""
+								+ jQuery.i18n.prop("action.remove.mark.click")
+								+ "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
+								+ '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
+								+ '<span class="sr-only">Remove this mark from the current visit</span>'
+								+ '</button>' + "</span>");
 
-						$(td).find(".removeMarkBtn").click(function () {
-							customMarkRemove(row, rowData.markName);
-						});
+							$(td).find(".removeMarkBtn").click(function () {
+								customMarkRemove(row, rowData.markName);
+							});
+						}
 					}
-				}
 				}, {
 					"sClass": "lastColumn",
 					"bSearchable": false,
@@ -380,47 +386,47 @@ var customMarks = new function () {
 
 			customMarksTable = $('#customMarks')
 				.dataTable(
-				{
-					"id": "cc",
-					"bDestroy": true,
-					"oLanguage": {
-						"sEmptyTable": translate
-							.msg("info.no.marks.added"),
-						"sInfo": "",
-						"sInfoEmpty": "",
-						"sZeroRecords": ""
-					},
-					"bFilter": false,
-					"fnRowCallback": null,
-					"fnHeaderCallback": headerCallback,
-					"bLengthChange": false,
-					"bProcessing": true,
-					"bPaginate": false,
-					"aoColumns": columns,
-					"sScrollX": "100%",
-					"sScrollY": "100%",
-					"bAutoWidth": false,
-					"aaData": (sessvars.state.visit != null
-						&& sessvars.state.visit.currentVisitService != null
-						&& sessvars.state.visit.visitMarks !== null ? sessvars.state.visit.visitMarks
-						: null)
-				});
+					{
+						"id": "cc",
+						"bDestroy": true,
+						"oLanguage": {
+							"sEmptyTable": translate
+								.msg("info.no.marks.added"),
+							"sInfo": "",
+							"sInfoEmpty": "",
+							"sZeroRecords": ""
+						},
+						"bFilter": false,
+						"fnRowCallback": null,
+						"fnHeaderCallback": headerCallback,
+						"bLengthChange": false,
+						"bProcessing": true,
+						"bPaginate": false,
+						"aoColumns": columns,
+						"sScrollX": "100%",
+						"sScrollY": "100%",
+						"bAutoWidth": false,
+						"aaData": (sessvars.state.visit != null
+							&& sessvars.state.visit.currentVisitService != null
+							&& sessvars.state.visit.visitMarks !== null ? sessvars.state.visit.visitMarks
+							: null)
+					});
 			$('#customMarks').prepend("<caption class='sr-only'>Add marks</caption>");
 		}
 		var sorting = [[1, 'desc']];
 		customMarksTable.fnSort(sorting);
 	};
-	this.checkIfMarkInThisTransferToRemove = function (markId){
+	this.checkIfMarkInThisTransferToRemove = function (markId) {
 
 		var marksInThisTransferArray = [];
-		if ((typeof sessvars.state.visit != 'undefined') && (typeof sessvars.state.visit.parameterMap != 'undefined') 
-			&& (typeof sessvars.state.visit.parameterMap.marksInThisTransfer != 'undefined')){
+		if ((typeof sessvars.state.visit != 'undefined') && (typeof sessvars.state.visit.parameterMap != 'undefined')
+			&& (typeof sessvars.state.visit.parameterMap.marksInThisTransfer != 'undefined')) {
 			marksInThisTransferArray = sessvars.state.visit.parameterMap.marksInThisTransfer.split(',');
 		}
-			
-		if ((mandatoryLevel == 'transfer') && (marksInThisTransferArray.indexOf(markId.toString()) == -1)){
+
+		if ((mandatoryLevel == 'transfer') && (marksInThisTransferArray.indexOf(markId.toString()) == -1)) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 

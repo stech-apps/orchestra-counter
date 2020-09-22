@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.16     2020-09-22   Change default value in marks mandatory   udaban
+                            parameter      
     7.0.15     2020-09-11   added new parameters for user and         chamut
                             servicepoint pool auto update      
     7.0.14     2020-08-17   Added parameter to make marks mandatory   udaban
@@ -85,7 +87,7 @@
 
 <unit name="WebServicePoint"
       frameworkVersion="2"
-      unitVersion="7.0.15"
+      unitVersion="7.0.16"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -249,6 +251,7 @@
               label = "Mark Mandatory Level"
                type = "Options"
           mandatory = "false"
+          defaultValue = "false"
           writeLevel = "profile"
           privilege = "install:adminAdmin"
           multiSelection = "false">

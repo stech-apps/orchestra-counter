@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.18     2020-09-22   Change default value in marks mandatory   udaban
+                            parameter      
     7.0.17     2020-09-11   added new parameters for user and         chamut
                             servicepoint pool auto update      
     7.0.16     2020-08-17   Added parameter to make marks mandatory   udaban
@@ -95,7 +97,7 @@
 
 <unit name="WebServicePoint_D924"
       frameworkVersion="2"
-      unitVersion="7.0.17"
+      unitVersion="7.0.18"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -260,11 +262,12 @@
                type = "Options"
           mandatory = "false"
           writeLevel = "profile"
+          defaultValue = "false"
           privilege = "install:adminAdmin"
           multiSelection = "false">
           <options>
-               <option label = "visit">Visit level</option>
-              <option label = "transfer">Transaction level</option>
+             <option label = "Visit level">visit</option>
+              <option label = "Transaction level">transfer</option>
           </options>
         </parameter>
         <parameter name="trQueue"
