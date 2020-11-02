@@ -561,6 +561,13 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("autoCloseTimerText", 'info.auto.close.extend.timerText');
         i18nSafe("autoCloseTimerSecondsTxt", 'info.auto.close.extend.timerText.seconds');
 
+        //custom fields
+        i18nSafe("customFieldLabel1", 'info.label.custom.field1');
+        i18nSafe("customFieldLabel2", 'info.label.custom.field2');
+        i18nSafe("customFieldLabel3", 'info.label.custom.field3');
+        i18nSafe("customFieldLabel4", 'info.label.custom.field4');
+        i18nSafe("customFieldLabel5", 'info.label.custom.field5');
+
         //footer
         sessvars.footer = translate.msg("label.poweredBy",
         		["Qmatic " + sessvars.systemInformation.productName + " " + sessvars.systemInformation.releaseName + " [" + sessvars.systemInformation.productVersion + "]"]);

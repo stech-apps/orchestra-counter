@@ -17,6 +17,28 @@
                     <span class="sr-only"></span>
                 </a>
             </div>
+            <div id="customFields" class="qm-card-header__custom-fields">
+                <div class="qm-card-header__custom-fields__row">
+                    <span id="customFieldLabel1"></span>
+                    <span id="customfieldvalue1"></span>
+                </div>
+                <div class="qm-card-header__custom-fields__row">
+                    <span id="customFieldLabel2"></span>
+                    <span id="customfieldvalue2"></span>
+                </div>
+                <div class="qm-card-header__custom-fields__row">
+                    <span id="customFieldLabel3"></span>
+                    <span id="customfieldvalue3"></span>
+                </div>
+                <div class="qm-card-header__custom-fields__row">
+                    <span id="customFieldLabel4"></span>
+                    <span id="customfieldvalue4"></span>
+                </div>
+                <div class="qm-card-header__custom-fields__row">
+                    <span id="customFieldLabel5"></span>
+                    <span id="customfieldvalue5"></span>
+                </div>
+            </div>
             <div class="qm-services">
                 <div class="qm-services__current-service-container">
 

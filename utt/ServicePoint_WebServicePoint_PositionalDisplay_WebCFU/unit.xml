@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.17     2020-11-06   Added parameter to set custom fields      chamut
     7.0.16     2020-09-22   Change default value in marks mandatory   udaban
                             parameter      
     7.0.15     2020-09-11   added new parameters for user and         chamut
@@ -88,7 +89,7 @@
 
 <unit name="WebServicePoint_PositionalDisplay_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.16"
+      unitVersion="7.0.17"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -477,6 +478,23 @@
           label="Send SMS"
           description="Enable/disable sms option"
           privilege="install:adminAdmin"/>
+        <parameter name="customParameters" 
+          description="Which custom parameters should be shown when the visit is called."
+          sortOrder="5042"
+          label="Custom parameters"
+          type="Options"
+          mandatory="false"
+          writeLevel="branch"
+          privilege="branchAdmin"
+          multiSelection="true">
+          <options label="Select custom parameters">
+            <option label="custom1">custom1</option>
+            <option label="custom2">custom2</option>
+            <option label="custom3">custom3</option>
+            <option label="custom4">custom4</option>
+            <option label="custom5">custom5</option>
+          </options>
+        </parameter>
 
 
     <parameter name="surfaceApplicationPositionalDisplay" description="Defines what surface application that should be used on the Positional Display"

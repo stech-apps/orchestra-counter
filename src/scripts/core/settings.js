@@ -51,6 +51,8 @@ mandatoryLevel = 'none';
 markMandatoryValidOptions = ['none', 'visit', 'transfer'];
 markMandatoryTrue = ['visit', 'transfer'];
 
+customParameters = null;
+
 function showModules() {
 	var $main = $('.qm-main');
 
@@ -451,6 +453,9 @@ function setUnitTypeModules(val) {
 	}
 	if (params.enableServicePointPoolAutoUpdate != undefined) {
 		pollServicePointPoolEnabled = params.enableServicePointPoolAutoUpdate;		
+	}
+	if (params.customParameters != undefined) {
+		customParameters = params.customParameters;		
 	}
 
 	showModules();

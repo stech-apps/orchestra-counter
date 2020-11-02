@@ -1923,6 +1923,54 @@ var servicePoint = new function () {
 		}
 
 		updateAppointmentTime();
+
+		if (customParameters && sessvars.state.visit) {
+			$('#customFields').show();
+			selectedCustomFields = customParameters.split(",");
+			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom1 != null
+				&& selectedCustomFields.includes("custom1")) {
+				$("#customfieldvalue1").html(sessvars.state.visit.parameterMap.custom1);
+				$("#customfieldvalue1").parent().show();
+			}
+			else {
+				$("#customfieldvalue1").parent().hide();
+			}
+			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom2 != null
+				&& selectedCustomFields.includes("custom2")) {
+				$("#customfieldvalue2").html(sessvars.state.visit.parameterMap.custom2);
+				$("#customfieldvalue2").parent().show();
+			}
+			else {
+				$("#customfieldvalue2").parent().hide();
+			}
+			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom3 != null
+				&& selectedCustomFields.includes("custom3")) {
+				$("#customfieldvalue3").html(sessvars.state.visit.parameterMap.custom3);
+				$("#customfieldvalue3").parent().show();
+			}
+			else {
+				$("#customfieldvalue3").parent().hide();
+			}
+			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom4 != null
+				&& selectedCustomFields.includes("custom4")) {
+				$("#customfieldvalue4").html(sessvars.state.visit.parameterMap.custom4);
+				$("#customfieldvalue4").parent().show();
+			}
+			else {
+				$("#customfieldvalue4").parent().hide();
+			}
+			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom5 != null
+				&& selectedCustomFields.includes("custom5")) {
+				$("#customfieldvalue5").html(sessvars.state.visit.parameterMap.custom5);
+				$("#customfieldvalue5").parent().show();
+			}
+			else {
+				$("#customfieldvalue5").parent().hide();
+			}
+
+		} else {
+			$('#customFields').hide();
+		}
 	};
 
 	var updateAppointmentTime = function() {

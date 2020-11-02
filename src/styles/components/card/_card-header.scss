@@ -92,6 +92,18 @@
     &__sub-heading {
         font-size: rem(28px);
     }
+
+    &__custom-fields {
+        padding: 5px 0px;
+        &__row {
+            padding: 2px 0px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-decoration: none;
+        }
+    }
+
 }
 
 .qm-card-description {
