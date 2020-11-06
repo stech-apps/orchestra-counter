@@ -1928,40 +1928,40 @@ var servicePoint = new function () {
 			$('#customFields').show();
 			selectedCustomFields = customParameters.split(",");
 			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom1 != null
-				&& selectedCustomFields.includes("custom1")) {
-				$("#customfieldvalue1").html(sessvars.state.visit.parameterMap.custom1);
+				&& selectedCustomFields.indexOf("custom1") != -1) {
+				$("#customfieldvalue1").html(decodeURIComponent(sessvars.state.visit.parameterMap.custom1));
 				$("#customfieldvalue1").parent().show();
 			}
 			else {
 				$("#customfieldvalue1").parent().hide();
 			}
 			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom2 != null
-				&& selectedCustomFields.includes("custom2")) {
-				$("#customfieldvalue2").html(sessvars.state.visit.parameterMap.custom2);
+				&& selectedCustomFields.indexOf("custom2") != -1) {
+				$("#customfieldvalue2").html(decodeURIComponent(sessvars.state.visit.parameterMap.custom2));
 				$("#customfieldvalue2").parent().show();
 			}
 			else {
 				$("#customfieldvalue2").parent().hide();
 			}
 			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom3 != null
-				&& selectedCustomFields.includes("custom3")) {
-				$("#customfieldvalue3").html(sessvars.state.visit.parameterMap.custom3);
+				&& selectedCustomFields.indexOf("custom3") != -1) {
+				$("#customfieldvalue3").html(decodeURIComponent(sessvars.state.visit.parameterMap.custom3));
 				$("#customfieldvalue3").parent().show();
 			}
 			else {
 				$("#customfieldvalue3").parent().hide();
 			}
 			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom4 != null
-				&& selectedCustomFields.includes("custom4")) {
-				$("#customfieldvalue4").html(sessvars.state.visit.parameterMap.custom4);
+				&& selectedCustomFields.indexOf("custom4") != -1) {
+				$("#customfieldvalue4").html(decodeURIComponent(sessvars.state.visit.parameterMap.custom4));
 				$("#customfieldvalue4").parent().show();
 			}
 			else {
 				$("#customfieldvalue4").parent().hide();
 			}
 			if (sessvars.state.visit.parameterMap != null && sessvars.state.visit.parameterMap.custom5 != null
-				&& selectedCustomFields.includes("custom5")) {
-				$("#customfieldvalue5").html(sessvars.state.visit.parameterMap.custom5);
+				&& selectedCustomFields.indexOf("custom5") != -1) {
+				$("#customfieldvalue5").html(decodeURIComponent(sessvars.state.visit.parameterMap.custom5));
 				$("#customfieldvalue5").parent().show();
 			}
 			else {
