@@ -428,7 +428,7 @@ var queues = new function() {
                                 onCreate: function (data) {
                                     var popover = data.instance.popper;
                                     var note = popover.querySelector('.qm-popover-notes-text');
-                                    $(note).text(decodeURIComponent(decodeURI(aData.parameterMap['custom1'])));
+                                    $(note).text(decodeURIComponent((aData.parameterMap['custom1'])));
 
                                 }
                             }
@@ -659,7 +659,7 @@ var queues = new function() {
                         onCreate: function (data) {
                             var popover = data.instance.popper;
                             var note = popover.querySelector('.qm-popover-notes-text');
-                            $(note).text(decodeURIComponent(decodeURI(aData.parameterMap['custom1'])));
+                            $(note).text(decodeURIComponent((aData.parameterMap['custom1'])));
 
                         }
                     }
