@@ -19,6 +19,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-8582** | **Show custom fields in the visit called card** |
+| **QP-8810** | **Counter - Note doesn't show in the queue list if the note has a percentage mark** |
 
 
 ----------
