@@ -19,9 +19,12 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-8582** | **Show custom fields in the visit called card** |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
 | **QP-8810** | **Counter - Note doesn't show in the queue list if the note has a percentage mark** |
-
-
 ----------
 
 <h2>Version 4.0.0.040</h2>
