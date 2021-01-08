@@ -827,12 +827,13 @@ var servicePoint = new function () {
 		var select = document.getElementById("availableServicesFilter");
 
 		util.clearSelect($("#availableServicesFilter"));
-
-		for (i = 0; i < servicePoint.servicesList.length; i++) {
+		serviceArr = servicePoint.servicesList || [];
+		util.sortArrayCaseInsensitive(serviceArr, "internalName");
+		for (i = 0; i < serviceArr.length; i++) {
 
 			var opt = document.createElement("option");
-			opt.value = servicePoint.servicesList[i].id;
-			opt.text = servicePoint.servicesList[i].internalName;
+			opt.value = serviceArr[i].id;
+			opt.text = serviceArr[i].internalName;
 
 			try {
 				select.add(opt, null); // standards compliant; doesn't work
