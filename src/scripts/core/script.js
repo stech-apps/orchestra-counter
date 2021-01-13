@@ -676,6 +676,9 @@ var servicePoint = new function () {
 
 	this.closeHijackModal = function () {
 		modalNavigationController.popModal($Qmatic.components.modal.hijack)
+
+		// Reset forceLogoutFunction : QP-8999
+		forceLogoutFunction = null;
 	}
 
 	this.claseAllModals = function () {

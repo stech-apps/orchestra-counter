@@ -19,6 +19,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-8903** | **Showing Primary and Secondary Resources in Queue** |
+| **QP-8999** | **Counter module - Force logout bug Orchestra 7.0 and 7.1** |
 
 <h3>Bug fixes</h3>
 
