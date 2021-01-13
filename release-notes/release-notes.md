@@ -10,7 +10,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h2>Version 4.0.0.042 - internal</h2>
 
-**Date: 08/01/2021**
+**Date: 13/01/2021**
 
 **Build number: 042**
 
@@ -18,6 +18,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 | **Id** | **Release notes** |
 | --- | --- |
+| **QP-8903** | **Showing Primary and Secondary Resources in Queue** |
 
 <h3>Bug fixes</h3>
 

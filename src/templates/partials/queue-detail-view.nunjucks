@@ -21,6 +21,8 @@
                     <th class="ticketNotes"></th>
                     <th class="ticketCustomerName"></th>
                     <th class="ticketActions"></th>
+                    <th class="ticketPrResource"></th>
+                    <th class="ticketSecResource"></th>
                     <th class="ticketAppointmentTime"></th>
                     <th class="ticketWaitingTime"></th>
                 </tr>

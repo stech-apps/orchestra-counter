@@ -8,6 +8,8 @@ var queues = new function() {
     var queuePopovers = [];
     var notePopovers = [];
     var isNoteEnabled = false;
+    var prResourceEnabled = false;
+    var secResourceEnabled = false;
 
     /*
      * keepCalling should be set to true to have this function call itself every 30 secs.
@@ -242,6 +244,8 @@ var queues = new function() {
 
             queueViewController.navigateToDetail();
             isNoteEnabled = sessvars && sessvars.isNotesEnabled;
+            prResourceEnabled = sessvars && sessvars.prResourceEnabled;
+            secResourceEnabled = sessvars && sessvars.secResourceEnabled;
             if(typeof ticketsTable !== 'undefined') {
                 //empty the tickets table and populate with new data from server if table is not created
                 ticketsTable.fnClearTable();
@@ -273,7 +277,7 @@ var queues = new function() {
                     },
                     /* notes */
                     {
-                        "sClass": "qm-table__middle-column qm-table--hide-note-column",
+                        "sClass": "qm-table__middle-column qm-table--hide-column",
                         "sType": "string",
                         "aDataSort": [1,2],
                         "sWidth": "",
@@ -308,6 +312,24 @@ var queues = new function() {
                         "mDataProp": "currentVisitService.serviceExternalName",
                         "sWidth": ""
                     },
+                    /* Priary resource */
+                    {
+                        "sClass": "qm-table__middle-column qm-table--hide-column",
+                        "sType": "qm-sort",
+                        "mData": null,
+                        "sWidth": "",
+                        "mDataProp": "currentVisitService.primaryResource.displayName",
+                        "sDefaultContent": ""
+                    },
+                    /* Secondary resource */
+                    {
+                        "sClass": "qm-table__middle-column qm-table--hide-column",
+                        "sType": "qm-sort",
+                        "mData": null,
+                        "sWidth": "",
+                        "mDataProp": "currentVisitService.secondaryResources[0].displayName",
+                        "sDefaultContent": ""
+                    },
                         /* Appointment time */      {
                         "sClass": "qm-table__app-column",
                         // "bVisible": false,
@@ -328,13 +350,27 @@ var queues = new function() {
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.notes');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
                     nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.service.name');
-                    nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
-                    nHead.getElementsByTagName('th')[5].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+                    nHead.getElementsByTagName('th')[4].innerHTML = '';
+                    nHead.getElementsByTagName('th')[5].innerHTML = '';
+                    nHead.getElementsByTagName('th')[6].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
+                    nHead.getElementsByTagName('th')[7].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
                     $(nHead).find('th').attr('scope', 'col');
                     if(isNoteEnabled){
-                        $('th:eq(1)', nHead).removeClass('qm-table--hide-note-column');
+                        $('th:eq(1)', nHead).removeClass('qm-table--hide-column');
                     }else{
-                        $('th:eq(1)', nHead).addClass('qm-table--hide-note-column');
+                        $('th:eq(1)', nHead).addClass('qm-table--hide-column');
+                    }
+                    if(prResourceEnabled && aasData.length){
+                        $('th:eq(4)', nHead).removeClass('qm-table--hide-column');
+                        nHead.getElementsByTagName('th')[4].innerHTML = aasData[0].currentVisitService.primaryResource.category || '';
+                    }else{
+                        $('th:eq(4)', nHead).addClass('qm-table--hide-column');
+                    }                    
+                    if(secResourceEnabled && aasData.length){
+                        $('th:eq(5)', nHead).removeClass('qm-table--hide-column');
+                        nHead.getElementsByTagName('th')[5].innerHTML = aasData[0].currentVisitService.secondaryResources[0].category || '';
+                    }else{
+                        $('th:eq(5)', nHead).addClass('qm-table--hide-column');
                     }
                 };
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues/" + sessvars.clickedQueueId + "/visits/full";
@@ -407,9 +443,19 @@ var queues = new function() {
                     }
 
                     if(isNoteEnabled){
-                        $('td:eq(1)', nRow).removeClass('qm-table--hide-note-column');
+                        $('td:eq(1)', nRow).removeClass('qm-table--hide-column');
                     }else{
-                        $('td:eq(1)', nRow).addClass('qm-table--hide-note-column');
+                        $('td:eq(1)', nRow).addClass('qm-table--hide-column');
+                    }
+                    if(prResourceEnabled){
+                        $('td:eq(4)', nRow).removeClass('qm-table--hide-column');
+                    }else{
+                        $('td:eq(4)', nRow).addClass('qm-table--hide-column');
+                    }
+                    if(secResourceEnabled){
+                        $('td:eq(5)', nRow).removeClass('qm-table--hide-column');
+                    }else{
+                        $('td:eq(5)', nRow).addClass('qm-table--hide-column');
                     }
                     if (isNoteEnabled && noteTxt) {
                         $('td:eq(1)', nRow).addClass('qm-table__notes-column');
@@ -439,10 +485,10 @@ var queues = new function() {
                         $('td:eq(2)', nRow).html(aData.parameterMap['customers']);
                     }
                     if(aData.appointmentTime) {
-                        $('td:eq(4)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
+                        $('td:eq(6)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
                     }
 
-                    $('td:eq(5)', nRow).html(formattedTime);
+                    $('td:eq(7)', nRow).html(formattedTime);
                     return nRow;
                 };
 

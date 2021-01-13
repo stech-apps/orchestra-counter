@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.18     2020-12-31   Added parameters to set primary           chamut 
+                            and secondary resources     
     7.0.17     2020-11-06   Added parameter to set custom fields      chamut      
     7.0.16     2020-09-22   Change default value in marks mandatory   udaban
                             parameter      
@@ -88,7 +90,7 @@
 
 <unit name="WebCounterMultiStaff"
       frameworkVersion="2"
-      unitVersion="7.0.17"
+      unitVersion="7.0.18"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="1"
@@ -317,12 +319,28 @@
           sortOrder="5024"
           writeLevel="branch"
           privilege="install:adminAdmin"/>
+        <parameter name="primaryResource"
+          type="Boolean"
+          defaultValue="false"
+          label="Primary resource"
+          description="If enabled, show Primary resource of the visit."
+          sortOrder="5025"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="secondaryResource"
+          type="Boolean"
+          defaultValue="false"
+          label="Secondary resource"
+          description="If enabled, show Secondary resource of the visit."
+          sortOrder="5026"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
         <parameter name="btnWrapUp"
           type="Boolean"
           defaultValue="false"
           label="Wrap-up"
           description="Button to enable the possibility to set a wrap-up time, which is a time spent after the Customer leaves and before the Visit is finished."
-          sortOrder="5025"
+          sortOrder="5027"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="btnNoShows"
@@ -330,7 +348,7 @@
           defaultValue="true"
           label="No Show Button"
           description="No Show button"
-          sortOrder="5025"
+          sortOrder="5028"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="btnWalkDirect"
@@ -338,12 +356,12 @@
           defaultValue="true"
           label="Walk In button"
           description="Walk In button"
-          sortOrder="5026"
+          sortOrder="5029"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="wdService"
           description="Default service used for walk in"
-          sortOrder="5026"
+          sortOrder="5030"
           label="Default walk in service"
           type="Service"
           writeLevel="profile"
@@ -354,7 +372,7 @@
           defaultValue="true"
           label="Remove from Queue"
           description="Remove a specific ticket from the queue"
-          sortOrder="5027"
+          sortOrder="5031"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="btnQueueTransfer"
@@ -362,7 +380,7 @@
           defaultValue="true"
           label="Transfer from Queue"
           description="Transfer a specific ticket from the queue"
-          sortOrder="5028"
+          sortOrder="5032"
           writeLevel="branch"
           privilege="install:adminAdmin"/>
         <parameter name="btnQueueCall"
@@ -370,7 +388,7 @@
           defaultValue="true"
           label="Call from Queue"
           description="Call a specific ticket from the queue"
-          sortOrder="5029"
+          sortOrder="5033"
           writeLevel="branch"
           privilege="install:adminAdmin"/>
         <parameter name="btnTransferFirst"
@@ -378,7 +396,7 @@
           defaultValue="true"
           label="Transfer First"
           description="Transfer to the first position in the queue"
-          sortOrder="5030"
+          sortOrder="5034"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="btnTransferLast"
@@ -386,7 +404,7 @@
           defaultValue="true"
           label="Transfer Last"
           description="Transfer to the last position in the queue"
-          sortOrder="5031"
+          sortOrder="5035"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="btnTransferSort"
@@ -394,7 +412,7 @@
           defaultValue="true"
           label="Transfer Sorted"
           description="Transfer sorted according to enter time into the queue"
-          sortOrder="5032"
+          sortOrder="5036"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="btnTransferDelayed"
@@ -402,11 +420,11 @@
           defaultValue="false"
           label="Transfer with delay"
           description="Enable/disable option to transfer a visit with a delay time"
-          sortOrder="5032"
+          sortOrder="5037"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="allowUserPoolTransfer"
-          sortOrder="5033"
+          sortOrder="5038"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -414,7 +432,7 @@
           description="Defines if it is possible to transfer to staff pools on this service point"
           privilege="install:adminAdmin"/>
         <parameter name="allowServicePointPoolTransfer"
-          sortOrder="5034"
+          sortOrder="5039"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -422,7 +440,7 @@
           description="Defines if it is possible to transfer to counter pools on this service point"
           privilege="install:adminAdmin"/>
         <parameter name="enableUserPoolAutoUpdate"
-          sortOrder="5035"
+          sortOrder="5040"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -430,7 +448,7 @@
           description="If enabled, staff pool waiting time will be automatically updated."
           privilege="install:adminAdmin"/>
         <parameter name="enableServicePointPoolAutoUpdate"
-          sortOrder="5036"
+          sortOrder="5041"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -438,7 +456,7 @@
           description="If enabled, counter pool waiting time will be automatically updated."
           privilege="install:adminAdmin"/>
         <parameter name="expectedTransactionTimeEnabled"
-          sortOrder="5037"
+          sortOrder="5042"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -446,7 +464,7 @@
           description="Show expected transaction time for current service"
           privilege="install:adminAdmin"/>
         <parameter name="notificationOpt"
-          sortOrder="5038"
+          sortOrder="5043"
           type="Boolean"
           defaultValue="false"
           writeLevel="profile"
@@ -454,7 +472,7 @@
           description="If enabled, the user is notified when a queue goes from 0 to 1 visit. This setting can only be used when https is enabled."
           privilege="install:adminAdmin"/>
         <parameter name="sndSMS"
-          sortOrder="5039"
+          sortOrder="5044"
           type="Boolean"
           defaultValue="true"
           writeLevel="profile"

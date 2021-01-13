@@ -42,6 +42,8 @@ ServiceTransactionTimeEnabled = true;
 enableNotificationUtt = false;
 pollUserPoolEnabled = false;
 pollServicePointPoolEnabled = false;
+prResourceEnabled = false;
+secResourceEnabled = false;
 
 queueRefreshTime = 30;
 servicePointPoolRefreshTime = 30;
@@ -256,6 +258,18 @@ function showModules() {
 	} else {
 		$('#chatModule').hide();
 	}
+
+	if (prResourceEnabled == true) {
+		sessvars.prResourceEnabled = true;
+	} else {
+		sessvars.prResourceEnabled = false;
+	}
+
+	if (secResourceEnabled == true) {
+		sessvars.secResourceEnabled = true;
+	} else {
+		sessvars.secResourceEnabled = false;
+	}
 }
 
 function setTempShowModule() {
@@ -456,6 +470,12 @@ function setUnitTypeModules(val) {
 	}
 	if (params.customParameters != undefined) {
 		customParameters = params.customParameters;		
+	}
+	if (params.primaryResource != undefined) {
+		prResourceEnabled = params.primaryResource;		
+	}
+	if (params.secondaryResource != undefined) {
+		secResourceEnabled = params.secondaryResource;		
 	}
 
 	showModules();

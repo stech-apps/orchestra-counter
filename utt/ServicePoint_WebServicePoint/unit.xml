@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.18     2020-12-31   Added parameters to set primary           chamut 
+                            and secondary resources     
     7.0.17     2020-11-06   Added parameter to set custom fields      chamut  
     7.0.16     2020-09-22   Change default value in marks mandatory   udaban
                             parameter      
@@ -88,7 +90,7 @@
 
 <unit name="WebServicePoint"
       frameworkVersion="2"
-      unitVersion="7.0.17"
+      unitVersion="7.0.18"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -323,6 +325,22 @@
           label="Park Button"
           description="Send a customer to your User Pool"
           sortOrder="5024"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+            <parameter name="primaryResource"
+          type="Boolean"
+          defaultValue="false"
+          label="Primary resource"
+          description="If enabled, show Primary resource of the visit."
+          sortOrder="5025"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="secondaryResource"
+          type="Boolean"
+          defaultValue="false"
+          label="Secondary resource"
+          description="If enabled, show Secondary resource of the visit."
+          sortOrder="5026"
           writeLevel="branch"
           privilege="install:adminAdmin"/>
         <parameter name="btnWrapUp"
