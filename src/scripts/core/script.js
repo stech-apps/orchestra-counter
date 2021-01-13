@@ -1378,6 +1378,8 @@ var servicePoint = new function () {
 
 	// @param serviceId - call walkdirect on a give id, if not provided get from list selection
 	var walkServiceClicked = function (event, serviceId) {
+		// for crete ticket with delay
+		// http://localhost:8080/rest/servicepoint/branches/branchId/servicePoints/servicePointId/visit/create/
 		if (!!!minTimeBetweenCallsTimer) {
 			if (servicePoint.hasValidSettings()) {
 				var walkParams = servicePoint.createParams();
@@ -1396,6 +1398,11 @@ var servicePoint = new function () {
 
 				setTimerToBlockCalls();
 
+
+			
+
+
+				console.log(sessvars.state.visit)
 				if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
 					sessvars.statusUpdated = new Date();
 				}
@@ -2932,7 +2939,8 @@ var servicePoint = new function () {
 		var userServicePoint = spService.get("branches/" + params.branchId
 			+ "/servicePoints/" + params.servicePointId);
 		setUnitTypeModules(userServicePoint);
-
+		sessvars.servicePointInfo = userServicePoint;
+		
 		sessvars.servicePointUnitId = typeof userServicePoint !== 'undefined'
 			|| userServicePoint != null ? userServicePoint.unitId : "";
 		sessvars.servicePointName = sessvarsInfo.servicePointName;
