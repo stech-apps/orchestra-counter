@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.22     2021-01-13   Added parameters to set transfer delays   udaban 
+                            for eight queues     
     7.0.21     2020-12-31   Added parameters to set primary           chamut 
                             and secondary resources     
     7.0.20     2020-11-06   Added parameter to set custom fields      chamut
@@ -104,7 +106,7 @@
 
 <unit name="WebServicePoint_Expressia_D924"
       frameworkVersion="2"
-      unitVersion="7.0.21"
+      unitVersion="7.0.22"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -509,6 +511,183 @@
           label="Send SMS"
           description="Enable/disable sms option"
           privilege="install:adminAdmin"/>
+        
+        <parameter name="walkQueueA" 
+          type="Queue" 
+          label="Walk Time Queue A"
+          description="Walk Time Queue for A"
+          sortOrder="10100" 
+          writeLevel="branch" 
+          readLevel="branch" 
+          privilege="install:adminAdmin"
+          mandatory="false" />
+
+        <parameter name="walkQueueTimeA" 
+          type="Integer" 
+           label="Walk Time Queue A delay(secs)"
+           description="Walk Time for Queue A"
+           defaultValue="0" 
+           size="4"
+           sortOrder="10101" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueB" 
+           type="Queue" 
+           label="Walk Time Queue B"
+           description="Walk Time Queue for B"
+           sortOrder="10200" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueTimeB" 
+           type="Integer" 
+           label="Walk Time Queue B delay(secs)"
+           description="Walk Time for Queue B"
+           defaultValue="0" 
+           size="4"
+           sortOrder="10201" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueC" 
+           type="Queue" 
+           label="Walk Time Queue C"
+           description="Walk Time Queue for C"
+           sortOrder="10300" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueTimeC" 
+           type="Integer" 
+           label="Walk Time Queue C delay(secs)"
+           description="Walk Time for Queue C"
+           defaultValue="0" 
+           size="4"
+           sortOrder="10301" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueD" 
+           type="Queue" 
+           label="Walk Time Queue D"
+           description="Walk Time Queue for D"
+           sortOrder="10400" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueTimeD" 
+          type="Integer" 
+          label="Walk Time Queue D delay(secs)"
+          description="Walk Time for Queue D"
+          defaultValue="0" 
+          size="4"
+          sortOrder="10401" 
+          writeLevel="branch" 
+          readLevel="branch" 
+          privilege="install:adminAdmin"
+          mandatory="false" />
+
+        <parameter name="walkQueueE" 
+           type="Queue" 
+           label="Walk Time Queue E"
+           description="Walk Time Queue for E"
+           sortOrder="10410" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueTimeE" 
+          type="Integer" 
+          label="Walk Time Queue E delay(secs)"
+          description="Walk Time for Queue E"
+          defaultValue="0" 
+          size="4"
+          sortOrder="10411" 
+          writeLevel="branch" 
+          readLevel="branch" 
+          privilege="install:adminAdmin"
+          mandatory="false" />
+
+        <parameter name="walkQueueF" 
+           type="Queue" 
+           label="Walk Time Queue F"
+           description="Walk Time Queue for F"
+           sortOrder="10420" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueTimeF" 
+          type="Integer" 
+          label="Walk Time Queue F delay(secs)"
+          description="Walk Time for Queue F"
+          defaultValue="0" 
+          size="4"
+          sortOrder="10421" 
+          writeLevel="branch" 
+          readLevel="branch" 
+          privilege="install:adminAdmin"
+          mandatory="false" />
+
+        <parameter name="walkQueueG" 
+           type="Queue" 
+           label="Walk Time Queue G"
+           description="Walk Time Queue for G"
+           sortOrder="10430" 
+           writeLevel="branch" 
+           readLevel="branch" 
+           privilege="install:adminAdmin"
+           mandatory="false" />
+
+        <parameter name="walkQueueTimeG" 
+          type="Integer" 
+          label="Walk Time Queue G delay(secs)"
+          description="Walk Time for Queue G"
+          defaultValue="0" 
+          size="4"
+          sortOrder="10431" 
+          writeLevel="branch" 
+          readLevel="branch" 
+          privilege="install:adminAdmin"
+          mandatory="false" />
+
+        <parameter name="walkQueueH" 
+          type="Queue" 
+          label="Walk Time Queue H"
+          description="Walk Time Queue for H"
+          sortOrder="10440" 
+          writeLevel="branch" 
+          readLevel="branch" 
+          privilege="install:adminAdmin"
+          mandatory="false" />
+
+        <parameter name="walkQueueTimeH" 
+          type="Integer" 
+          label="Walk Time Queue H delay(secs)"
+          description="Walk Time for Queue H"
+          defaultValue="0" 
+          size="4"
+          sortOrder="10441" 
+          writeLevel="branch" 
+          readLevel="branch" 
+          privilege="install:adminAdmin"
+          mandatory="false" />
+
         <parameter name="customParameters" 
             description="Which custom parameters should be shown when the visit is called."
             sortOrder="5042"

@@ -82,7 +82,6 @@ var transfer = new function () {
                         transferParams.$entity.delay = delaySecs;
                 }
             }
-            console.log(sessvars);
             transferParams.json = JSON.stringify(transferParams.$entity);
             spService.putParams('branches/' + transferParams.branchId + '/queues/' + transferParams.queueId + '/visits/', transferParams);
             //Reset parameter 'marksInThisTransfer' in current visit
@@ -570,6 +569,31 @@ var transfer = new function () {
             }
             if (delay) {
                 transferParams.$entity.delay = delay;
+            } else {
+                //set delay on transfer according to unit type parameters
+                if (sessvars.servicePointInfo) {
+                    var sp = sessvars.servicePointInfo;
+                    delaySecs = -1;
+                    if (sp.parameters.walkQueueA == aRowData.id) {
+                        delaySecs = sp.parameters.walkQueueTimeA;
+                    } else if (sp.parameters.walkQueueB == aRowData.id) {
+                        delaySecs = sp.parameters.walkQueueTimeB;
+                    } else if (sp.parameters.walkQueueC == aRowData.id) {
+                        delaySecs = sp.parameters.walkQueueTimeC;
+                    } else if (sp.parameters.walkQueueD == aRowData.id) {
+                        delaySecs = sp.parameters.walkQueueTimeD;
+                    } else if (sp.parameters.walkQueueE == aRowData.id) {
+                        delaySecs = sp.parameters.walkQueueTimeE;
+                    } else if (sp.parameters.walkQueueF == aRowData.id) {
+                        delaySecs = sp.parameters.walkQueueTimeF;
+                    } else if (sp.parameters.walkQueueG == aRowData.id) {
+                        delaySecs = sp.parameters.walkQueueTimeG;
+                    } else if (sp.parameters.walkQueueH == aRowData.id) {
+                        delaySecs = sp.parameters.walkQueueTimeH;
+                    }
+                    if (delaySecs != -1)
+                        transferParams.$entity.delay = delaySecs;
+                }
             }
             transferParams.json = JSON.stringify(transferParams.$entity);
             var requestStatus = spService.putParamsPromised('branches/' + transferParams.branchId + '/queues/' + transferParams.queueId + '/visits/', transferParams);
