@@ -524,6 +524,7 @@
 
         <parameter name="walkQueueTimeA" 
           type="Integer" 
+          regexp = "^\d+$"
            label="Walk Time Queue A delay(secs)"
            description="Walk Time for Queue A"
            defaultValue="0" 
@@ -546,6 +547,7 @@
 
         <parameter name="walkQueueTimeB" 
            type="Integer" 
+           regexp = "^\d+$"
            label="Walk Time Queue B delay(secs)"
            description="Walk Time for Queue B"
            defaultValue="0" 
@@ -568,6 +570,7 @@
 
         <parameter name="walkQueueTimeC" 
            type="Integer" 
+           regexp = "^\d+$"
            label="Walk Time Queue C delay(secs)"
            description="Walk Time for Queue C"
            defaultValue="0" 
@@ -590,6 +593,7 @@
 
         <parameter name="walkQueueTimeD" 
           type="Integer" 
+          regexp = "^\d+$"
           label="Walk Time Queue D delay(secs)"
           description="Walk Time for Queue D"
           defaultValue="0" 
@@ -612,6 +616,7 @@
 
         <parameter name="walkQueueTimeE" 
           type="Integer" 
+          regexp = "^\d+$"
           label="Walk Time Queue E delay(secs)"
           description="Walk Time for Queue E"
           defaultValue="0" 
@@ -634,6 +639,7 @@
 
         <parameter name="walkQueueTimeF" 
           type="Integer" 
+          regexp = "^\d+$"
           label="Walk Time Queue F delay(secs)"
           description="Walk Time for Queue F"
           defaultValue="0" 
@@ -656,6 +662,7 @@
 
         <parameter name="walkQueueTimeG" 
           type="Integer" 
+          regexp = "^\d+$"
           label="Walk Time Queue G delay(secs)"
           description="Walk Time for Queue G"
           defaultValue="0" 
@@ -678,6 +685,7 @@
 
         <parameter name="walkQueueTimeH" 
           type="Integer" 
+          regexp = "^\d+$"
           label="Walk Time Queue H delay(secs)"
           description="Walk Time for Queue H"
           defaultValue="0" 

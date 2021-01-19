@@ -362,13 +362,13 @@ var queues = new function() {
                     }
                     if(prResourceEnabled && aasData.length){
                         $('th:eq(4)', nHead).removeClass('qm-table--hide-column');
-                        nHead.getElementsByTagName('th')[4].innerHTML = aasData[0].currentVisitService.primaryResource.category || '';
+                        nHead.getElementsByTagName('th')[4].innerHTML = (aasData[0].currentVisitService.primaryResource && aasData[0].currentVisitService.primaryResource.category) ? aasData[0].currentVisitService.primaryResource.category : '';
                     }else{
                         $('th:eq(4)', nHead).addClass('qm-table--hide-column');
                     }                    
                     if(secResourceEnabled && aasData.length){
                         $('th:eq(5)', nHead).removeClass('qm-table--hide-column');
-                        nHead.getElementsByTagName('th')[5].innerHTML = aasData[0].currentVisitService.secondaryResources[0].category || '';
+                        nHead.getElementsByTagName('th')[5].innerHTML = (aasData[0].currentVisitService.secondaryResources && aasData[0].currentVisitService.secondaryResources[0].category) ? aasData[0].currentVisitService.secondaryResources[0].category : '';
                     }else{
                         $('th:eq(5)', nHead).addClass('qm-table--hide-column');
                     }
