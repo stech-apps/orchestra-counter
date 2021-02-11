@@ -3034,11 +3034,11 @@ var servicePoint = new function () {
 	}
 
 	this.isMarkListEmptyInVisit = function () {
-		return ((sessvars.state.visit != null) && (mandatoryLevel == 'visit') && (sessvars.state.visit.visitMarks.length == 0));
+		return ((sessvars.state.visit != null) && (mandatoryLevel == 'visit') && moduleCustomMarksEnabled && (sessvars.state.visit.visitMarks.length == 0));
 	};
 
 	this.isMarkListEmptyInTransfer = function () {
-		return ((sessvars.state.visit != null) && (mandatoryLevel == 'transfer') && 
+		return ((sessvars.state.visit != null) && (mandatoryLevel == 'transfer') && moduleCustomMarksEnabled &&
 			((sessvars.state.visit.visitMarks.length == 0) || (servicePoint.isTransferWithNoMarks())));		
 	};
 
