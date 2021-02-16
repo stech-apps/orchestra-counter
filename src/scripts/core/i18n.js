@@ -572,6 +572,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         sessvars.footer = translate.msg("label.poweredBy",
         		["Qmatic " + sessvars.systemInformation.productName + " " + sessvars.systemInformation.releaseName + " [" + sessvars.systemInformation.productVersion + "]"]);
 
+        sessvars.footer += " (" + translate.msg("application.counter") + " - " + translate.msg("label.app.version") + ")";
         if(sessvars.systemInformation.licenseCompanyName == null || sessvars.systemInformation.licenseCompanyName == "") {
         	sessvars.footer += " " + translate.msg("label.notLicensed");
         } else {

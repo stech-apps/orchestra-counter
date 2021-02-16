@@ -206,9 +206,8 @@ function moveInf() {
 
 gulp.task('move:inf', moveInf);
 
-function moveLang(done) {
-  gulp.src(['./src/lang/*']).pipe(gulp.dest('./dist/properties'));
-  done();
+function moveLang() {
+  return gulp.src(['./src/lang/*']).pipe(gulp.dest('./dist/properties'));
 }
 
 gulp.task('move:lang', moveLang);
@@ -227,7 +226,7 @@ gulp.task('move:release-notes', moveReleaseNotes);
 
 function buildArtifactoryZip(done) {
   try {
-    var appData = JSON.parse(fs.readFileSync('./app.json'));
+    var appData = getVersionInfo();
     if (appData) {
       var version = appData.version;
       return gulp
@@ -417,14 +416,35 @@ function writeManifest(done) {
 
 gulp.task('write:manifest', writeManifest);
 
+// Write to property file ***************************************
+
+function writeProperty(done) {
+  try {
+    var localeData = fs.readFileSync('./dist/properties/workstationTerminalMessages.properties');
+    var versionInfo = getVersionInfo();
+    if (versionInfo && localeData) {
+      var version = localeData.toString() + 'label.app.version = ' + versionInfo.version;
+      fs.writeFileSync('./dist/properties/workstationTerminalMessages.properties', version);
+      done();
+      return true;
+    }
+  } catch (ex) {
+    console.log(
+      'There was an exception when trying to read the property file or package.json - ' + ex
+    );
+    done();
+    return false;
+  }
+}
+gulp.task('write:property', writeProperty);
+
 function getVersionInfo() {
-  var appData = JSON.parse(fs.readFileSync('./app.json'));
+  var appData = JSON.parse(fs.readFileSync('./package.json'));
   if (appData) {
     return {
-      //versionPrefix: appData.version,
-      //version: appData.version + '.' + appData.build,
-      //build: appData.build
-      version: appData.version
+      versionPrefix: appData.version,
+      version: appData.version + '.' + appData.build,
+      build: appData.build
     };
   }
   return null;
@@ -512,6 +532,7 @@ gulp.task(
     'util:war',
     'clean:war',
     'move:lang',
+    'write:property',
     'clean:build:utts'
   ),
   buildDevWar
@@ -574,6 +595,7 @@ gulp.task(
     'util:war',
     'clean:war',
     'move:lang',
+    'write:property',
     'clean:build:utts'
   ),
   buildProdWar
@@ -609,6 +631,7 @@ gulp.task(
     'util:war',
     'clean:war',
     'move:lang',
+    'write:property',
     'clean:build:utts',
     'move:release-notes',
     'build:artifactory:zip',
@@ -635,6 +658,7 @@ gulp.task(
     'util:war',
     'clean:war',
     'move:lang',
+    'write:property',
     'deploy:war',
     'deploy:lang'
   ),
