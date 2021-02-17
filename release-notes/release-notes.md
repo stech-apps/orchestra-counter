@@ -8,6 +8,19 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+<h2>Version 4.0.0.043</h2>
+
+**Date: 17/02/2021**
+
+**Build number: 043**
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-9437** | **Malformed unit parameter in UTT issue fixed** |
+----------
+
 <h2>Version 4.0.0.042</h2>
 
 **Date: 29/01/2021**

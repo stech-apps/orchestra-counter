@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.20     2021-02-16   Fixed default value mismatch in marks     udaban 
+                            mandatory level     
     7.0.19     2021-01-13   Added parameters to set transfer delays   udaban 
                             for eight queues     
     7.0.18     2020-12-31   Added parameters to set primary           chamut 
@@ -92,7 +94,7 @@
 
 <unit name="WebCounterMultiStaff"
       frameworkVersion="2"
-      unitVersion="7.0.19"
+      unitVersion="7.0.20"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="1"
@@ -245,16 +247,17 @@
         <parameter name = "markMandatoryLevel"
           description = "Define whether marks are mandatory. If visit is selected marks are mandatory per every visit. If transfer is selected marks are mandatory to transfer the visit"
           sortOrder = "5017"
-              label = "Mark Mandatory Level"
-               type = "Options"
-          mandatory = "false"
+          label = "Mark Mandatory Level"
+          type = "Options"
+          mandatory = "true"
           writeLevel = "profile"
-          defaultValue = "false"
+          defaultValue = "none"
           privilege = "install:adminAdmin"
           multiSelection = "false">
           <options>
+             <option label = "None">none</option>
              <option label = "Visit level">visit</option>
-              <option label = "Transaction level">transfer</option>
+             <option label = "Transaction level">transfer</option>
           </options>
         </parameter>
         <parameter name="trQueue"
