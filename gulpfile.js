@@ -416,15 +416,15 @@ function writeManifest(done) {
 
 gulp.task('write:manifest', writeManifest);
 
-// Write to property file ***************************************
+// Set app version ***************************************
 
-function writeProperty(done) {
+function setAppVersion(done) {
   try {
-    var localeData = fs.readFileSync('./dist/properties/workstationTerminalMessages.properties');
+    var pageData = fs.readFileSync('./src/scripts/core/i18n.js');
     var versionInfo = getVersionInfo();
-    if (versionInfo && localeData) {
-      var version = localeData.toString() + 'label.app.version = ' + versionInfo.version;
-      fs.writeFileSync('./dist/properties/workstationTerminalMessages.properties', version);
+    if (versionInfo && pageData) {
+      pageData = pageData.toString().replace('%APP_VERSION%', ' (Counter ' + versionInfo.version + ') ');
+      fs.writeFileSync('./src/scripts/core/i18n.js', pageData);
       done();
       return true;
     }
@@ -436,7 +436,27 @@ function writeProperty(done) {
     return false;
   }
 }
-gulp.task('write:property', writeProperty);
+gulp.task('set:appVersion', setAppVersion);
+
+function resetAppVersion(done) {
+  try {
+    var pageData = fs.readFileSync('./src/scripts/core/i18n.js');
+    var versionInfo = getVersionInfo();
+    if (versionInfo && pageData) {
+      pageData = pageData.toString().replace(' (Counter ' + versionInfo.version + ') ' ,'%APP_VERSION%');
+      fs.writeFileSync('./src/scripts/core/i18n.js', pageData);
+      done();
+      return true;
+    }
+  } catch (ex) {
+    console.log(
+      'There was an exception when trying to read the property file or package.json - ' + ex
+    );
+    done();
+    return false;
+  }
+}
+gulp.task('reset:appVersion', resetAppVersion);
 
 function getVersionInfo() {
   var appData = JSON.parse(fs.readFileSync('./package.json'));
@@ -532,7 +552,6 @@ gulp.task(
     'util:war',
     'clean:war',
     'move:lang',
-    'write:property',
     'clean:build:utts'
   ),
   buildDevWar
@@ -580,6 +599,7 @@ function buildProdWar(done) {
 gulp.task(
   'build:prod:war',
   gulp.series(
+    'set:appVersion',
     'clean:build',
     'compile:scss',
     'move:js',
@@ -595,8 +615,8 @@ gulp.task(
     'util:war',
     'clean:war',
     'move:lang',
-    'write:property',
-    'clean:build:utts'
+    'clean:build:utts',
+    'reset:appVersion',
   ),
   buildProdWar
 );
@@ -615,6 +635,7 @@ function buildArtifactory(done) {
 gulp.task(
   'build:artifactory',
   gulp.series(
+    'set:appVersion',
     'clean:build',
     'write:manifest',
     'compile:scss',
@@ -631,11 +652,11 @@ gulp.task(
     'util:war',
     'clean:war',
     'move:lang',
-    'write:property',
     'clean:build:utts',
     'move:release-notes',
     'build:artifactory:zip',
-    'build:artifactory:clean'
+    'build:artifactory:clean',
+    'reset:appVersion',
   ),
   buildArtifactory
 );
@@ -658,7 +679,6 @@ gulp.task(
     'util:war',
     'clean:war',
     'move:lang',
-    'write:property',
     'deploy:war',
     'deploy:lang'
   ),
