@@ -14,11 +14,18 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Build number: 043**
 
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-9353** | **Show version in the status bar** |
+
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-9437** | **Malformed unit parameter in UTT issue fixed** |
+
 ----------
 
 <h2>Version 4.0.0.042</h2>
@@ -40,6 +47,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-9001** | **Minneapolis - Counter Module, Add Service not Alphabetized** |
+
 ----------
 
 <h2>Version 4.0.0.041</h2>
@@ -59,6 +67,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-8810** | **Counter - Note doesn't show in the queue list if the note has a percentage mark** |
+
 ----------
 
 <h2>Version 4.0.0.040</h2>
