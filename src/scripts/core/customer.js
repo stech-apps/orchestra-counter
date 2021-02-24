@@ -459,7 +459,7 @@ var customer = new function() {
             $emailField.removeClass('qm-field-error');
         }
 
-        var phonePattern = /^[0-9\+\s]+$/;
+        var phonePattern = /^[0-9()s\+\s]+$/;
         var passedTest = phonePattern.test($phoneField.val());
         if (!passedTest) {
             if($phoneField.val().length > 0){
@@ -1011,7 +1011,8 @@ var customer = new function() {
     }
 
     this.determineIfCustomerUpdated = function (formName) {
-        var serializedForm = $('#' + formName).serializeArray();
+        var serializedForm = $("#" + formName + ' :input').serializeArray();
+        // var serializedForm = $('#editCustomerForm :input').serializeArray();
         var isUpdated = false;
 
         for(var i = 0; i < serializedForm.length; i++) {

@@ -10,7 +10,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h2>Version 4.0.0.043</h2>
 
-**Date: 17/02/2021**
+**Date: 18/02/2021**
 
 **Build number: 043**
 
