@@ -254,7 +254,7 @@ gulp.task('build:artifactory:clean', buildArtifactoryClean);
 function utilWar() {
   return gulp
     .src(['dist/**', '!dist/lang'])
-    .pipe(zip('workstationterminal.war'))
+    .pipe(zip('counter.war'))
     .pipe(gulp.dest('dist/webapp/'));
 }
 
@@ -316,7 +316,7 @@ function connectDevServer(done) {
 gulp.task('connect', connectDevServer);
 
 function deployWar(done) {
-  gulp.src('./dist/webapp/workstationterminal.war').pipe(
+  gulp.src('./dist/webapp/counter.war').pipe(
     sftp({
       remotePath: remoteDeploymentDefaultPath,
       remotePlatform: remoteDeploymentPlatform,
@@ -332,7 +332,7 @@ gulp.task('deploy:war', deployWar);
 
 function deployLang(done) {
   gulp
-    .src('./dist/properties/workstationTerminalMessages.properties')
+    .src('./dist/properties/counterMessages.properties')
     .pipe(
       sftp({
         remotePath: remoteDeploymentDefaultLangPath,
@@ -533,7 +533,7 @@ gulp.task(
 
 function buildDevWar(done) {
   console.log(
-    `workstationterminal.war(Development Build) file created in dist folder`
+    `counter.war(Development Build) file created in dist folder`
   );
   done();
 }
@@ -591,7 +591,7 @@ gulp.task('deploy:war:artifactory', deployWarArtifactory);
 
 function buildProdWar(done) {
   console.log(
-    `workstationterminal.war(Productiion Build) file created in dist folder`
+    `counter.war(Productiion Build) file created in dist folder`
   );
   done();
 }
@@ -627,7 +627,7 @@ gulp.task(
 
 function buildArtifactory(done) {
   console.log(
-    `workstationterminal.war(Productiion Build) file created in dist folder`
+    `counter.war(Productiion Build) file created in dist folder`
   );
   done();
 }
@@ -667,7 +667,7 @@ gulp.task(
  *  Note - For this to work you need to have openssh installed on the remote server.
  */
 function deployRemote(done) {
-  console.log(`workstationterminal.war deployed!`);
+  console.log(`counter.war deployed!`);
   done();
 }
 
@@ -692,7 +692,7 @@ gulp.task(
 
 function buildArtifactoryDeploy(done) {
   console.log(
-    `workstationterminal.zip deployed to artifactory server!`
+    `counter.zip deployed to artifactory server!`
   );
   done();
 }

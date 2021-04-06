@@ -32,7 +32,7 @@ var init = new function () {
         validateAndSetDateConvension(sessvars.systemInformation);
 
         jQuery.i18n.properties({
-            name: 'workstationTerminalMessages',
+            name: 'counterMessages',
             path: '/bundle/',
             mode: 'map',
             language: sessvars.currentUser.locale == " " ? sessvars.systemInformation.defaultLanguage : sessvars.currentUser.locale,

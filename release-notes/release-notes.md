@@ -8,6 +8,42 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+<h2>Version 4.0.0.044</h2>
+
+**Date: 25/03/2021**
+
+**Build number: 044**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-9598** | **Unique url path name for Counter** | 
+| **QP-9177** | **Phone validation differs between Counter and other applications** |
+
+<h3>Upgrade Instructions</h3>
+- Should update the application related data since change the application name
+
+1. Add/update a record in application and application_modules table
+INSERT INTO qp_central.applications
+(id,branch_app,is_distributed,enabled,icon_url,url,version,view_index)
+VALUES('counter',true,true,1,NULL,'counter',1,10)
+
+INSERT INTO qp_central.application_modules     
+     (id,is_distributed,enabled,icon_url,privilege_level,url,view_index,application_id)
+     VALUES ('counter',0,1,NULL,20,NULL,0,'counter')
+
+2. Add new section to commonMessages.properties 
+application.counter                  = Counter
+application.counter.description      = Counter Workstation
+module.counter                       = Counter
+
+3. Add Counter module to CounterUser role
+
+4. Restart the Orchestra
+
+----------
+
 <h2>Version 4.0.0.043</h2>
 
 **Date: 18/02/2021**

@@ -1,7 +1,7 @@
 {
   "name": "qmatic-counter-ui",
   "version": "4.0.0",
-  "build": "043",
+  "build": "044",
   "description": "Qmatic Counter UI",
   "main": "index.js",
   "scripts": {
