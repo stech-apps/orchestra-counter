@@ -14,6 +14,12 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Build number: 045**
 
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-9667** | **Finding the checkbox for the notification is too complicated** | 
+
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |

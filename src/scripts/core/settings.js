@@ -460,7 +460,16 @@ function setUnitTypeModules(val) {
 	}
 
 	if (params.notificationOpt != undefined) {
-		enableNotificationUtt = params.notificationOpt;					
+		enableNotificationUtt = params.notificationOpt;
+		if (enableNotificationUtt == true && util.getNotificationAvailablity() && location.protocol === 'https:') {
+			var status = util.getNotificationInStorage();
+			if (status === null) {
+				util.setNotificationStatus(true, true);
+			}
+			if (status && status.notificationStatus === true) {
+				util.setNotificationStatus(true, false);
+			}
+		}					
 	}
 	if (params.enableUserPoolAutoUpdate != undefined) {
 		pollUserPoolEnabled = params.enableUserPoolAutoUpdate;			

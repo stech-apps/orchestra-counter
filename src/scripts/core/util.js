@@ -741,7 +741,7 @@ var util = new function () {
         localStorage.setItem('isAutoCloseToast', value);
     }
 
-    this.setNotificationStatus = function(value) {
+    this.setNotificationStatus = function(value, initial) {
         if(value) {
             if(Notification.permission === 'default') {
                 var tmpObj = this;
@@ -749,16 +749,20 @@ var util = new function () {
                     // If the user accepts, let's create a notification
                     if (permission === "granted") {
                         tmpObj.setNotificationInStorage(value);
+                        $('#qmNotificationSelection').prop( "checked", true );
                     } else {
                         util.updateUINofiticationStatus(false);
                     }
                 });
             } else if(Notification.permission === 'granted') {
                 this.setNotificationInStorage(value);
+                $('#qmNotificationSelection').prop( "checked", true );
             } else {
                 util.updateUINofiticationStatus(false);
-                util.showMessage(jQuery.i18n
-					.prop('info.notification.enable.error'), true);
+                if(!initial){
+                    util.showMessage(jQuery.i18n
+                        .prop('info.notification.enable.error'), true);
+                }
             }
         } else {
             this.setNotificationInStorage(value);
@@ -776,6 +780,10 @@ var util = new function () {
 
     this.getNotificationAvailablity = function() {
         return ("Notification" in window);
+    }
+
+    this.getNotificationPermission = function() {
+        return Notification.permission;
     }
 
     this.setNotificationInStorage = function(isNotificationEnable) {
