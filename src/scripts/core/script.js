@@ -1982,6 +1982,26 @@ var servicePoint = new function () {
 		} else {
 			$('#customFields').hide();
 		}
+
+		if ((prResourceEnabled || secResourceEnabled) && sessvars.state.visit && sessvars.state.visit.currentVisitService) {
+			$('#resources').show();
+			if(prResourceEnabled && sessvars.state.visit.currentVisitService.primaryResource){
+				$("#primaryResourceLabel").html(sessvars.state.visit.currentVisitService.primaryResource.category+':' || '');
+				$("#primaryResourceVal").html(sessvars.state.visit.currentVisitService.primaryResource.displayName || '');
+				$("#primaryResourceVal").parent().show();
+			}	else {
+				$("#primaryResourceVal").parent().hide();
+			}
+			if(secResourceEnabled && sessvars.state.visit.currentVisitService.secondaryResources && sessvars.state.visit.currentVisitService.secondaryResources.length){
+				$("#secondaryResourceLabel").html(sessvars.state.visit.currentVisitService.secondaryResources[0].category+':' || '');
+				$("#secondaryResourceVal").html(sessvars.state.visit.currentVisitService.secondaryResources[0].displayName || '');
+				$("#secondaryResourceVal").parent().show();
+			}	else {
+				$("#secondaryResourceVal").parent().hide();
+			}
+		}else {
+			$('#resources').hide();
+		}
 	};
 
 	var updateAppointmentTime = function() {

@@ -19,6 +19,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-9667** | **Finding the checkbox for the notification is too complicated** | 
+| **QP-9949** | **Primary and Secondary Resource shown in "call" card** |
 
 <h3>Bug fixes</h3>
 

@@ -1,0 +1,37 @@
+.qm-resources {
+    max-width: 550px;
+    @media screen and (max-width: #{map-get($grid-breakpoints, 'md')}) {
+        max-width: 300px;
+      }
+      @media screen and (max-width: #{map-get($grid-breakpoints, 'lg')}) {
+        max-width: 400px;
+      }
+    padding: 5px 0px;
+    @at-root [dir='rtl'] & {
+        text-align: right;
+    }
+    &__row {
+        display: flex;
+        padding: 2px 0px;
+
+        span{
+            &:first-child{
+                white-space: nowrap;
+                margin-right: 5px;
+                @at-root [dir='rtl'] & {
+                    margin-left: 5px;
+                }
+            }
+            &:last-child{
+                padding: 0 2px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                text-decoration: none;
+                color: rgba(0, 0, 0, 0.62);
+                font-weight: 300;
+            }
+            
+        }
+    }
+}

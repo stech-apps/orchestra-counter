@@ -126,6 +126,17 @@
             </div>
         </div>
 
+        <div id="resources" class="qm-resources">
+            <div class="qm-resources__row">
+                <span id="primaryResourceLabel"></span>
+                <span id="primaryResourceVal"></span>
+            </div>
+            <div class="qm-resources__row">
+                <span id="secondaryResourceLabel"></span>
+                <span id="secondaryResourceVal"></span>
+            </div>
+        </div>
+
         <!-- Navigation to screens -->
         <div class="qm-task-items">
             <a href="#" class="qm-task-item" id="deliveredServicesModule" onclick="deliveredServices.addDeliveredServicePressed();util.moveFocusToCardTop();">
