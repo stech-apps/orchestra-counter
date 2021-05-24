@@ -8,6 +8,20 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+<h2>Version 4.0.0.046 - Internal</h2>
+
+**Date: 24/05/2021**
+
+**Build number: 046**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-9122** | **Counter: Improve the DoB - Year validation** | 
+
+----------
+
 <h2>Version 4.0.0.045</h2>
 
 **Date: 17/05/2021**

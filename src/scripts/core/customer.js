@@ -598,6 +598,10 @@ var customer = new function() {
                 this.showDobFieldError(dob[2]);
                 toggleErrorLabel(true, dob[1], $saveBtn, '<br>'+jQuery.i18n.prop('error.validate.dob.date.in.future'));
                 return false;
+            } else if ((yy+120 < now.getFullYear())){ // DoB < 120 years
+                this.showDobFieldError(dob[2]);
+                toggleErrorLabel(true, dob[1], $saveBtn, '<br>'+jQuery.i18n.prop('error.validate.dob.date.in.past'));
+                return false;
             } else {
                 this.hideDobFieldError(dob[2]);
             }
