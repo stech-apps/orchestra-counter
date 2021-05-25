@@ -287,6 +287,16 @@
             color: rgba(0, 0, 0, 0.62);
         }
     }
+
+    &-services {
+        margin-left:5px;
+        border-radius:50%;
+        padding: 1px 5px;
+        background: rgba(0, 0, 0, 0.2);
+    }
+    &-row-heading {
+        margin-bottom:4px;
+    }
 }
 .pool-popover-line{
     max-width: 100%;
@@ -302,7 +312,3 @@
     width: 100%;
     z-index: 110;
 }
-
-
-
-

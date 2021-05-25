@@ -18,7 +18,8 @@ This document describes the new features, bug corrections, known issues and reco
 
 | **Id** | **Release notes** |
 | --- | --- |
-| **QP-9122** | **Counter: Improve the DoB - Year validation** | 
+| **QP-9122** | **Counter: Improve the DoB - Year validation** |
+| **QP-7751** | **Amount of services in parked visit (user-/servicepointpool)** |
 
 ----------
 

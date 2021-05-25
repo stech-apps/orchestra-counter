@@ -52,6 +52,7 @@ var servicePointPool = new function () {
                     }
                     options.visitId = data.id;
                     options.serviceName = data.currentVisitService.serviceExternalName;
+                    options.totalServices = data.servedVisitServices.length + data.unservedVisitServices.length + 1;
                     options.customerName = data.parameterMap.customers;
                     var popover = new window.$Qmatic.components.popover.CounterPoolPopoverComponent(options);
                     popover.init();

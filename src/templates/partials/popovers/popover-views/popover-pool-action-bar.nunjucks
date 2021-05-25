@@ -13,7 +13,10 @@
     <span class="pool-popover-line"> </span>
     <div class="pool-popover-content">
         <div class="pool-popover-content-col">
-         <span id="popoverPoolActionbarService" class="pool-popover-content-col-heading"></span>
+        <span class="pool-popover-content-row-heading">
+            <span id="popoverPoolActionbarService" class="pool-popover-content-col-heading"></span>
+            <span class="pool-popover-content-services"></span>
+        </span>  
          <span class="pool-popover-content-col-content"></span>
         </div>
 

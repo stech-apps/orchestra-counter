@@ -4,6 +4,7 @@ window.$Qmatic.components.popover.PoolPopoverComponent = function(options) {
     window.$Qmatic.components.popover.BasePopoverComponent.call(this, options);
     this.visitId        = options.visitId;
     this.serviceName    = options.serviceName;
+    this.totalServices    = options.totalServices;
     this.customerName   = options.customerName;
     this.disableCall    = _.isBoolean(options.disableCall) ? options.disableCall : false;
     this.isRTL          = document.getElementsByTagName("html")[0].getAttribute("dir")
@@ -82,6 +83,7 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
     },
         updateContent: function () {
             $(this.instance._tooltipNode.querySelectorAll('.pool-popover-content-col-content')[0]).text(this.serviceName);
+            $(this.instance._tooltipNode.querySelectorAll('.pool-popover-content-services')[0]).text(this.totalServices);
             if (this.customerName) {
                 $(this.instance._tooltipNode.querySelectorAll('.pool-popover-content-col-content')[1]).text(this.customerName);
             } else {
