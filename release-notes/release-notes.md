@@ -20,6 +20,7 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **QP-9122** | **Counter: Improve the DoB - Year validation** |
 | **QP-7751** | **Amount of services in parked visit (user-/servicepointpool)** |
+| **QP-8579** | **Add a setting which will change the behaviour of getting the workstations for all branches** |
 
 ----------
 
