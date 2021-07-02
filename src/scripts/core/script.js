@@ -51,6 +51,7 @@ var delServUpdateNeeded = true;
 var trtUpdateNeeded = true;
 var journeyUpdateNeeded = true;
 var unitMappings;
+var branches_;
 
 // Navigation Controllers.... modals, cards, etc
 var modalNavigationController = new $Qmatic.components.NavController("#qm-modal-nav");
@@ -62,6 +63,9 @@ var notesController = new $Qmatic.components.NotesController();
 var contextMarketingController = new $Qmatic.components.popover.ContextMarketingPopoverController();
 var popoverController = new $Qmatic.components.popover.PopoverController();
 var tableScrollController = new $Qmatic.components.TableScrollController();
+
+var ORCHESTRA_VERSIONS = {};
+ORCHESTRA_VERSIONS.ALL_BRANCHES_WITH_SW_SUPPORTED = '4.3.0.91';
 
 var servicePoint = new function () {
 
@@ -409,26 +413,39 @@ var servicePoint = new function () {
 	 */
 	var showBranches = function () {
 		var isBranchSelectShown = false;
-		var branches = spService.get("branches");
 		$Qmatic.components.dropdown.branchSelection.onRemoveSingleItem()
-
-		// We "filter" out the branches that do not have any software service
-		// points
 		var branches_tmp = [];
-		for (var i = 0; i < branches.length; i++) {
-			var params = {};
-			params.branchId = parseInt(branches[i].id);
-			params.deviceType = "SW_SERVICE_POINT";
-			var resource = "branches/"
-				+ params.branchId + "/servicePoints/deviceTypes/"
-				+ params.deviceType;
-			softwareWorkstations = spService.get(resource);
-			spServiceCache.putData(resource, softwareWorkstations);
-			if (softwareWorkstations.length > 0) {
-				branches_tmp.push(branches[i]);
+		var branches;
+		if(sessvars.systemInformation.productVersion >= ORCHESTRA_VERSIONS.ALL_BRANCHES_WITH_SW_SUPPORTED) {
+			branches = spService.get("branches/servicePoints/deviceTypes/SW_SERVICE_POINT");
+			for (var i = 0; i < branches.length; i++) {
+				if (branches[i].servicePoints.length > 0) {
+					branches_tmp.push(branches[i]);	
+				}
 			}
+
+		} else {
+			branches = spService.get("branches");
+			// We "filter" out the branches that do not have any software service
+			// points
+		
+			for (var i = 0; i < branches.length; i++) {
+				var params = {};
+				params.branchId = parseInt(branches[i].id);
+				params.deviceType = "SW_SERVICE_POINT";
+				var resource = "branches/"
+					+ params.branchId + "/servicePoints/deviceTypes/"
+					+ params.deviceType;
+				softwareWorkstations = spService.get(resource);
+				spServiceCache.putData(resource, softwareWorkstations);
+				if (softwareWorkstations.length > 0) {
+					branches_tmp.push(branches[i]);	
+				}
+			}
+
 		}
 		branches = branches_tmp;
+		branches_ = branches;
 
 		if (branches.length == 0) {
 			// no branches returned
@@ -455,8 +472,8 @@ var servicePoint = new function () {
 					.val() != -1)) {
 					isBranchSelectShown = true;
 				}
-      }
-      branchSelect.trigger("chosen:updated");
+      		}
+      		branchSelect.trigger("chosen:updated");
 		}
 
 		return isBranchSelectShown;
@@ -504,8 +521,15 @@ var servicePoint = new function () {
 		var params = {};
 		params.branchId = parseInt(branchId);
 		params.deviceType = "SW_SERVICE_POINT";
-		var softwareWorkstations = spService.get("branches/" + params.branchId
+	
+		if(sessvars.systemInformation.productVersion.includes(4.3)){
+			var softwareWorkstations = branches_.filter(function (e) {
+				return e.id == params.branchId;
+			})[0].servicePoints;
+		} else {
+			var softwareWorkstations = spService.get("branches/" + params.branchId
 			+ "/servicePoints/deviceTypes/" + params.deviceType, true);
+		}
 
 		if (softwareWorkstations.length == 0) {
 			// no workstations returned
