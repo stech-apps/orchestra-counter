@@ -522,7 +522,7 @@ var servicePoint = new function () {
 		params.branchId = parseInt(branchId);
 		params.deviceType = "SW_SERVICE_POINT";
 	
-		if(sessvars.systemInformation.productVersion.includes(4.3)){
+		if(sessvars.systemInformation.productVersion >= ORCHESTRA_VERSIONS.ALL_BRANCHES_WITH_SW_SUPPORTED){
 			var softwareWorkstations = branches_.filter(function (e) {
 				return e.id == params.branchId;
 			})[0].servicePoints;
