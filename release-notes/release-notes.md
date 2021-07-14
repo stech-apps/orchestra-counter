@@ -22,6 +22,12 @@ This document describes the new features, bug corrections, known issues and reco
 | **QP-7751** | **Amount of services in parked visit (user-/servicepointpool)** |
 | **QP-8579** | **Add a setting which will change the behaviour of getting the workstations for all branches** |
 
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-10248** | **Teams meeting button disappears after confirm is clicked** |
+
 ----------
 
 <h2>Version 4.0.0.045</h2>
