@@ -142,6 +142,8 @@ var customer = new function() {
         this.setFormButtonsState("#editCustomerForm", true);
         this.setFormButtonsState("#editAttachedCustomerForm", true);
 
+        this.setDOBOrder();
+
         this.initClearInputField();
         /*
          * Functionality below for autocomplete customer-search.
@@ -341,6 +343,39 @@ var customer = new function() {
                 $self.next('.js-clear-field').hide();
             }
         })
+    }
+
+    this.setDOBOrder = function () {
+        var dateConvention  = sessvars.systemInformation.dateConvention;
+        var dobOrder = { month : 0, day : 1 , year : 2};
+        var objArr = dateConvention.split('-');
+          if (objArr.length !== 3) {
+            objArr = val.split('/');
+        }
+        dobOrder.day = objArr.indexOf('DD');
+        dobOrder.month = objArr.indexOf('MM');
+        dobOrder.year = objArr.indexOf('YY');
+        
+        var month = document.getElementById("create-customer-month-container");
+        month.style.order = dobOrder.month;
+        var day = document.getElementById("create-customer-day-container");
+        day.style.order = dobOrder.day;
+        var year = document.getElementById("create-customer-year-container");
+        year.style.order = dobOrder.year;
+
+        var monthEdit = document.getElementById("edit-customer-month-container");
+        monthEdit.style.order = dobOrder.month;
+        var dayEdit = document.getElementById("edit-customer-day-container");
+        dayEdit.style.order = dobOrder.day;
+        var yearEdit = document.getElementById("edit-customer-year-container");
+        yearEdit.style.order = dobOrder.year;
+
+        var monthEditForm = document.getElementById("edit-form-customer-month-container");
+        monthEditForm.style.order = dobOrder.month;
+        var dayEditForm = document.getElementById("edit-form-customer-day-container");
+        dayEditForm.style.order = dobOrder.day;
+        var yearEditForm = document.getElementById("edit-form-customer-year-container");
+        yearEditForm.style.order = dobOrder.year;
     }
 
     this.setFormButtonsState = function (formSelector, setListeners) {

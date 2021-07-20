@@ -87,7 +87,7 @@
                             <div class="qm-form-column-12">
                                 <p class="qm-form-field__headline js-label-dob"></p>
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
-                                    <div class="qm-form-field__input-container qm-form-field__input-container--month">
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--month" id="edit-form-customer-month-container">
                                         <label for="editAttacheddateOfBirthMonth" class="qm-form-field__label"><span class="qm-form-field--dob-sr-text sr-only"></span><span class="js-label-month"></span></label>
                                         <div class="qm-drop-down__component">
                                             <select id="editAttacheddateOfBirthMonth" tabIndex="-1" aria-describedby="editAttacheddateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
@@ -98,14 +98,14 @@
 
                                         </div>
                                     </div>
-                                    <div class="qm-form-field__input-container qm-form-field__input-container--day">
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--day" id="edit-form-customer-day-container">
                                         <label for="editAttacheddateOfBirthDay" class="qm-form-field__label">
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
                                         <input id="editAttacheddateOfBirthDay" autocomplete="chrome-off" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" />
                                     </div>
-                                    <div class="qm-form-field__input-container qm-form-field__input-container--year">
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--year" id="edit-form-customer-year-container">
                                         <label for="editAttacheddateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
