@@ -10,7 +10,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h2>Version 4.0.0.046 - Internal</h2>
 
-**Date: 20/07/2021**
+**Date: 27/07/2021**
 
 **Build number: 046**
 
@@ -28,6 +28,7 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **QP-10248** | **Teams meeting button disappears after confirm is clicked** |
 | **QP-10237** | **Counter > Add an option to change the order of the dob input of customer from** |
+| **QP-10265** | **SLA icon shows when there are zero customers in the queue** |
 
 ----------
 

@@ -118,8 +118,8 @@ var queues = new function () {
                         $('td:eq(2)', nRow).html("--");
                     } else {
                         $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
+                        setSLAIcon(aData.serviceLevel, aData.waitingTime, nRow);
                     }
-                    setSLAIcon(aData.serviceLevel, aData.waitingTime, nRow);
 
                     return nRow;
                 };
@@ -143,9 +143,9 @@ var queues = new function () {
                         $('td:eq(2)', nRow).html("--");
                     } else {
                         $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
+                        setSLAIcon(aData.serviceLevel, aData.waitingTime, nRow);
                     }
 
-                    setSLAIcon(aData.serviceLevel, aData.waitingTime, nRow);
                     return nRow;
                 };
 
@@ -187,7 +187,7 @@ var queues = new function () {
     var setSLAIcon = function (serviceLevel, waitingTime, nRow) {
         if (serviceLevel && serviceLevel !== 0) {
             var waitingTimeInMinutes = 0
-            if (waitingTime && waitingTime !== 0) {
+            if (waitingTime && waitingTime !== 0 ) {
                 waitingTimeInMinutes = waitingTime / 60;
 
                 if (waitingTimeInMinutes < serviceLevel * 0.75) {
