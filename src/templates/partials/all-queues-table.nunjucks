@@ -2,11 +2,12 @@
 <table id="queues" class="qm-table">
     <thead class="qm-table__header">
         <tr>
-            <th class="queueName"></th>
+            <th class="myQueueAction"></th>
             <th class="queueId"></th>
             <th class="queueSLA"></th>
             <th class="queueWaitingTime"></th>
             <th class="queueCustomersWaiting"></th>
+            <th class="myQueueCustomersWaiting"></th>
         </tr>
     </thead>
     <tbody class="qm-table__body">

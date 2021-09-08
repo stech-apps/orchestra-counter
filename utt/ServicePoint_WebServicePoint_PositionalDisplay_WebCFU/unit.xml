@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.21     2021-09-02   Added parameter to One click transfer     basama
     7.0.20     2021-02-16   Fixed default value mismatch in marks     udaban 
                             mandatory level
     7.0.19     2021-01-13   Added parameters to set transfer delays   udaban 
@@ -95,7 +96,7 @@
 
 <unit name="WebServicePoint_PositionalDisplay_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.20"
+      unitVersion="7.0.21"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -299,6 +300,14 @@
           label="Transfer Button"
           description="Transfer button"
           sortOrder="5022"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="oneClickTransfer"
+          type="Boolean"
+          defaultValue="false"
+          label="One click transfer"
+          description="Enable/disable direct transfer to a non-appointment queue. Transfer is sorted based on visit lifetime. Note that ‘Transfer Button’ and ‘Transfer from Queue’ options are also considered for this feature."
+          sortOrder="5023"
           writeLevel="branch"
           privilege="install:adminAdmin"/>
         <parameter name="btnRecycle"

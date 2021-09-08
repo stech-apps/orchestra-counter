@@ -12,6 +12,9 @@ var queues = new function () {
     var secResourceEnabled = false;
     var showPrResource = false;
     var showSecResource = false;
+    var oneClickTransfer = false;
+    var buttonTransferEnabled = false;
+    var transferToQueueEnabled = false;
 
     /*
      * keepCalling should be set to true to have this function call itself every 30 secs.
@@ -19,12 +22,19 @@ var queues = new function () {
      */
     this.updateQueues = function (keepCalling) {
         if (!servicePoint.getWorkstationOffline() && servicePoint.hasValidSettings()) {
-
+            oneClickTransfer = sessvars.oneClickTransfer;
+            buttonTransferEnabled = sessvars.buttonTransferEnabled;
+            transferToQueueEnabled = sessvars.transferToQueueEnabled;
             if (typeof queuesTable !== 'undefined' && typeof myQueuesTable !== 'undefined') {
                 // All Queues
                 var existingData = queuesTable.fnGetData();
                 queuesTable.fnClearTable();
-                var queuesData = spService.get("branches/" + sessvars.branchId + "/queues")
+                if(keepCalling !== 'lazyUpdate') {    
+                    var queuesData = spService.get("branches/" + sessvars.branchId + "/queues")
+                } else {
+                    var queuesData = existingData;
+                    keepCalling = false;
+                }
                 if (queuesData && queuesData.length > 0) {
                     queuesTable.fnAddData(queuesData);
                 }
@@ -60,8 +70,17 @@ var queues = new function () {
 
             } else {
                 var columns = [
+                    /* Queue action */        {
+                        "sClass": "qm-table__action-column qm-action-btn qm-table--hide-column",
+                        "mRender": function (data, type, full) {
+                            return "<a><i class= 'qm-action-btn__icon icon-transfer qm-action-btn__text' id='actionBtnTransfer'  title='' tabindex='0' aria-hidden='true'></i></a>"                               
+                        },
+                        "orderable": false,
+                        "bSearchable": false,
+                        "autoWidth": false
+                    },
                     /* Queue name */        {
-                        "sClass": "qm-table__first-column",
+                        "sClass": "qm-table__queue-column",
                         "mDataProp": "name",
                         "sType": "qm-sort",
                         "sDefaultContent": null
@@ -92,59 +111,100 @@ var queues = new function () {
                     }
                 ];
                 var headerCallback = function (nHead, aasData, iStart, iEnd, aiDisplay) {
-                    nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.name');
-                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.waiting');
-                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+                    nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.action');
+                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.name');
+                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.waiting');
+                    nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
                     $(nHead).find('th').attr('scope', 'col');
+                    if (sessvars.state.userState == servicePoint.userState.SERVING && oneClickTransfer
+                        && transferToQueueEnabled && buttonTransferEnabled) {
+                        $('th:eq(0)', nHead).removeClass('qm-table--hide-column');
+                    } else {
+                        $('th:eq(0)', nHead).addClass('qm-table--hide-column');
+                    }
+
                 };
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues";
                 var rowCallbackAllQueues = function (nRow, aData, iDisplayIndex) {
+                    $('td:eq(0)', nRow).click(function (e) {
+                        e.preventDefault();
+                        transfer._transferCurrentVisitToQueueClicked("SORTED", aData);
+                    });
                     if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                         !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
-                        var queueName = $('td:eq(0)', nRow).text();
-                        $('td:eq(0)', nRow).empty().append("<a href='' class=\"qm-table__queue-name\" " +
+                        var queueName = $('td:eq(1)', nRow).text();
+                        var toolTip = translate.msg('info.queue.action.tooltip', [queueName]);
+                        $('td:eq(0)', nRow).find('#actionBtnTransfer').attr('title', toolTip);
+
+                        $('td:eq(1)', nRow).empty().append("<a href='' class=\"qm-table__queue-name\" " +
                             ">" + queueName + "</a>");
 
-                        $('td:eq(0) > a.qm-table__queue-name', nRow).click(function (e) {
+                        $('td:eq(1) > a.qm-table__queue-name', nRow).click(function (e) {
                             e.preventDefault();
                             queueClicked(queuesTable, nRow, aData);
                         });
                     } else {
-                        $('td:eq(0)', nRow).addClass("qm-table__queue-name--disabled");
+                        $('td:eq(1)', nRow).addClass("qm-table__queue-name--disabled");
                     }
 
 
                     if (aData.customersWaiting === 0) {
-                        $('td:eq(2)', nRow).html("--");
+                        $('td:eq(3)', nRow).html("--");
                     } else {
-                        $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
+                        $('td:eq(3)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
                         setSLAIcon(aData.serviceLevel, aData.waitingTime, nRow);
                     }
-
+                    if (oneClickTransfer && transferToQueueEnabled && buttonTransferEnabled) {
+                        if (sessvars.state.userState == servicePoint.userState.SERVING) {
+                            $('td:eq(0)', nRow).removeClass('qm-table--hide-column');
+                        } else {
+                            $('td:eq(0)', nRow).addClass('qm-table--hide-column');
+                        }
+                        if (aData.queueType == 'APPOINTMENT_QUEUE') {
+                            $('td:eq(0)', nRow).addClass('qm-table--hide-cell');
+                        }
+                    }
                     return nRow;
                 };
 
                 var rowCallbackMyQueues = function (nRow, aData, iDisplayIndex) {
+                    $('td:eq(0)', nRow).click(function (e) {
+                        e.preventDefault();
+                        transfer._transferCurrentVisitToQueueClicked("SORTED", aData);
+                    });
                     if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                         !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
-                        var queueName = $('td:eq(0)', nRow).text();
-                        $('td:eq(0)', nRow).empty().append("<a href='' class=\"qm-table__queue-name\" " +
+                        var queueName = $('td:eq(1)', nRow).text();
+                        var toolTip = translate.msg('info.queue.action.tooltip', [queueName]);
+                        $('td:eq(0)', nRow).find('#actionBtnTransfer').attr('title', toolTip);
+                        $('td:eq(1)', nRow).empty().append("<a href='' class=\"qm-table__queue-name\" " +
                             ">" + queueName + "</a>");
 
-                        $('td:eq(0) > a.qm-table__queue-name', nRow).click(function (e) {
+                        $('td:eq(1) > a.qm-table__queue-name', nRow).click(function (e) {
                             e.preventDefault();
                             queueClicked(myQueuesTable, nRow, aData);
                         });
                     } else {
-                        $('td:eq(0)', nRow).addClass("qm-table__queue-name--disabled");
+                        $('td:eq(1)', nRow).addClass("qm-table__queue-name--disabled");
                     }
 
                     if (aData.customersWaiting === 0) {
-                        $('td:eq(2)', nRow).html("--");
+                        $('td:eq(3)', nRow).html("--");
                     } else {
-                        $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
+                        $('td:eq(3)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
                         setSLAIcon(aData.serviceLevel, aData.waitingTime, nRow);
                     }
+                    if (oneClickTransfer && transferToQueueEnabled && buttonTransferEnabled) {
+                        if (sessvars.state.userState == servicePoint.userState.SERVING) {
+                            $('td:eq(0)', nRow).removeClass('qm-table--hide-column');
+                        } else {
+                            $('td:eq(0)', nRow).addClass('qm-table--hide-column');
+                        }
+                        if (aData.queueType == 'APPOINTMENT_QUEUE') {
+                            $('td:eq(0)', nRow).addClass('qm-table--hide-cell');
+                        }
+                    }
+                    
 
                     return nRow;
                 };
@@ -262,6 +322,9 @@ var queues = new function () {
             isNoteEnabled = sessvars && sessvars.isNotesEnabled;
             prResourceEnabled = sessvars && sessvars.prResourceEnabled;
             secResourceEnabled = sessvars && sessvars.secResourceEnabled;
+            oneClickTransfer = sessvars && sessvars.oneClickTransfer;
+            buttonTransferEnabled = sessvars && sessvars.buttonTransferEnabled;
+            transferToQueueEnabled = sessvars && sessvars.transferToQueueEnabled;
             if (typeof ticketsTable !== 'undefined') {
                 //empty the tickets table and populate with new data from server if table is not created
                 ticketsTable.fnClearTable();

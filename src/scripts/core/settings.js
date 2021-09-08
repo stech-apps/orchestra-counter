@@ -44,6 +44,7 @@ pollUserPoolEnabled = false;
 pollServicePointPoolEnabled = false;
 prResourceEnabled = false;
 secResourceEnabled = false;
+oneClickTransfer = false;
 
 queueRefreshTime = 30;
 servicePointPoolRefreshTime = 30;
@@ -270,6 +271,21 @@ function showModules() {
 	} else {
 		sessvars.secResourceEnabled = false;
 	}
+	if (oneClickTransfer == true) {
+		sessvars.oneClickTransfer = true;
+	} else {
+		sessvars.oneClickTransfer = false;
+	}
+	if (transferToQueueEnabled == true) {
+		sessvars.transferToQueueEnabled = true;
+	} else {
+		sessvars.transferToQueueEnabled = false;
+	}
+	if (buttonTransferEnabled == true) {
+		sessvars.buttonTransferEnabled = true;
+	} else {
+		sessvars.buttonTransferEnabled = false;
+	}
 }
 
 function setTempShowModule() {
@@ -485,6 +501,9 @@ function setUnitTypeModules(val) {
 	}
 	if (params.secondaryResource != undefined) {
 		secResourceEnabled = params.secondaryResource;		
+	}
+	if (params.oneClickTransfer != undefined) {
+		oneClickTransfer = params.oneClickTransfer;	
 	}
 
 	showModules();

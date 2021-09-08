@@ -1377,6 +1377,10 @@ var servicePoint = new function () {
 			modalNavigationController.popAllModals();
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
+
+			if(sessvars.oneClickTransfer && sessvars.buttonTransferEnabled && sessvars.transferToQueueEnabled) {
+				queues.updateQueues('lazyUpdate');
+			}
 		}
 	};
 
@@ -1424,7 +1428,10 @@ var servicePoint = new function () {
 					+ "/visits", walkParams));
 
 				setTimerToBlockCalls();
-
+				if (sessvars.oneClickTransfer && sessvars.buttonTransferEnabled && sessvars.transferToQueueEnabled) {
+					queues.updateQueues('lazyUpdate');	
+				}
+				
 
 			
 

@@ -21,6 +21,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **QP-9122** | **Counter: Improve the DoB - Year validation** |
 | **QP-7751** | **Amount of services in parked visit (user-/servicepointpool)** |
 | **QP-8579** | **Add a setting which will change the behaviour of getting the workstations for all branches** |
+| **QP-10535** | **Simplified transfer to queue option with less number of clicks** |
 
 <h3>Bug fixes</h3>
 
@@ -29,6 +30,8 @@ This document describes the new features, bug corrections, known issues and reco
 | **QP-10248** | **Teams meeting button disappears after confirm is clicked** |
 | **QP-10237** | **Counter > Add an option to change the order of the dob input of customer from** |
 | **QP-10265** | **SLA icon shows when there are zero customers in the queue** |
+
+**Note:** Added a new configuration in **QP-10265** (One click transfer). To enable this feature, 'Queue transfer controls' and 'Transfer Button' should be enabled along with 'One click transfer' at branch level. The 'One click transfer' button will be visible in both 'My queues' and 'All queues' when all non-appointment visits are called.
 
 ----------
 

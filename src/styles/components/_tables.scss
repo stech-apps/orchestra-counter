@@ -223,6 +223,10 @@
     &--hide-column {
             display: none;
     }
+    &--hide-cell {
+        pointer-events: none;
+        color: $popover-header-color;
+    }
 }
 
 .dataTables_info {
@@ -255,6 +259,16 @@
     tr {
         .qm-table__first-column {
             width: 50% !important;
+        }
+        .qm-table__action-column {
+            width: 10% !important;
+            padding-right: 0;
+            &::after{
+                content: none !important;
+            }
+        }
+        .qm-table__queue-column {
+            width: 45% !important;
         }
         .qm-table__middle-column {
             width: 20% !important;

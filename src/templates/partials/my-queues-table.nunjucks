@@ -2,6 +2,7 @@
 <table id="myQueuesTable" class="qm-table">
     <thead class="qm-table__header">
         <tr>
+            <th class="myQueueAction"></th>
             <th class="myQueueName"></th>
             <th class="myQueueId"></th>
             <th class="myQueueSLA"></th>
