@@ -130,11 +130,11 @@ var queues = new function () {
                         e.preventDefault();
                         transfer._transferCurrentVisitToQueueClicked("SORTED", aData);
                     });
+                    var queueName = $('td:eq(1)', nRow).text();
+                    var toolTip = translate.msg('info.queue.action.tooltip', [queueName]);
+                    $('td:eq(0)', nRow).find('#actionBtnTransfer').attr('title', toolTip);
                     if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                         !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
-                        var queueName = $('td:eq(1)', nRow).text();
-                        var toolTip = translate.msg('info.queue.action.tooltip', [queueName]);
-                        $('td:eq(0)', nRow).find('#actionBtnTransfer').attr('title', toolTip);
 
                         $('td:eq(1)', nRow).empty().append("<a href='' class=\"qm-table__queue-name\" " +
                             ">" + queueName + "</a>");
@@ -172,11 +172,12 @@ var queues = new function () {
                         e.preventDefault();
                         transfer._transferCurrentVisitToQueueClicked("SORTED", aData);
                     });
+                    var queueName = $('td:eq(1)', nRow).text();
+                    var toolTip = translate.msg('info.queue.action.tooltip', [queueName]);
+                    $('td:eq(0)', nRow).find('#actionBtnTransfer').attr('title', toolTip);
                     if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                         !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
-                        var queueName = $('td:eq(1)', nRow).text();
-                        var toolTip = translate.msg('info.queue.action.tooltip', [queueName]);
-                        $('td:eq(0)', nRow).find('#actionBtnTransfer').attr('title', toolTip);
+                    
                         $('td:eq(1)', nRow).empty().append("<a href='' class=\"qm-table__queue-name\" " +
                             ">" + queueName + "</a>");
 

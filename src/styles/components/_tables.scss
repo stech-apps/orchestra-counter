@@ -266,9 +266,17 @@
             &::after{
                 content: none !important;
             }
+            @at-root [dir='rtl'] & {
+                &::before{
+                    content: none !important;
+                }
+            }
         }
         .qm-table__queue-column {
             width: 45% !important;
+            @at-root [dir='rtl'] & {
+                text-align: right !important;
+            }
         }
         .qm-table__middle-column {
             width: 20% !important;
