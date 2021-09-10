@@ -350,7 +350,7 @@ var customer = new function() {
         var dobOrder = { month : 0, day : 1 , year : 2};
         var objArr = dateConvention.split('-');
           if (objArr.length !== 3) {
-            objArr = val.split('/');
+            objArr = dateConvention.split('/');
         }
         dobOrder.day = objArr.indexOf('DD');
         dobOrder.month = objArr.indexOf('MM');
