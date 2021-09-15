@@ -372,6 +372,19 @@ var servicePoint = new function () {
 				// many of branch, workstation and work profile
 				sessvars.singleSettingsOnly = false;
 				modalNavigationController.push($Qmatic.components.modal.profileSettings)
+
+				var profileSetting = getProfileSettings(sessvars.currentUser.userName);
+				if (profileSetting) {
+					var branchSel = $("#branchListModal");
+					var workstationSel = $("#workstationListModal");
+					var prioSel = $("#prioListModal");
+
+					util.setSelect(branchSel, profileSetting.branchId);
+					showWorkstations(profileSetting.branchId, workstationSel, prioSel);
+					util.setSelect(workstationSel, profileSetting.servicePointId);
+					showProfiles(profileSetting.branchId, profileSetting.servicePointId, prioSel);
+					util.setSelect(prioSel, profileSetting.workProfileId);
+				}
 				settingsShown = true;
 			} else {
 				// only one of branch, workstation and work profile available
@@ -666,6 +679,13 @@ var servicePoint = new function () {
 
 				if (isApplied(settings)) {
 					servicePoint.storeSettingsInSession(settings);
+					var profileSetting =  {
+						'userName': settings.userName,
+						'branchId': settings.branchId,
+						'servicePointId': settings.servicePointId,
+						'workProfileId': settings.workProfileId
+					}
+					setInLocalStorage("SETTINGS", profileSetting);
 					setProfile(servicePoint.createParams());
 					updateUI();
 				} else {

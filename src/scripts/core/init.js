@@ -138,6 +138,13 @@ var init = new function () {
             typeof sessvars.state.servicePointId !== "undefined" && sessvars.state.servicePointId != null &&
             typeof sessvars.state.workProfileId !== "undefined" && sessvars.state.workProfileId != null) {
             servicePoint.storeSettingsInSession(sessvars.state);
+            var profileSetting =  {
+                'userName': sessvars.currentUser.userName,
+                'branchId': sessvars.state.branchId,
+                'servicePointId': sessvars.state.servicePointId,
+                'workProfileId': sessvars.state.workProfileId
+            }
+            setInLocalStorage("SETTINGS", profileSetting);
         } else {
             // something is not valid, everything is invalid. Scenario: New configuration has been published
             servicePoint.resetSettings();

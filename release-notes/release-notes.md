@@ -10,7 +10,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h2>Version 4.0.0.046 - Internal</h2>
 
-**Date: 27/07/2021**
+**Date: 15/09/2021**
 
 **Build number: 046**
 
@@ -22,6 +22,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **QP-7751** | **Amount of services in parked visit (user-/servicepointpool)** |
 | **QP-8579** | **Add a setting which will change the behaviour of getting the workstations for all branches** |
 | **QP-10535** | **Simplified transfer to queue option with less number of clicks** |
+| **QP-10483** | **Counter module not saving cookie with counter settings selection** |
 
 <h3>Bug fixes</h3>
 

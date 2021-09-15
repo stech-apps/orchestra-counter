@@ -56,6 +56,8 @@ markMandatoryTrue = ['visit', 'transfer'];
 
 customParameters = null;
 
+localStorageKey = 'COUNTER';
+
 function showModules() {
 	var $main = $('.qm-main');
 
@@ -515,4 +517,34 @@ function loadSettingsFromProperties(){
 		showOnlySwBranches = false;
 	}	
 	$('#meetingBtn').hide();
+}
+
+function setInLocalStorage(key, value) {
+	var settings = getFromLocalStorage();
+	settings = settings ? settings : {};
+	settings[key] = value;
+	localStorage.setItem(localStorageKey, JSON.stringify(settings));
+}
+
+function getFromLocalStorage() {
+	var settings = localStorage.getItem(localStorageKey);
+	if (settings) {
+		return JSON.parse(settings);
+	} else {
+		return null;
+	}
+}
+
+function getProfileSettings(userName) {
+	var counterSettings = getFromLocalStorage();
+	if (counterSettings) {
+		var profileSetting = counterSettings.SETTINGS;
+		if (profileSetting.userName == userName) {
+			return profileSetting;
+		} else {
+			return null;
+		}
+	} else {
+		return null;
+	}
 }
