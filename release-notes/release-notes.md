@@ -31,6 +31,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **QP-10248** | **Teams meeting button disappears after confirm is clicked** |
 | **QP-10237** | **Counter > Add an option to change the order of the dob input of customer from** |
 | **QP-10265** | **SLA icon shows when there are zero customers in the queue** |
+| **QP-10615** | **One Click Transfer > Tool Tip is not visible until user add a delivered service to the visit.** |
 
 **Note:** Added a new configuration in **QP-10265** (One click transfer). To enable this feature, 'Queue transfer controls' and 'Transfer Button' should be enabled along with 'One click transfer' at branch level. The 'One click transfer' button will be visible in both 'My queues' and 'All queues' when all non-appointment visits are called.
 
