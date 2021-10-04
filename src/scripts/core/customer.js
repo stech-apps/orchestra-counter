@@ -290,10 +290,13 @@ var customer = new function() {
         }
         var rowCallback = function(nRow, aData, iDisplayIndex) {
             var searchTerm = $("#customerInput").val();
-            if(searchTerm.indexOf('+') > -1) {
-                searchTerm = searchTerm.replace('+', '\\+');
-            }
-            var pattern = new RegExp(searchTerm, "ig");
+            var replaceStr = searchTerm.replaceAll('(', '\\(');
+            replaceStr = replaceStr.replaceAll(')', '\\)');
+            replaceStr = replaceStr.replaceAll('+', '\\+');
+            replaceStr = replaceStr.replaceAll('{', '\\{');
+            replaceStr = replaceStr.replaceAll('}', '\\}');
+            
+            var pattern = new RegExp(replaceStr, "ig");
             $('td:eq(0)', nRow).html(aData.fullName.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
             $('td:eq(1)', nRow).html(aData.phoneNumber.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
             $('td:eq(2)', nRow).html(aData.email.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
@@ -805,8 +808,13 @@ var customer = new function() {
                 val = encodeURIComponent(val);
             }
 
+            var reqUrl = "/rest/servicepoint/customers/search?text=";
+            if (compatibileHelper.advancedSearchCompatible(sessvars.systemInformation.productVersion)) {
+                reqUrl = "/rest/servicepoint/customers/advancedSearch?text=";
+            }
+
             $.ajax({
-                url: "/rest/servicepoint/customers/search?text=" + val + urlextra,
+                url: reqUrl + val + urlextra,
                 dataType: 'json',
                 async: false,
                 success: function(data){
@@ -824,6 +832,8 @@ var customer = new function() {
                       customer.customerDbOnline = false;
                       util.showError(jQuery.i18n.prop('error.central.server.unavailable'));
                       util.hideModal("customerSearchDiv");
+                    } else if (jqXHR.status == 400) {
+                        util.showMessage(translate.msg('info.customerSearch.results.error'), true);
                     }
   			  }
             });
