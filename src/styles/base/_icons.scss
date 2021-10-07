@@ -40,6 +40,18 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+  .icon-multicustomer-rtl:before {
+    content: "\e97f";
+  }
+  .icon-multiservice-rtl:before {
+    content: "\e980";
+  }
+  .icon-multiservice:before {
+    content: "\e981";
+  }
+  .icon-multicustomer:before {
+    content: "\e982";
+  }
   .icon-next:before {
     content: "\e97d";
   }

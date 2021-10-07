@@ -28,3 +28,15 @@
      {% include "partials/popovers/popover-views/popover-queue-note.nunjucks" %}
     <div class="tooltip__inner"></div>
 </div>
+
+<div class="qm-popover qm-popover--multiservices tooltip" tabindex="-1">
+    <div class="tooltip__arrow"></div>
+     {% include "partials/popovers/popover-views/popover-queue-multi-services.nunjucks" %}
+    <div class="tooltip__inner"></div>
+</div>
+
+<div class="qm-popover qm-popover--customers tooltip" tabindex="-1">
+    <div class="tooltip__arrow"></div>
+     {% include "partials/popovers/popover-views/popover-queue-customers.nunjucks" %}
+    <div class="tooltip__inner"></div>
+</div>

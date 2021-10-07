@@ -10,15 +10,16 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h2>Version 4.1.0-Internal</h2>
 
-**Date: 04/10/2021**
+**Date: 08/10/2021**
 
-**Build number: 1**
+**Build number: 2**
 
 <h3>Stories</h3>
 
 | **Id** | **Release notes** |
 | --- | --- |
-| **QP-10771** | **Counter Advanced Serach searching for customers** | 
+| **QP-10771** | **Counter Advanced Serach searching for customers** |
+| **QP-10282** | **Counterterminal queue should indicate when and appointment is multi person or multi service** | 
 
 ----------
 

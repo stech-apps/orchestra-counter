@@ -73,8 +73,9 @@
     }
 
     &__notes-column {
-            font-size: 24px!important;
+            
             i{
+                font-size: 24px!important;
                 padding: 5px;
             }
     }
@@ -94,6 +95,25 @@
         font-size: rem(24px);
         color: $dark-transparent42;
         vertical-align: text-bottom;
+    }
+
+    &__customers,
+    &__multi_service{
+        display: flex;
+        align-items: center;
+        span {
+            max-width: 80%;
+        }
+        &_icon {
+            @extend .icon-styles;
+            display: inline-block;
+            font-size: rem(18px);
+            line-height: rem(24px);
+            vertical-align: middle;
+            padding: 0 5px;
+            color: $secondary-color;
+            width: 100%;
+        }
     }
 
     &__highlight {
@@ -315,6 +335,9 @@
             width: auto !important;
         }
         .qm-table__app-column {
+            width: 90px !important;
+        }
+        .qm-table__notes-column {
             width: 90px !important;
         }
         .qm-table__last-column {

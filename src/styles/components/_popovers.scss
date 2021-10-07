@@ -163,7 +163,9 @@
         }
     }
 
-        .qm-popover-notes {
+        .qm-popover-notes, 
+        .qm-popover-multi-services,
+        .qm-popover-customers {
             display: block;
             max-width: 400px;
             &-text{
