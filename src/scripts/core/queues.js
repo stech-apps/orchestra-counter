@@ -465,13 +465,13 @@ var queues = new function () {
                 var isRTL = sessvars.currentUser.direction == "rtl";
                 var rowCallback = function (nRow, aData, iDisplayIndex) {
                     var noteTxt = '';
-                    var peopleServices;
+                    // var peopleServices;
                     if (aData.parameterMap['custom1']) {
                         noteTxt = decodeURIComponent(aData.parameterMap['custom1']).trim();
                     }
-                    if (aData.parameterMap['peopleServices']) {
-                        peopleServices = JSON.parse(aData.parameterMap['peopleServices']);
-                    }
+                    // if (aData.parameterMap['peopleServices']) {
+                    //     peopleServices = JSON.parse(aData.parameterMap['peopleServices']);
+                    // }
 
                     if ($('td:eq(0)', nRow).find('a').length == 0) {
                         if (iDisplayIndex === 0) {
@@ -507,7 +507,7 @@ var queues = new function () {
                                     var textVal = aData.unservedVisitServices.map(function (service) {
                                         return service.serviceExternalName;
                                     }).join(', ');
-                                    $(text).text(textVal);
+                                    $(text).text(aData.currentVisitService.serviceExternalName.trim()+", "+ textVal);
 
                                 }
                             }
