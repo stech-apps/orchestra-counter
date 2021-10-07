@@ -2,7 +2,7 @@ var compatibileHelper = new function () {
     var ADVANCED_CUSTOMER_SEARCH = ['4.1.0.780', '4.2.0.868'];
 
     this.advancedSearchCompatible = function(currentVersion) {
-        let status = getCompatibleStatus(ADVANCED_CUSTOMER_SEARCH, currentVersion);
+        var status = getCompatibleStatus(ADVANCED_CUSTOMER_SEARCH, currentVersion);
         return status;
     }
 
@@ -22,10 +22,12 @@ var compatibileHelper = new function () {
     }
 
     function getCompatibleStatus(featureType, currentVersion) {
-        let currentBaseVersion = currentVersion.substring(0, 4);
-        let featureBase = featureType.find(element => (element.indexOf(currentBaseVersion) != -1));
+        var currentBaseVersion = currentVersion.substring(0, 4);
+        var featureBase = featureType.find(function (element){
+            return (element.indexOf(currentBaseVersion) != -1);
+        })
         if (featureBase) {
-            let status = compareVersions(featureBase, currentVersion);
+            var status = compareVersions(featureBase, currentVersion);
             return status <= 0 ? true : false;
         } else if (compareVersions(featureType[featureType.length - 1], currentVersion) < 0) {
            return true;

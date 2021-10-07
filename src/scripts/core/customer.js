@@ -810,7 +810,7 @@ var customer = new function() {
 
             var reqUrl = "/rest/servicepoint/customers/search?text=";
             if (compatibileHelper.advancedSearchCompatible(sessvars.systemInformation.productVersion)) {
-                reqUrl = "/rest/servicepoint/customers/advancedSearch?text=";
+                reqUrl = "/rest/servicepoint/customers/advancedSearch?option=STARTS_WITH&text=";
             }
 
             $.ajax({
