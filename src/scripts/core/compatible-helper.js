@@ -1,5 +1,5 @@
 var compatibileHelper = new function () {
-    var ADVANCED_CUSTOMER_SEARCH = ['4.1.0.780', '4.2.0.868'];
+    var ADVANCED_CUSTOMER_SEARCH = ['4.0.0.852', '4.1.0.780', '4.2.0.868'];
 
     this.advancedSearchCompatible = function(currentVersion) {
         var status = getCompatibleStatus(ADVANCED_CUSTOMER_SEARCH, currentVersion);

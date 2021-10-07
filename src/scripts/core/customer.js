@@ -810,7 +810,8 @@ var customer = new function() {
 
             var reqUrl = "/rest/servicepoint/customers/search?text=";
             if (compatibileHelper.advancedSearchCompatible(sessvars.systemInformation.productVersion)) {
-                reqUrl = "/rest/servicepoint/customers/advancedSearch?option=STARTS_WITH&text=";
+                var searchOption = /\s/g.test(val) ? 'CONTAINS' : 'STARTS_WITH';
+                reqUrl = "/rest/servicepoint/customers/advancedSearch?option=" + searchOption + "&text=";
             }
 
             $.ajax({
@@ -832,7 +833,7 @@ var customer = new function() {
                       customer.customerDbOnline = false;
                       util.showError(jQuery.i18n.prop('error.central.server.unavailable'));
                       util.hideModal("customerSearchDiv");
-                    } else if (jqXHR.status == 400) {
+                    } else if (jqXHR.status == 400 && jqXHR.getResponseHeader('error_code') == '8135') {
                         util.showMessage(translate.msg('info.customerSearch.results.error'), true);
                     }
   			  }
