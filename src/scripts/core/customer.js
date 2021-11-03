@@ -625,13 +625,13 @@ var customer = new function() {
             var pdate = inputDate.split('-');
 
             var dd = parseInt(pdate[0]);
-            // minus one from month because it's zero indexed
-            var mm  = parseInt(pdate[1]-1);
+            var mm  = parseInt(pdate[1]);
             var yy = parseInt(pdate[2]);
 
             // Check if the date is in the future
             var now = new Date();
-            var dobYear = new Date(yy, mm, dd);
+            // minus one from month because it's zero indexed
+            var dobYear = new Date(yy, mm-1, dd);
 
             if (dobYear.getTime() > now.getTime()) {
                 this.showDobFieldError(dob[2]);
