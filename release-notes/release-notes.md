@@ -23,6 +23,12 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** In order to work **QP-10282** correctly, Concierge 4.1.0, Appointment Booking 4.1.0 and Mobile Ticket 1.15.0 applications are required.
 
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **QP-9944** | **title of the counter web app should be changed to "Counter"** |
+
 ----------
 
 <h2>Version 4.0.0.046</h2>
