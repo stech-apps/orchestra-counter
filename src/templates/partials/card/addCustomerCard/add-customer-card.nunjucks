@@ -119,14 +119,14 @@
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
-                                        <input id="createdateOfBirthDay" autocomplete="chrome-off" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" />
+                                        <input id="createdateOfBirthDay" autocomplete="chrome-off" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" maxlength="2" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year" id="create-customer-year-container">
                                         <label for="createdateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
                                         </label>
-                                        <input id="createdateOfBirthYear" autocomplete="chrome-off" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" />
+                                        <input id="createdateOfBirthYear" autocomplete="chrome-off" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" maxlength="4" />
                                     </div>
                                     <span id="createdateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error" role="alert"></span>
                                 </div>
@@ -234,14 +234,14 @@
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
-                                        <input id="editdateOfBirthDay" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" />
+                                        <input id="editdateOfBirthDay" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" maxlength="2" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year" id="edit-customer-year-container">
                                         <label for="editdateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
                                         </label>
-                                        <input id="editdateOfBirthYear" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" />
+                                        <input id="editdateOfBirthYear" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" maxlength="4"/>
                                     </div>
                                     <span id="editdateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
                                 </div>

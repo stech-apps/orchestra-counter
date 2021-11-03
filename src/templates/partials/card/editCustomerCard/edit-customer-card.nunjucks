@@ -103,14 +103,14 @@
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
-                                        <input id="editAttacheddateOfBirthDay" autocomplete="chrome-off" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" />
+                                        <input id="editAttacheddateOfBirthDay" autocomplete="chrome-off" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" maxlength="2"/>
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year" id="edit-form-customer-year-container">
                                         <label for="editAttacheddateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
                                         </label>
-                                        <input id="editAttacheddateOfBirthYear" autocomplete="chrome-off" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" />
+                                        <input id="editAttacheddateOfBirthYear" autocomplete="chrome-off" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" maxlength="4"/>
                                     </div>
                                     <span id="editAttacheddateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
                                 </div>
