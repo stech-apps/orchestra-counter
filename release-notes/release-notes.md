@@ -8,11 +8,11 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
-<h2>Version 4.1.0-Internal</h2>
+<h2>Version 4.1.0</h2>
 
-**Date: 08/10/2021**
+**Date: 03/11/2021**
 
-**Build number: 3**
+**Build number: 4**
 
 <h3>Stories</h3>
 
@@ -20,14 +20,15 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **QP-10771** | **Counter Advanced Serach searching for customers** |
 | **QP-10282** | **Counterterminal queue should indicate when and appointment is multi person or multi service** | 
-
-**Note:** In order to work **QP-10282** correctly, Concierge 4.1.0, Appointment Booking 4.1.0 and Mobile Ticket 1.15.0 applications are required.
+| **QP-11086** | **Add new Customer - DoB upto current day should be allowed to match with AB-412** |
 
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
 | --- | --- |
 | **QP-9944** | **title of the counter web app should be changed to "Counter"** |
+
+**Note:** In order to work **QP-10282** correctly, Concierge 4.1.0, Appointment Booking 4.1.0 and Mobile Ticket 1.15.0 applications are required.
 
 ----------
 
