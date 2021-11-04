@@ -10,9 +10,9 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h2>Version 4.1.0</h2>
 
-**Date: 03/11/2021**
+**Date: 04/11/2021**
 
-**Build number: 5**
+**Build number: 6**
 
 <h3>Stories</h3>
 
