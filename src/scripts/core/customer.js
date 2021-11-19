@@ -29,10 +29,10 @@ var customer = new function() {
 
     this.editUserPressed = function (e, index) {
         e.preventDefault();
-        if(moduleCustomerEnabled) {
+        // if(moduleCustomerEnabled) {
             cardNavigationController.push(window.$Qmatic.components.card.editCustomerCard);
             this.populateEditAttachedCustomerFields("editAttached", index);
-        }
+        // }
     }
 
     this.editAttachedCustomer = function (e) {
@@ -142,7 +142,7 @@ var customer = new function() {
         this.setFormButtonsState("#editCustomerForm", true);
         this.setFormButtonsState("#editAttachedCustomerForm", true);
 
-        this.setDOBOrder();
+        // this.setDOBOrder();
 
         this.initClearInputField();
         /*
@@ -427,14 +427,14 @@ var customer = new function() {
             $emailField.removeClass('qm-field-error');
         }
 
-       if(customer.validateDateOfBirth(dob, $saveBtn) !== true) {
-            $saveBtn.prop('disabled', true);
-        } else {
-            toggleErrorLabel(false, dob[1], $saveBtn);
-            this.hideDobFieldError(dob[0]);
-            this.hideDobFieldError(dob[1]);
-            this.hideDobFieldError(dob[2]);
-        }
+    //    if(customer.validateDateOfBirth(dob, $saveBtn) !== true) {
+    //         $saveBtn.prop('disabled', true);
+    //     } else {
+    //         toggleErrorLabel(false, dob[1], $saveBtn);
+    //         this.hideDobFieldError(dob[0]);
+    //         this.hideDobFieldError(dob[1]);
+    //         this.hideDobFieldError(dob[2]);
+    //     }
     };
 
     this.clearInput = function (e) {
@@ -515,15 +515,15 @@ var customer = new function() {
          // saveBtn.prop('disabled', false);
         };
 
-        if(customer.validateDateOfBirth(dob, $saveBtn) !== true) {
-            // toggleErrorLabel(true, dob[1]);
-            $saveBtn.prop('disabled', true);
-        } else {
-            toggleErrorLabel(false, dob[1], $saveBtn);
-            this.hideDobFieldError(dob[0]);
-            this.hideDobFieldError(dob[1]);
-            this.hideDobFieldError(dob[2]);
-        }
+        // if(customer.validateDateOfBirth(dob, $saveBtn) !== true) {
+        //     // toggleErrorLabel(true, dob[1]);
+        //     $saveBtn.prop('disabled', true);
+        // } else {
+        //     toggleErrorLabel(false, dob[1], $saveBtn);
+        //     this.hideDobFieldError(dob[0]);
+        //     this.hideDobFieldError(dob[1]);
+        //     this.hideDobFieldError(dob[2]);
+        // }
     };
 
     var toggleErrorLabel = function (showError, $field, $saveBtn, errorMessage) {
@@ -963,6 +963,9 @@ var customer = new function() {
                                 case 'email':
                                     $("#" + prefix + property).val(value);
                                     break;
+                                case 'custom3':
+                                    $("#" + prefix + 'captainId').val(value);
+                                    break;
                                 case 'dateOfBirth': {
                                     if(value) {
                                         var dob = value.split('-');
@@ -1219,14 +1222,14 @@ var customer = new function() {
     var jsonString = function (val) {
 		var main = val.$entity;
         var prop = val.$entity.properties;
-        var includeDob = shouldIncludeDob(prop);
+        var includeDob = false; shouldIncludeDob(prop);
 
         var j = '{';
             j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '"'
         if (includeDob === true) {
             j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "dateOfBirth":"' + prop.dobYear + '-' + prop.dobMonth + '-' + prop.dobDay + '"}}';
         } else {
-            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '"}}';
+            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "custom3": "' + prop.captainId + '"}}';
         }
 
 		return j;

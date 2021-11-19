@@ -54,17 +54,17 @@
                             </div>
                         </div>
                         <div class="qm-form-row">
-                            <div class="qm-form-column-12">
+                            <div class="qm-form-column-6">
                                 <div class="qm-form-field">
-                                    <label for="editAttachedemail" class="qm-form-field__label js-label-email"></label>
+                                    <label for="editAttachedcaptainId" class="qm-form-field__label">Captain ID</label>
                                     <div class="qm-form-field__input-container">
-                                        <input id="editAttachedemail" autocomplete="chrome-off" class="qm-form-field__text-input" aria-describedby="editAttachedemail_error" type="email" name="email"/>
+                                        <input id="editAttachedcaptainId" autocomplete="chrome-off" class="qm-form-field__text-input" aria-describedby="editAttachedcaptainId_error" name="captainId" />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
-                                    <span id="editAttachedemail_error" class="qm-form-field__error-label js-form-field-error"></span>
+                                    <span id="editAttachedcaptainId_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +84,21 @@
                             </div>
                         </div>
                         <div class="qm-form-row">
+                            <div class="qm-form-column-12">
+                                <div class="qm-form-field">
+                                    <label for="editAttachedemail" class="qm-form-field__label js-label-email"></label>
+                                    <div class="qm-form-field__input-container">
+                                        <input id="editAttachedemail" autocomplete="chrome-off" class="qm-form-field__text-input" aria-describedby="editAttachedemail_error" type="email" name="email"/>
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
+                                    <span id="editAttachedemail_error" class="qm-form-field__error-label js-form-field-error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="qm-form-row">
                             <div class="qm-form-column-12">
                                 <p class="qm-form-field__headline js-label-dob"></p>
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
@@ -115,7 +130,7 @@
                                     <span id="editAttacheddateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="qm-form-actions qm-form-actions--large-margin-top">
                             <div class="qm-generic-layout qm-generic-layout--align-right">
                                 <button type="button" class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">

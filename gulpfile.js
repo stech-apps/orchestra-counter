@@ -78,7 +78,7 @@ try {
   // For those who don't provide an external configuration file, use the following default.
   // Assuming Orchestra is running on local machine
   if(targetOrchestraUrl === undefined) {
-    var targetOrchestraUrl = "http://localhost:8080";
+    var targetOrchestraUrl = "http://d2.appzone.io:8070";
   }
   console.log('No gulp.config.json found. Assuming orchestra is running on local machine at port 8080');
 }

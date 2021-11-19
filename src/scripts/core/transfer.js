@@ -8,37 +8,62 @@ var transfer = new function () {
     var transferQueueToServicePointPoolTable;
 
     this.transferPressed = function () {
-        if (transferToQueueEnabled
-            && transferToUserPoolEnabled === false
-            && transferToServicePointPoolEnabled === false) {
-            transfer.navigateToQueueView();
-        } else if (transferToUserPoolEnabled
-            && transferToQueueEnabled === false
-            && transferToServicePointPoolEnabled === false) {
-            transfer.navigateToUserPoolView();
-        } else if (transferToServicePointPoolEnabled
-            && transferToUserPoolEnabled === false
-            && transferToQueueEnabled === false) {
-            transfer.navigateToCounterPoolView();
-        } else {
-            cardNavigationController.push($Qmatic.components.card.transferOptionsCard);
-        }
 
-        if (transferToQueueEnabled) {
-            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').attr('style', '');
-        } else {
-            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').css('display', 'none');
-        }
-        if (transferToUserPoolEnabled) {
-            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').attr('style', '');
-        } else {
-            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').css('display', 'none');
-        }
-        if (transferToServicePointPoolEnabled) {
-            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').attr('style', '');
-        } else {
-            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').css('display', 'none');
-        }
+
+        // if (transferToQueueEnabled
+        //     && transferToUserPoolEnabled === false
+        //     && transferToServicePointPoolEnabled === false) {
+        //     transfer.navigateToQueueView();
+        // } else if (transferToUserPoolEnabled
+        //     && transferToQueueEnabled === false
+        //     && transferToServicePointPoolEnabled === false) {
+        //     transfer.navigateToUserPoolView();
+        // } else if (transferToServicePointPoolEnabled
+        //     && transferToUserPoolEnabled === false
+        //     && transferToQueueEnabled === false) {
+        //     transfer.navigateToCounterPoolView();
+        // } else {
+        //     cardNavigationController.push($Qmatic.components.card.transferOptionsCard);
+        // }
+
+        // if (transferToQueueEnabled) {
+        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').attr('style', '');
+        // } else {
+        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').css('display', 'none');
+        // }
+        // if (transferToUserPoolEnabled) {
+        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').attr('style', '');
+        // } else {
+        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').css('display', 'none');
+        // }
+        // if (transferToServicePointPoolEnabled) {
+        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').attr('style', '');
+        // } else {
+        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').css('display', 'none');
+        // }
+
+        // auto transfer based on the rules
+        if (sessvars.state.visit != null){
+			var lastQueue = sessvars.state.visit.currentVisitService.serviceInternalName;
+			var rules = JSON.parse(autoTransferRules);
+			var targetQueue = rules[lastQueue];
+			if (targetQueue != null){
+				var queues = spService.get("branches/"+sessvars.branchId+"/queues");
+				console.log(queues);
+				for (var i = 0; i < queues.length; i++){
+					if (queues[i].name == targetQueue){
+						
+						var transferParams = {json:'{"fromBranchId" : "'+sessvars.branchId+'","visitId" : "'+sessvars.state.visit.id+'","sortPolicy" :"LAST","fromId":"'+sessvars.servicePointId+'"}'};
+						spService.putParams("branches/"+sessvars.branchId+"/queues/"+queues[i].id+"/visits",transferParams);
+						
+						break;
+					}
+				}
+			}
+		}
+
+        // call next after transfer
+        servicePoint.callNext();
 
     }
 
