@@ -963,7 +963,7 @@ var customer = new function() {
                                 case 'email':
                                     $("#" + prefix + property).val(value);
                                     break;
-                                case 'custom3':
+                                case 'custom4':
                                     $("#" + prefix + 'captainId').val(value);
                                     break;
                                 case 'dateOfBirth': {
@@ -1229,7 +1229,7 @@ var customer = new function() {
         if (includeDob === true) {
             j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "dateOfBirth":"' + prop.dobYear + '-' + prop.dobMonth + '-' + prop.dobDay + '"}}';
         } else {
-            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "custom3": "' + prop.captainId + '"}}';
+            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "custom3": "' + prop.captainId + " - " + prop.phoneNumber + '", "custom4": "' + prop.captainId + '"}}';
         }
 
 		return j;
