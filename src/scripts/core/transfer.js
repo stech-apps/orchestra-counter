@@ -9,7 +9,6 @@ var transfer = new function () {
 
     this.transferPressed = function () {
 
-
         // if (transferToQueueEnabled
         //     && transferToUserPoolEnabled === false
         //     && transferToServicePointPoolEnabled === false) {
@@ -43,27 +42,46 @@ var transfer = new function () {
         // }
 
         // auto transfer based on the rules
-        if (sessvars.state.visit != null){
-			var lastQueue = sessvars.state.visit.currentVisitService.serviceInternalName;
-			var rules = JSON.parse(autoTransferRules);
-			var targetQueue = rules[lastQueue];
-			if (targetQueue != null){
-				var queues = spService.get("branches/"+sessvars.branchId+"/queues");
-				console.log(queues);
-				for (var i = 0; i < queues.length; i++){
-					if (queues[i].name == targetQueue){
+        var queues = spService.get("branches/"+sessvars.branchId+"/queues");
+        if (sessvars.state.visit && queues && queues.length) {
+            var currentQ = localStorage.getItem("CurrentQ");
+            if (currentQ) {
+                var rules = JSON.parse(autoTransferRules);
+                var targetQName = rules[currentQ];
+                if (targetQName) {
+                    var targetQ = queues.find(q => q.name === targetQName);
+                    var aData = {
+                        id: targetQ.id,
+                        name: targetQ.name
+                    };
+                    transferCurrentVisitToQueueClicked("LAST", aData);
+                } else {
+                    util.showMessage(`No transfer rule found for ${currentQ}`, true);
+                }
+            }
+        }
+
+        // if (sessvars.state.visit != null){
+		// 	var lastQueue = sessvars.state.visit.currentVisitService.serviceInternalName;
+		// 	var rules = JSON.parse(autoTransferRules);
+		// 	var targetQueue = rules[lastQueue];
+		// 	if (targetQueue != null){
+		// 		var queues = spService.get("branches/"+sessvars.branchId+"/queues");
+		// 		console.log(queues);
+		// 		for (var i = 0; i < queues.length; i++){
+		// 			if (queues[i].name == targetQueue){
 						
-						var transferParams = {json:'{"fromBranchId" : "'+sessvars.branchId+'","visitId" : "'+sessvars.state.visit.id+'","sortPolicy" :"LAST","fromId":"'+sessvars.servicePointId+'"}'};
-						spService.putParams("branches/"+sessvars.branchId+"/queues/"+queues[i].id+"/visits",transferParams);
+		// 				var transferParams = {json:'{"fromBranchId" : "'+sessvars.branchId+'","visitId" : "'+sessvars.state.visit.id+'","sortPolicy" :"LAST","fromId":"'+sessvars.servicePointId+'"}'};
+		// 				spService.putParams("branches/"+sessvars.branchId+"/queues/"+queues[i].id+"/visits",transferParams);
 						
-						break;
-					}
-				}
-			}
-		}
+		// 				break;
+		// 			}
+		// 		}
+		// 	}
+		// }
 
         // call next after transfer
-        servicePoint.callNext();
+        // servicePoint.callNext();
 
     }
 

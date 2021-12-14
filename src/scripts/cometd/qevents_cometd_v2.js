@@ -131,6 +131,14 @@ var qevents = (function ($) {
     function _subscribeChannel(channel) {
         _subscriptions.push(_cometd.subscribe(channel.channel, function (message) {
             //var json = JSON.stringify(message);
+
+            // store the current queue information if available
+            var obj = JSON.parse(message.data);
+            if (obj && obj.E && obj.E.prm && obj.E.prm.fromQueueName) {
+                // currentQ = obj.E.prm.fromQueueName;
+                localStorage.setItem("CurrentQ", obj.E.prm.fromQueueName);
+            }
+
             _log('received data: ' + message.data + ', on channel: ' + message.channel);
             channel.callback(message.data);
         }));
