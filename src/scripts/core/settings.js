@@ -1,5 +1,5 @@
 // Enable/disable functionality
-autoTransferRules = '{ "Blocking": "Change SIM" }';
+autoTransferRules = '{ "Blocking": "Change SIM", "Change SIM": "New Sale" }';
 
 moduleCustomerEnabled = true;						// Customer information edit/selection
 moduleDeliveredServicesEnabled = true;				// Delivered services Panel
