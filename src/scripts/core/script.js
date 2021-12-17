@@ -1088,7 +1088,30 @@ var servicePoint = new function () {
 		}
 	}
 
+	this.checkCaptainId = function() {
+		// check if don't have captain id then user is not allowed to continue
+		if (sessvars && sessvars.state && sessvars.state.visit && 
+			sessvars.state.visit.customerIds.length &&
+			sessvars.state.visit.customerIds[0]) {
+
+			var customerId = sessvars.state.visit.customerIds[0];
+			if (customerId) {
+				var customer = spService.get("customers/"+customerId);
+				if (customer && customer.properties && !customer.properties.custom4) {
+					util.showMessage('Please provide captain id before you continue!', true);
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
 	this.callNext = function () {
+
+		if (!this.checkCaptainId()) {
+			return;
+		}
 
 		if (!!!minTimeBetweenCallsTimer) {
 			var params = servicePoint.createParams();
@@ -1381,6 +1404,11 @@ var servicePoint = new function () {
 
 
 	this.endVisitPressed = function () {
+
+		if (!this.checkCaptainId()) {
+			return;
+		}
+
 		if (servicePoint.hasValidSettings()
 			&& (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP)
 			&& !servicePoint.isOutcomeOrDeliveredServiceNeeded()) {

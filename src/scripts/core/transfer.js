@@ -49,14 +49,31 @@ var transfer = new function () {
                 var rules = JSON.parse(autoTransferRules);
                 var targetQName = rules[currentQ];
                 if (targetQName) {
-                    var targetQ = queues.find(q => q.name === targetQName);
-                    var aData = {
-                        id: targetQ.id,
-                        name: targetQ.name
-                    };
-                    transferCurrentVisitToQueueClicked("LAST", aData);
+
+                    for (var i = 0; i < queues.length; i++) {
+                        if (queues[i].name == targetQName) {
+                            
+                            var aData = {
+                                id: queues[i].id,
+                                name: queues[i].name
+                            };
+                            transferCurrentVisitToQueueClicked("LAST", aData);
+                            
+                            break;
+                        }
+                    }
+
+                    // var targetQIdx = queues.findIndex(q => q.name === targetQName)
+                    // if (targetQIdx) {
+                    //     var targetQ = queues[targetQIdx]; // queues.find(q => q.name === targetQName);
+                    //     var aData = {
+                    //         id: targetQ.id,
+                    //         name: targetQ.name
+                    //     };
+                    //     transferCurrentVisitToQueueClicked("LAST", aData);
+                    // }
                 } else {
-                    util.showMessage(`No transfer rule found for ${currentQ}`, true);
+                    util.showMessage('No transfer rule found for ' + currentQ, true);
                 }
             }
         }

@@ -1229,7 +1229,7 @@ var customer = new function() {
         if (includeDob === true) {
             j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "dateOfBirth":"' + prop.dobYear + '-' + prop.dobMonth + '-' + prop.dobDay + '"}}';
         } else {
-            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "custom3": "' + prop.captainId + " - " + prop.phoneNumber + '", "custom4": "' + prop.captainId + '"}}';
+            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "custom3": "' + prop.captainId + " - " + prop.phoneNumber + '", "custom4": "' + prop.captainId + '", "custom5": "' + prop.phoneNumber + '"}}';
         }
 
 		return j;
