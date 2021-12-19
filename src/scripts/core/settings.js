@@ -1,4 +1,5 @@
 // Enable/disable functionality
+enableAutoTransfer = false;
 autoTransferRules = '{ "Blocking": "Change SIM", "Change SIM": "New Sale" }';
 
 moduleCustomerEnabled = true;						// Customer information edit/selection

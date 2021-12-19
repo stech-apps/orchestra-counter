@@ -9,96 +9,70 @@ var transfer = new function () {
 
     this.transferPressed = function () {
 
-        // if (transferToQueueEnabled
-        //     && transferToUserPoolEnabled === false
-        //     && transferToServicePointPoolEnabled === false) {
-        //     transfer.navigateToQueueView();
-        // } else if (transferToUserPoolEnabled
-        //     && transferToQueueEnabled === false
-        //     && transferToServicePointPoolEnabled === false) {
-        //     transfer.navigateToUserPoolView();
-        // } else if (transferToServicePointPoolEnabled
-        //     && transferToUserPoolEnabled === false
-        //     && transferToQueueEnabled === false) {
-        //     transfer.navigateToCounterPoolView();
-        // } else {
-        //     cardNavigationController.push($Qmatic.components.card.transferOptionsCard);
-        // }
+        if (!enableAutoTransfer) {
 
-        // if (transferToQueueEnabled) {
-        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').attr('style', '');
-        // } else {
-        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').css('display', 'none');
-        // }
-        // if (transferToUserPoolEnabled) {
-        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').attr('style', '');
-        // } else {
-        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').css('display', 'none');
-        // }
-        // if (transferToServicePointPoolEnabled) {
-        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').attr('style', '');
-        // } else {
-        //     $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').css('display', 'none');
-        // }
+            if (transferToQueueEnabled
+                && transferToUserPoolEnabled === false
+                && transferToServicePointPoolEnabled === false) {
+                transfer.navigateToQueueView();
+            } else if (transferToUserPoolEnabled
+                && transferToQueueEnabled === false
+                && transferToServicePointPoolEnabled === false) {
+                transfer.navigateToUserPoolView();
+            } else if (transferToServicePointPoolEnabled
+                && transferToUserPoolEnabled === false
+                && transferToQueueEnabled === false) {
+                transfer.navigateToCounterPoolView();
+            } else {
+                cardNavigationController.push($Qmatic.components.card.transferOptionsCard);
+            }
 
-        // auto transfer based on the rules
-        var queues = spService.get("branches/"+sessvars.branchId+"/queues");
-        if (sessvars.state.visit && queues && queues.length) {
-            var currentQ = localStorage.getItem("CurrentQ");
-            if (currentQ) {
-                var rules = JSON.parse(autoTransferRules);
-                var targetQName = rules[currentQ];
-                if (targetQName) {
+            if (transferToQueueEnabled) {
+                $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').attr('style', '');
+            } else {
+                $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').css('display', 'none');
+            }
+            if (transferToUserPoolEnabled) {
+                $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').attr('style', '');
+            } else {
+                $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').css('display', 'none');
+            }
+            if (transferToServicePointPoolEnabled) {
+                $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').attr('style', '');
+            } else {
+                $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').css('display', 'none');
+            }
 
-                    for (var i = 0; i < queues.length; i++) {
-                        if (queues[i].name == targetQName) {
-                            
-                            var aData = {
-                                id: queues[i].id,
-                                name: queues[i].name
-                            };
-                            transferCurrentVisitToQueueClicked("LAST", aData);
-                            
-                            break;
+        } else {
+
+            // auto transfer based on the rules
+            var queues = spService.get("branches/" + sessvars.branchId + "/queues");
+            if (sessvars.state.visit && queues && queues.length) {
+                var currentQ = localStorage.getItem("CurrentQ");
+                if (currentQ) {
+                    var rules = JSON.parse(autoTransferRules);
+                    var targetQName = rules[currentQ];
+                    if (targetQName) {
+
+                        for (var i = 0; i < queues.length; i++) {
+                            if (queues[i].name == targetQName) {
+
+                                var aData = {
+                                    id: queues[i].id,
+                                    name: queues[i].name
+                                };
+                                transferCurrentVisitToQueueClicked("LAST", aData);
+
+                                break;
+                            }
                         }
-                    }
 
-                    // var targetQIdx = queues.findIndex(q => q.name === targetQName)
-                    // if (targetQIdx) {
-                    //     var targetQ = queues[targetQIdx]; // queues.find(q => q.name === targetQName);
-                    //     var aData = {
-                    //         id: targetQ.id,
-                    //         name: targetQ.name
-                    //     };
-                    //     transferCurrentVisitToQueueClicked("LAST", aData);
-                    // }
-                } else {
-                    util.showMessage('No transfer rule found for ' + currentQ, true);
+                    } else {
+                        util.showMessage('No transfer rule found for ' + currentQ, true);
+                    }
                 }
             }
         }
-
-        // if (sessvars.state.visit != null){
-		// 	var lastQueue = sessvars.state.visit.currentVisitService.serviceInternalName;
-		// 	var rules = JSON.parse(autoTransferRules);
-		// 	var targetQueue = rules[lastQueue];
-		// 	if (targetQueue != null){
-		// 		var queues = spService.get("branches/"+sessvars.branchId+"/queues");
-		// 		console.log(queues);
-		// 		for (var i = 0; i < queues.length; i++){
-		// 			if (queues[i].name == targetQueue){
-						
-		// 				var transferParams = {json:'{"fromBranchId" : "'+sessvars.branchId+'","visitId" : "'+sessvars.state.visit.id+'","sortPolicy" :"LAST","fromId":"'+sessvars.servicePointId+'"}'};
-		// 				spService.putParams("branches/"+sessvars.branchId+"/queues/"+queues[i].id+"/visits",transferParams);
-						
-		// 				break;
-		// 			}
-		// 		}
-		// 	}
-		// }
-
-        // call next after transfer
-        // servicePoint.callNext();
 
     }
 
