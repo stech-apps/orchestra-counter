@@ -1230,6 +1230,13 @@ var customer = new function() {
             j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "dateOfBirth":"' + prop.dobYear + '-' + prop.dobMonth + '-' + prop.dobDay + '"}}';
         } else {
             j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "custom3": "' + prop.captainId + " - " + prop.phoneNumber + '", "custom4": "' + prop.captainId + '", "custom5": "' + prop.phoneNumber + '"}}';
+
+            // update parameters in the visit to reflect on reports and query
+            var updateParams = servicePoint.createParams();
+            updateParams.customerId = sessvars.currentCustomer.id;
+            updateParams.visitId = sessvars.state.visit.id;
+            updateParams.json = '{"custom3": "' + prop.captainId + " - " + prop.phoneNumber + '", "custom4": "' + prop.captainId + '", "custom5": "' + prop.phoneNumber + '"}';
+            spService.putParams("branches/" + updateParams.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
         }
 
 		return j;

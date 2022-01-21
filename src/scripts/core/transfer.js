@@ -9,6 +9,10 @@ var transfer = new function () {
 
     this.transferPressed = function () {
 
+        if (!servicePoint.checkCaptainId()) {
+            return;
+        }
+
         if (!enableAutoTransfer) {
 
             if (transferToQueueEnabled

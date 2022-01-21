@@ -27,18 +27,21 @@
     "gulp-line-ending-corrector": "^1.0.2",
     "gulp-nunjucks-render": "^2.2.2",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sftp": "^0.1.5",
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^3.1.4",
     "gulp-zip": "^4.1.0",
     "http-proxy-middleware": "^0.19.1",
-    "node-cmd": "^3.0.0"
+    "node-cmd": "^3.0.0",
+    "node-sass": "^7.0.1",
+    "sass": "^1.49.0"
   },
   "author": "Qmatic",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "gulp-uglify-es": "^3.0.0"
   },
   "repository": {
     "type": "git",
